@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Mastery Session | Coach Shruti Tiwari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0c0a0e;
+  --ink-2: #1a1520;
+  --ink-3: #231c2f;
+  --plum: #3d1a5e;
+  --violet: #6b21a8;
+  --amber: #c9933a;
+  --amber-bright: #f0b94a;
+  --amber-pale: #fdf0d5;
+  --cream: #faf6ef;
+  --white: #ffffff;
+  --white-80: rgba(255,255,255,0.8);
+  --white-50: rgba(255,255,255,0.5);
+  --white-20: rgba(255,255,255,0.12);
+  --white-8: rgba(255,255,255,0.05);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  line-height: 1;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: 0.6;
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+  background: linear-gradient(90deg, var(--amber), var(--amber-bright));
+  width: 0%; transition: width 0.1s linear;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+  padding: 0 5%;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(12,10,14,0.82);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(201,147,58,0.12);
+  transition: all 0.3s;
+}
+nav.scrolled { height: 60px; background: rgba(12,10,14,0.96); }
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--amber-bright);
+  text-decoration: none; letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--white-50); text-decoration: none;
+  font-size: 0.82rem; font-weight: 400; letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--amber-bright); }
+.nav-cta {
+  padding: 10px 26px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 3px;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 2px 20px rgba(201,147,58,0.3);
+}
+.nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 5% 60px;
+  position: relative;
+  overflow: hidden;
+  gap: 40px;
+}
+.hero-bg-glow {
+  position: absolute;
+  border-radius: 50%; pointer-events: none;
+}
+.glow-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(107,33,168,0.22) 0%, transparent 70%);
+  top: -200px; right: -100px;
+}
+.glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(201,147,58,0.08) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+}
+.hero-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-left { position: relative; z-index: 2; }
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px;
+  border: 1px solid rgba(201,147,58,0.4);
+  border-radius: 100px;
+  background: rgba(201,147,58,0.07);
+  font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber-bright);
+  font-weight: 600; margin-bottom: 28px;
+  animation: fadeSlideUp 0.8s 0.1s both;
+}
+.hero-pill-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--amber-bright);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.06;
+  margin-bottom: 22px;
+  animation: fadeSlideUp 0.8s 0.2s both;
+}
+.hero-h1 .line2 {
+  display: block;
+  color: var(--amber-bright);
+  font-style: italic;
+}
+.hero-sub {
+  font-size: 1.02rem;
+  color: var(--white-50);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 500px;
+  margin-bottom: 38px;
+  animation: fadeSlideUp 0.8s 0.3s both;
+}
+.hero-btns {
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  animation: fadeSlideUp 0.8s 0.4s both;
+}
+.btn-primary {
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 3px;
+  box-shadow: 0 4px 28px rgba(201,147,58,0.4);
+  transition: transform 0.2s, box-shadow 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(201,147,58,0.55); }
+.btn-ghost {
+  padding: 15px 28px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white-80); font-size: 0.88rem;
+  text-decoration: none; border-radius: 3px;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber-bright); transform: translateY(-2px); }
+
+.hero-meta {
+  display: flex; gap: 0;
+  margin-top: 48px;
+  border: 1px solid rgba(201,147,58,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  animation: fadeSlideUp 0.8s 0.5s both;
+  max-width: 480px;
+}
+.hero-meta-item {
+  flex: 1; padding: 16px 18px;
+  border-right: 1px solid rgba(201,147,58,0.12);
+}
+.hero-meta-item:last-child { border-right: none; }
+.hmi-label {
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--amber);
+  font-weight: 600; margin-bottom: 5px;
+}
+.hmi-value { font-size: 0.85rem; font-weight: 500; }
+
+/* Hero right — visual card */
+.hero-right {
+  position: relative; z-index: 2;
+  animation: fadeSlideUp 0.8s 0.35s both;
+}
+.hero-card {
+  background: linear-gradient(160deg, var(--ink-3) 0%, var(--plum) 100%);
+  border: 1px solid rgba(201,147,58,0.2);
+  border-radius: 16px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+.hero-card-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  background: rgba(201,147,58,0.15);
+  border: 1px solid rgba(201,147,58,0.3);
+  border-radius: 100px;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero-card-price-old {
+  font-size: 0.85rem;
+  color: var(--white-50);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+.hero-card-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: var(--amber-bright);
+  line-height: 1; margin-bottom: 4px;
+}
+.hero-card-gst { font-size: 0.78rem; color: var(--white-50); margin-bottom: 28px; }
+.hero-card-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.hero-card-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.88rem; color: var(--white-80); font-weight: 300;
+}
+.feat-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.6rem; color: var(--ink); font-weight: 900;
+}
+.hero-card-cta {
+  display: block; width: 100%; text-align: center;
+  padding: 16px; border-radius: 4px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-weight: 700; font-size: 0.92rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(201,147,58,0.35);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.hero-card-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,147,58,0.5); }
+.hero-card-guarantee {
+  text-align: center; margin-top: 14px;
+  font-size: 0.75rem; color: var(--white-50);
+}
+.hero-card-deco {
+  position: absolute; bottom: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,147,58,0.1);
+}
+.hero-card-deco2 {
+  position: absolute; top: -30px; right: 60px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,147,58,0.07);
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SOCIAL PROOF STRIP ── */
+.proof-strip {
+  border-top: 1px solid rgba(201,147,58,0.1);
+  border-bottom: 1px solid rgba(201,147,58,0.1);
+  background: rgba(255,255,255,0.02);
+  padding: 20px 5%;
+  display: flex; align-items: center; justify-content: center;
+  gap: 56px; flex-wrap: wrap;
+}
+.proof-item {
+  text-align: center;
+}
+.proof-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--amber-bright); line-height: 1;
+  margin-bottom: 4px;
+}
+.proof-label { font-size: 0.72rem; color: var(--white-50); letter-spacing: 0.08em; font-weight: 300; }
+.proof-divider { width: 1px; height: 40px; background: rgba(201,147,58,0.15); }
+
+/* ── SECTION SHARED ── */
+section { position: relative; }
+.section-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,147,58,0.3) 50%, transparent 100%);
+}
+.s-label {
+  font-size: 0.68rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--amber);
+  font-weight: 600; margin-bottom: 14px;
+  display: block;
+}
+.s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 900; line-height: 1.15;
+}
+.s-title em {
+  font-style: italic;
+  color: var(--amber-bright);
+}
+.s-sub {
+  color: var(--white-50);
+  font-size: 0.95rem; line-height: 1.75;
+  font-weight: 300; margin-top: 14px;
+}
+
+/* ── ABOUT ── */
+#about {
+  padding: 100px 5%;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px; margin: 0 auto;
+}
+.about-img-wrap {
+  position: relative;
+}
+.about-photo-placeholder {
+  width: 100%; aspect-ratio: 3/4;
+  background: linear-gradient(160deg, var(--ink-3) 0%, var(--plum) 60%, var(--ink-3) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(201,147,58,0.15);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; color: rgba(201,147,58,0.4);
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative; overflow: hidden;
+}
+.about-photo-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 24px,
+    rgba(201,147,58,0.025) 24px, rgba(201,147,58,0.025) 48px
+  );
+}
+.about-photo-placeholder .ph-person {
+  font-size: 3.5rem; opacity: 0.4;
+}
+.about-img-accent {
+  position: absolute;
+  bottom: -18px; right: -18px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); padding: 18px 22px;
+  border-radius: 8px; text-align: center;
+  box-shadow: 0 8px 32px rgba(201,147,58,0.3);
+}
+.acc-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900; line-height: 1;
+}
+.acc-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 3px; }
+
+.about-right { }
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem; font-weight: 900;
+  margin: 12px 0 6px; line-height: 1.1;
+}
+.about-role {
+  font-size: 0.82rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--amber);
+  font-weight: 600; margin-bottom: 24px;
+}
+.about-body {
+  font-size: 0.95rem; color: var(--white-50);
+  line-height: 1.8; font-weight: 300;
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.astat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900;
+  color: var(--amber-bright); line-height: 1;
+}
+.astat-label { font-size: 0.72rem; color: var(--white-50); margin-top: 5px; line-height: 1.4; }
+
+/* ── EVENT BAND ── */
+#event-band {
+  background: linear-gradient(135deg, var(--plum) 0%, var(--violet) 100%);
+  padding: 52px 5%;
+  position: relative; overflow: hidden;
+}
+#event-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 80px);
+}
+.eb-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  position: relative;
+}
+.eb-items { display: flex; gap: 48px; flex-wrap: wrap; }
+.eb-item { }
+.eb-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,185,74,0.7); font-weight: 600; margin-bottom: 6px; }
+.eb-value { font-size: 1rem; font-weight: 600; }
+
+/* ── PILLARS ── */
+#pillars {
+  padding: 100px 5%;
+}
+.pillars-header { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1100px; margin: 0 auto;
+}
+.pillar-card {
+  background: var(--white-8);
+  border: 1px solid rgba(201,147,58,0.1);
+  border-radius: 12px;
+  padding: 32px 24px;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+.pillar-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--amber) 0%, var(--amber-bright) 100%);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.pillar-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201,147,58,0.3);
+  background: rgba(255,255,255,0.07);
+}
+.pillar-card:hover::after { transform: scaleX(1); }
+.pillar-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: rgba(201,147,58,0.08);
+  line-height: 1; margin-bottom: 12px;
+  position: absolute; top: 16px; right: 20px;
+}
+.pillar-icon-wrap {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.pillar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 10px; color: var(--amber-bright);
+}
+.pillar-desc {
+  font-size: 0.85rem; color: var(--white-50);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ── WHY THIS SESSION ── */
+#why {
+  padding: 100px 5%;
+  background: linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+}
+.why-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.why-points { display: flex; flex-direction: column; gap: 32px; }
+.why-point {
+  display: flex; gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.why-point:last-of-type { border-bottom: none; }
+.wp-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: rgba(201,147,58,0.12);
+  line-height: 1; flex-shrink: 0; width: 52px; text-align: right;
+}
+.wp-content { padding-top: 4px; }
+.wp-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 8px; }
+.wp-desc { font-size: 0.88rem; color: var(--white-50); line-height: 1.7; font-weight: 300; }
+.why-visual { position: relative; }
+.why-img-placeholder {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(160deg, var(--ink-3) 0%, var(--plum) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(201,147,58,0.12);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; color: rgba(201,147,58,0.4);
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+  position: relative; overflow: hidden;
+}
+.why-img-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(201,147,58,0.025) 24px, rgba(201,147,58,0.025) 48px);
+}
+.why-quote-box {
+  position: absolute; bottom: -20px; left: -24px;
+  background: var(--ink-2);
+  border: 1px solid rgba(201,147,58,0.25);
+  padding: 22px 26px;
+  border-radius: 10px; max-width: 270px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+.wqb-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-style: italic;
+  line-height: 1.5; color: var(--white-80); margin-bottom: 10px;
+}
+.wqb-by { font-size: 0.7rem; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+/* ── EXPERTISE ── */
+#expertise {
+  padding: 100px 5%;
+}
+.expertise-header { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1100px; margin: 0 auto;
+}
+.exp-card {
+  background: var(--white-8);
+  border: 1px solid rgba(201,147,58,0.1);
+  border-radius: 12px;
+  padding: 32px 22px;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.exp-card:hover { transform: translateY(-6px); border-color: rgba(201,147,58,0.3); }
+.exp-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ink-3) 0%, var(--plum) 100%);
+  border: 1px solid rgba(201,147,58,0.25);
+  margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.exp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--amber-bright); margin-bottom: 8px;
+}
+.exp-desc { font-size: 0.82rem; color: var(--white-50); line-height: 1.6; font-weight: 300; }
+
+/* ── TESTIMONIALS ── */
+#testimonials {
+  padding: 100px 5%;
+  background: var(--ink-2);
+  overflow: hidden; position: relative;
+}
+.testimonials-header { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px; margin: 0 auto;
+}
+.testi-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,147,58,0.1);
+  border-radius: 12px;
+  padding: 32px 28px;
+  position: relative;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.testi-card:hover { border-color: rgba(201,147,58,0.25); transform: translateY(-4px); }
+.testi-card::before {
+  content: '"';
+  position: absolute; top: 16px; right: 22px;
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: rgba(201,147,58,0.07); line-height: 1;
+}
+.testi-stars { color: var(--amber); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 16px; }
+.testi-text {
+  font-size: 0.92rem; color: var(--white-80);
+  line-height: 1.75; font-weight: 300;
+  font-style: italic; margin-bottom: 24px;
+}
+.testi-person { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--plum) 0%, var(--violet) 100%);
+  border: 1.5px solid rgba(201,147,58,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.testi-name { font-weight: 600; font-size: 0.88rem; }
+.testi-role { font-size: 0.72rem; color: var(--amber); margin-top: 2px; }
+
+/* ── PRICING ── */
+#pricing {
+  padding: 100px 5%;
+}
+.pricing-header { text-align: center; max-width: 560px; margin: 0 auto 60px; }
+.pricing-wrap { max-width: 520px; margin: 0 auto; }
+.pricing-card {
+  background: linear-gradient(160deg, var(--ink-3) 0%, var(--plum) 50%, var(--ink-3) 100%);
+  border: 1px solid var(--amber);
+  border-radius: 16px;
+  padding: 48px 40px;
+  position: relative;
+  box-shadow: 0 0 80px rgba(201,147,58,0.12), 0 0 0 1px rgba(201,147,58,0.05);
+  overflow: hidden;
+}
+.pricing-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber-bright), transparent);
+}
+.pricing-ribbon {
+  position: absolute; top: -1px; right: 32px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 18px 18px;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+}
+.pricing-tier { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 20px; }
+.pricing-was { font-size: 0.9rem; color: var(--white-50); text-decoration: line-through; margin-bottom: 4px; }
+.pricing-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 900;
+  color: var(--amber-bright); line-height: 1; margin-bottom: 4px;
+}
+.pricing-price sup { font-size: 2rem; vertical-align: top; margin-top: 14px; }
+.pricing-note { font-size: 0.78rem; color: var(--white-50); margin-bottom: 36px; }
+.pricing-sep { height: 1px; background: rgba(255,255,255,0.07); margin: 32px 0; }
+.pf-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.pf-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 0.9rem; color: var(--white-80); font-weight: 300; line-height: 1.5;
+}
+.pf-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.65rem; color: var(--ink); font-weight: 900;
+  margin-top: 1px;
+}
+.pricing-cta {
+  display: block; width: 100%; text-align: center;
+  padding: 18px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 6px 32px rgba(201,147,58,0.45);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.pricing-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(201,147,58,0.6); }
+.pricing-guarantee {
+  text-align: center; margin-top: 14px;
+  font-size: 0.78rem; color: var(--white-50);
+}
+.guarantee-block {
+  max-width: 560px; margin: 40px auto 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,147,58,0.18);
+  border-radius: 12px; padding: 32px 36px;
+  text-align: center;
+}
+.gb-icon { font-size: 2.5rem; margin-bottom: 14px; }
+.gb-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 900;
+  color: var(--amber-bright); margin-bottom: 10px;
+}
+.gb-text { font-size: 0.88rem; color: var(--white-50); line-height: 1.75; font-weight: 300; }
+
+/* ── FAQ ── */
+#faq { padding: 100px 5%; }
+.faq-inner { max-width: 680px; margin: 0 auto; }
+.faq-header { text-align: center; margin-bottom: 52px; }
+.faq-item { border-bottom: 1px solid rgba(201,147,58,0.12); }
+.faq-btn {
+  width: 100%; background: none; border: none;
+  color: var(--white); font-family: 'DM Sans', sans-serif;
+  font-size: 0.97rem; font-weight: 500;
+  padding: 22px 0; text-align: left; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; transition: color 0.2s;
+}
+.faq-btn:hover, .faq-btn.open { color: var(--amber-bright); }
+.faq-toggle {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(201,147,58,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--amber); flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.faq-btn.open .faq-toggle { transform: rotate(45deg); }
+.faq-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  font-size: 0.9rem; color: var(--white-50); line-height: 1.75; font-weight: 300;
+}
+.faq-body.open { max-height: 200px; padding-bottom: 22px; }
+
+/* ── CONTACT / FOOTER ── */
+#contact {
+  padding: 80px 5% 56px;
+  background: var(--ink-2);
+  border-top: 1px solid rgba(201,147,58,0.1);
+}
+.contact-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  gap: 48px; flex-wrap: wrap; align-items: flex-start;
+}
+.contact-left { max-width: 320px; }
+.c-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900;
+  color: var(--amber-bright); margin-bottom: 12px;
+}
+.c-tagline { font-size: 0.88rem; color: var(--white-50); line-height: 1.7; font-weight: 300; margin-bottom: 28px; }
+.social-row { display: flex; flex-direction: column; gap: 6px; }
+.social-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); font-weight: 600; margin-bottom: 10px; }
+.social-link {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem; color: var(--white-50);
+  text-decoration: none; padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s;
+}
+.social-link:hover { color: var(--amber-bright); }
+.social-link:last-child { border-bottom: none; }
+.social-platform {
+  width: 26px; height: 26px;
+  background: rgba(201,147,58,0.08);
+  border: 1px solid rgba(201,147,58,0.15);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; flex-shrink: 0;
+}
+
+.contact-right { text-align: center; }
+.c-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900;
+  margin-bottom: 20px; line-height: 1.2;
+}
+.c-cta-title span { color: var(--amber-bright); font-style: italic; }
+.c-note { margin-top: 14px; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(201,147,58,0.08);
+  padding: 20px 5%;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--amber); }
+
+/* ── STICKY BAR ── */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 140;
+  background: rgba(12,10,14,0.96);
+  backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(201,147,58,0.2);
+  padding: 12px 5%;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  transform: translateY(100%); transition: transform 0.4s ease;
+}
+.sticky-bar.show { transform: translateY(0); }
+.sb-text { font-size: 0.88rem; font-weight: 500; }
+.sb-text span { color: var(--amber-bright); }
+.sb-btn {
+  padding: 10px 28px;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+  color: var(--ink); font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 3px;
+  box-shadow: 0 2px 16px rgba(201,147,58,0.35);
+  transition: transform 0.2s;
+  white-space: nowrap;
+}
+.sb-btn:hover { transform: translateY(-1px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  #hero { grid-template-columns: 1fr; padding-top: 90px; }
+  .hero-card { max-width: 480px; }
+  #about { grid-template-columns: 1fr; max-width: 600px; gap: 48px; }
+  .about-img-wrap { max-width: 340px; }
+  .why-inner { grid-template-columns: 1fr; }
+  .why-visual { display: none; }
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+  .testi-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .pillars-grid, .expertise-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; max-width: 100%; }
+  .hero-meta-item { border-right: none; border-bottom: 1px solid rgba(201,147,58,0.1); }
+  .hero-meta-item:last-child { border-bottom: none; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-ghost { text-align: center; }
+  .proof-strip { gap: 24px; }
+  .proof-divider { display: none; }
+  .eb-items { gap: 20px; }
+  .pricing-card { padding: 36px 24px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .sticky-bar { flex-direction: column; text-align: center; }
+  .contact-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#">Shruti Tiwari</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">The 4 Pillars</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#pricing">Register</a></li>
+  </ul>
+  <a class="nav-cta" href="#pricing">Reserve your Seat @₹99</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-glow glow-1"></div>
+  <div class="hero-bg-glow glow-2"></div>
+  <div class="hero-lines"></div>
+
+  <div class="hero-left">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      Live 90-Minute Masterclass
+    </div>
+    <h1 class="hero-h1">
+      Master the Art of
+      <span class="line2">Closing</span>
+    </h1>
+    <p class="hero-sub">Stop pitching and start winning. Learn the psychological triggers to double your conversion rate and handle objections like a pro.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#pricing">Book My Spot for ₹99</a>
+      <a class="btn-ghost" href="#about">Meet Your Mentor →</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hmi-label">Date</div>
+        <div class="hmi-value">This Sunday</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hmi-label">Time</div>
+        <div class="hmi-value">7 – 8:30 PM</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hmi-label">Venue</div>
+        <div class="hmi-value">LIVE on Zoom</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hmi-label">Language</div>
+        <div class="hmi-value">Hinglish</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-deco"></div>
+      <div class="hero-card-deco2"></div>
+      <div class="hero-card-badge">🔥 Limited Seats Available</div>
+      <div class="hero-card-price-old">Value: ₹4,999/-</div>
+      <div class="hero-card-price"><sup>₹</sup>99</div>
+      <div class="hero-card-gst">Includes GST · Today's Offer Only</div>
+      <ul class="hero-card-features">
+        <li><span class="feat-check">✓</span> 90-Minute LIVE Mastery Session</li>
+        <li><span class="feat-check">✓</span> Live Q&A with Coach Shruti</li>
+        <li><span class="feat-check">✓</span> Digital Workbook & Scripts</li>
+        <li><span class="feat-check">✓</span> Exclusive WhatsApp Community</li>
+        <li><span class="feat-check">✓</span> Session Recordings (limited)</li>
+      </ul>
+      <a class="hero-card-cta" href="#pricing">Secure My Seat — ₹99</a>
+      <p class="hero-card-guarantee">🛡️ 100% Money-Back Guarantee</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item">
+    <div class="proof-num">1M+</div>
+    <div class="proof-label">Lives Empowered</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">1000+</div>
+    <div class="proof-label">Workshops Done</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">11+</div>
+    <div class="proof-label">Years of Experience</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-num">Pan India</div>
+    <div class="proof-label">Reach</div>
+  </div>
+</div>
+
+<div class="section-rule"></div>
+
+<!-- ABOUT -->
+<section>
+  <div id="about">
+    <div class="about-img-wrap">
+      <div class="about-photo-placeholder">
+        <span class="ph-person">👤</span>
+        <span>Shruti Tiwari Portrait</span>
+      </div>
+      <div class="about-img-accent">
+        <div class="acc-num">11+</div>
+        <div class="acc-label">Years of<br>Influence</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <span class="s-label">Your Guide</span>
+      <h2 class="about-name">Shruti Tiwari</h2>
+      <div class="about-role">Sales Coach · Inspirational Speaker · Corporate Trainer</div>
+      <p class="about-body">Hi, I'm Shruti Tiwari — on a mission to help you grow, thrive, and succeed. With 11+ years of experience, I've trained entrepreneurs and salespeople to master the art of selling across corporate boardrooms and digital classrooms alike.<br><br>My approach is simple: sales isn't about talking — it's about listening, leading, and creating genuine transformation. I help you find the authority in your own voice.</p>
+      <div class="about-stats">
+        <div>
+          <div class="astat-num">1M+</div>
+          <div class="astat-label">Lives Transformed</div>
+        </div>
+        <div>
+          <div class="astat-num">1000+</div>
+          <div class="astat-label">Workshops Conducted</div>
+        </div>
+        <div>
+          <div class="astat-num">Pan India</div>
+          <div class="astat-label">Training Reach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT BAND -->
+<section id="event-band">
+  <div class="eb-inner">
+    <div class="eb-items">
+      <div class="eb-item">
+        <div class="eb-label">📅 Date</div>
+        <div class="eb-value">This Sunday</div>
+      </div>
+      <div class="eb-item">
+        <div class="eb-label">🕙 Time</div>
+        <div class="eb-value">7:00 – 8:30 PM</div>
+      </div>
+      <div class="eb-item">
+        <div class="eb-label">📍 Venue</div>
+        <div class="eb-value">LIVE Digital Masterclass (Zoom)</div>
+      </div>
+      <div class="eb-item">
+        <div class="eb-label">🎟 Price</div>
+        <div class="eb-value">₹99 Only (Today's Offer)</div>
+      </div>
+    </div>
+    <a class="btn-primary" href="#pricing">Reserve your seat @ ₹99</a>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars">
+  <div class="pillars-header">
+    <span class="s-label">The Curriculum</span>
+    <h2 class="s-title">The 4 Pillars of<br><em>Sales Mastery</em></h2>
+    <p class="s-sub">A condensed masterclass on the most essential skill in business.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <span class="pillar-num">01</span>
+      <div class="pillar-icon-wrap">🧠</div>
+      <div class="pillar-title">Money Mindset</div>
+      <p class="pillar-desc">Overcome the fear of rejection and the imposter syndrome of asking for what you're truly worth.</p>
+    </div>
+    <div class="pillar-card">
+      <span class="pillar-num">02</span>
+      <div class="pillar-icon-wrap">🎣</div>
+      <div class="pillar-title">The Perfect Hook</div>
+      <p class="pillar-desc">Grab attention in the first 30 seconds of any call or meeting to establish instant authority.</p>
+    </div>
+    <div class="pillar-card">
+      <span class="pillar-num">03</span>
+      <div class="pillar-icon-wrap">🛡️</div>
+      <div class="pillar-title">Objection Alchemy</div>
+      <p class="pillar-desc">Turn "I'll think about it" or "It's too expensive" into a "Yes" using proven scripts and empathy.</p>
+    </div>
+    <div class="pillar-card">
+      <span class="pillar-num">04</span>
+      <div class="pillar-icon-wrap">⚡</div>
+      <div class="pillar-title">The Power Close</div>
+      <p class="pillar-desc">Master 3 high-impact closing frameworks that make the final payment feel like a natural next step.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-inner">
+    <div>
+      <span class="s-label">Why This Session?</span>
+      <h2 class="s-title" style="margin-bottom:48px;">Build an <em>Unstoppable</em><br>Sales Engine</h2>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="wp-num">01</div>
+          <div class="wp-content">
+            <div class="wp-title">No More Sales Pressure</div>
+            <p class="wp-desc">Sell with such ease that it feels like you're helping a friend, not pushing a product.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="wp-num">02</div>
+          <div class="wp-content">
+            <div class="wp-title">High-Value Framing</div>
+            <p class="wp-desc">Position your service as a 'must-have' rather than a 'good-to-have' luxury.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="wp-num">03</div>
+          <div class="wp-content">
+            <div class="wp-title">Immediate Application</div>
+            <p class="wp-desc">Apply these 90 minutes of learning to your very next sales call and see the difference.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:44px;">
+        <a class="btn-primary" href="#pricing">Reserve your seat @ ₹99</a>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="why-img-placeholder">
+        <span style="font-size:3rem; opacity:0.4;">🎤</span>
+        <span>Shruti Workshop Action Shot</span>
+      </div>
+      <div class="why-quote-box">
+        <p class="wqb-text">"Your net worth is built on your ability to sell your vision."</p>
+        <div class="wqb-by">— Shruti Tiwari</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="expertise-header">
+    <span class="s-label">As Seen On</span>
+    <h2 class="s-title">Where Shruti Has <em>Trained</em></h2>
+    <p class="s-sub">Delivering impact across corporate and educational institutions.</p>
+  </div>
+  <div class="expertise-grid">
+    <div class="exp-card">
+      <div class="exp-icon">🏢</div>
+      <div class="exp-title">Corporate Training</div>
+      <p class="exp-desc">Leadership & Influence<br>Multiple Companies</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🎯</div>
+      <div class="exp-title">Sales Coaching</div>
+      <p class="exp-desc">Certified Expert<br>Closing & Influence</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">📱</div>
+      <div class="exp-title">Influencer</div>
+      <p class="exp-desc">Content Creator<br>Self Growth Niche</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🌟</div>
+      <div class="exp-title">Workshop Guru</div>
+      <p class="exp-desc">Expert Mentor<br>1000+ Live Sessions</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <span class="s-label">Real Success</span>
+    <h2 class="s-title">Results That <em>Speak Volumes</em></h2>
+    <p class="s-sub">Join the students who have mastered their sales game.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Shruti's approach to objection handling is magic. I used her script on a client who was stalling and closed the deal in 10 minutes!"</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👤</div>
+        <div>
+          <div class="testi-name">Aman Singh</div>
+          <div class="testi-role">Freelance Designer</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The ₹99 I spent here was better than the ₹10k courses I've taken. Straight to the point, no fluff, just actionable sales logic."</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👤</div>
+        <div>
+          <div class="testi-name">Priya V.</div>
+          <div class="testi-role">Marketing Executive</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Shruti helped me overcome my fear of asking for money. My revenue has doubled since I changed my money mindset."</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👤</div>
+        <div>
+          <div class="testi-name">Rahul K.</div>
+          <div class="testi-role">E-commerce Owner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-header">
+    <span class="s-label">Exclusive Offer</span>
+    <h2 class="s-title">The <em>₹99</em> Experience</h2>
+    <p class="s-sub">Why such a low price? Because I want growth to be accessible to everyone.</p>
+  </div>
+<!-- REGISTRATION MODAL -->
+<div id="regModal" style="display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:linear-gradient(160deg,#1a1520,#3d1a5e); border:1px solid #f0b94a; border-radius:16px; padding:40px; max-width:480px; width:100%; position:relative; max-height:90vh; overflow-y:auto;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.5rem;cursor:pointer;">×</button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#f0b94a;margin-bottom:6px;">Almost There!</h2>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.88rem;margin-bottom:28px;font-weight:300;">Apni details bharo — phir ₹99 payment karke seat confirm karo!</p>
+    
+    <div id="formError" style="display:none;background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.3);border-radius:6px;padding:12px;margin-bottom:16px;color:#ff6b6b;font-size:0.85rem;"></div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Full Name *</label>
+        <input id="reg-name" type="text" placeholder="Apna poora naam likho" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Phone Number *</label>
+        <input id="reg-phone" type="tel" placeholder="10-digit mobile number" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Email Address *</label>
+        <input id="reg-email" type="email" placeholder="Email jahan Zoom link aayega" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Profession *</label>
+        <select id="reg-profession" style="width:100%;padding:14px 16px;background:#1a1520;border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+          <option value="">Select karo...</option>
+          <option>Entrepreneur / Business Owner</option>
+          <option>Freelancer</option>
+          <option>Sales Professional</option>
+          <option>Coach / Trainer</option>
+          <option>Student</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <button onclick="initiatePayment()" id="payBtn" style="width:100%;margin-top:24px;padding:16px;background:linear-gradient(135deg,#c9933a,#f0b94a);color:#0c0a0e;font-weight:700;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:transform 0.2s,box-shadow 0.3s;box-shadow:0 4px 24px rgba(201,147,58,0.4);">
+      Pay ₹99 & Confirm Seat 🔒
+    </button>
+    <p style="text-align:center;margin-top:12px;font-size:0.75rem;color:rgba(255,255,255,0.3);">🛡️ Secure payment via Razorpay</p>
+  </div>
+</div>  
+<div class="pricing-wrap">
+    <div class="pricing-card">
+      <div class="pricing-ribbon">🔥 Limited Time</div>
+      <div class="pricing-tier">Full Session Access</div>
+      <div class="pricing-was">Value: ₹4,999/-</div>
+      <div class="pricing-price"><sup>₹</sup>99</div>
+      <div class="pricing-note">Includes GST · Today's Offer Only</div>
+      <div class="pricing-sep"></div>
+      <ul class="pf-list">
+        <li><span class="pf-check">✓</span> 90-Minute LIVE Mastery Session</li>
+        <li><span class="pf-check">✓</span> Live Q&A with Coach Shruti</li>
+        <li><span class="pf-check">✓</span> Digital Workbook & Proven Scripts</li>
+        <li><span class="pf-check">✓</span> Access to Exclusive WhatsApp Community</li>
+        <li><span class="pf-check">✓</span> Session Recordings (limited access)</li>
+      </ul>
+      <a class="pricing-cta" href="#">Reserve your seat @ ₹99</a>
+      <p class="pricing-guarantee">🛡️ 100% Money-Back if not 10x value</p>
+    </div>
+    <div class="guarantee-block">
+      <div class="gb-icon">🛡️</div>
+      <div class="gb-title">100% Money-Back Guarantee</div>
+      <p class="gb-text">I'm so confident in this framework that if you feel you didn't get 10x value by the end of the session, I will refund your ₹99 immediately. No questions asked. Your trust is my priority.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <span class="s-label">Got Questions?</span>
+      <h2 class="s-title">Common <em>Queries</em></h2>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="faqToggle(this)">
+        Is this for beginners or experienced salespeople?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-body">Both! Beginners will learn the foundational mindset, and experienced professionals will unlock high-level closing frameworks they can apply immediately to their existing pipeline.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="faqToggle(this)">
+        What language will the session be in?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-body">The session will be in Hinglish (a mix of Hindi and English) to ensure everyone absorbs the concepts clearly and comfortably.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="faqToggle(this)">
+        What if I can't attend the live session?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-body">We strongly encourage attending live for the interactive Q&A. A summary of key takeaways will be shared in the community group for registered members.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="faqToggle(this)">
+        How is ₹99 enough for a full masterclass?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-body">Shruti believes that growth should be accessible. The low entry price is her way of giving back — and the quality of content is backed by a full money-back guarantee.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="c-logo">Shruti Tiwari</div>
+      <p class="c-tagline">Empowering professionals to master influence and close more deals — ethically and confidently.</p>
+      <div class="social-label">Follow &amp; Connect</div>
+      <div class="social-row">
+        <a class="social-link" href="https://instagram.com/coachshrutitiwari" target="_blank">
+          <span class="social-platform">📸</span> Instagram · @coachshrutitiwari
+        </a>
+        <a class="social-link" href="#" target="_blank">
+          <span class="social-platform">📘</span> Facebook · Shruti Tiwari
+        </a>
+        <a class="social-link" href="#" target="_blank">
+          <span class="social-platform">💼</span> LinkedIn · Shruti Tiwari
+        </a>
+        <a class="social-link" href="https://t.me/coachshrutitiwari" target="_blank">
+          <span class="social-platform">✈️</span> Telegram · @coachshrutitiwari
+        </a>
+        <a class="social-link" href="#" target="_blank">
+          <span class="social-platform">𝕏</span> X · @shruti_tiwari04
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h3 class="c-cta-title">Start Your Journey To<br><span>Sales Mastery</span></h3>
+      <a class="btn-primary" style="font-size:1rem; padding:18px 52px;" href="#pricing">Reserve your seat @ ₹99</a>
+      <p class="c-note">Seats are filling fast. Don't wait for the price to go up.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Coach Shruti Tiwari · All Rights Reserved</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Terms</a>
+    <a href="#">Privacy</a>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <span class="sb-text">🔥 <span>Almost full</span> — Grab your seat for just ₹99</span>
+  <a class="sb-btn" href="#pricing">Register Now</a>
+</div>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
+    // Sticky bar
+    document.getElementById('stickyBar').classList.toggle('show', scrolled > 500);
+    // Nav shadow
+    document.getElementById('mainNav').classList.toggle('scrolled', scrolled > 60);
+  });
+
+  // FAQ toggle
+  function faqToggle(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  // Scroll-triggered fade-in for cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar-card, .exp-card, .testi-card, .benefit-card').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = `opacity 0.5s ${i * 0.08}s ease, transform 0.5s ${i * 0.08}s ease, border-color 0.3s, background 0.3s`;
+    observer.observe(el);
+  });
+// Razorpay script load karo
+const rzpScript = document.createElement('script');
+rzpScript.src = 'https://checkout.razorpay.com/v1/checkout.js';
+document.head.appendChild(rzpScript);
+
+// Modal open/close
+function openModal() {
+  const modal = document.getElementById('regModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  const modal = document.getElementById('regModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Saare CTA buttons ko modal se connect karo
+document.querySelectorAll('a[href="#pricing"], a.pricing-cta, a.hero-card-cta').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal();
+  });
+});
+
+// Payment initiate karo
+async function initiatePayment() {
+  const name = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const profession = document.getElementById('reg-profession').value;
+  const errorDiv = document.getElementById('formError');
+  const payBtn = document.getElementById('payBtn');
+
+  // Validation
+  if (!name || !phone || !email || !profession) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Sabhi fields bharna zaroori hai!';
+    return;
+  }
+  if (!/^[0-9]{10}$/.test(phone)) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Phone number 10 digits ka hona chahiye!';
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Valid email daalo!';
+    return;
+  }
+
+  errorDiv.style.display = 'none';
+  payBtn.textContent = 'Processing...';
+  payBtn.disabled = true;
+
+  try {
+    // Backend se order create karo
+    const res = await fetch('/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, profession })
+    });
+    const data = await res.json();
+
+    if (!data.orderId) throw new Error('Order create nahi hua');
+
+    // Razorpay checkout open karo — ₹99 pre-filled
+    const options = {
+      key: data.keyId,
+      amount: data.amount, // 9900 paise = ₹99
+      currency: data.currency,
+      name: 'Coach Shruti Tiwari',
+      description: 'Sales Mastery Session — ₹99',
+      order_id: data.orderId,
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+      theme: { color: '#f0b94a' },
+      handler: async function(response) {
+        // Payment verify karo
+        const verifyRes = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            name,
+            email
+          })
+        });
+        const verifyData = await verifyRes.json();
+        if (verifyData.success) {
+          window.location.href = '/success.html';
+        } else {
+          alert('Payment verify nahi hua. Support se contact karo.');
+        }
+      },
+      modal: {
+        ondismiss: function() {
+          payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
+          payBtn.disabled = false;
+        }
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (err) {
+    console.error(err);
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Kuch problem aayi. Dobara try karo!';
+    payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
+    payBtn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
