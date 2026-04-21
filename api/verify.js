@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
             <p style="color: #ffffff; margin: 8px 0;">📅 <strong>Date:</strong> This Sunday</p>
             <p style="color: #ffffff; margin: 8px 0;">🕙 <strong>Time:</strong> 7:00 PM – 8:30 PM</p>
             <p style="color: #ffffff; margin: 8px 0;">📍 <strong>Venue:</strong> Zoom (Live Online)</p>
-            <p style="color: #ffffff; margin: 8px 0;">🔗 <strong>Zoom Link:</strong> <a href="${process.env.ZOOM_LINK}" style="color: #f0b94a;">${process.env.ZOOM_LINK}</a></p>
+            <p style="color: #ffffff; margin: 8px 0;">🔗 <strong>Zoom Link:</strong> <span style="color: #f0b94a;">Will be sent via email 24 hours before the session</span></p>
           </div>
           <p style="color: #cccccc; font-size: 14px;">
             Koi sawaal ho toh Instagram pe message karo: <a href="https://instagram.com/coachshrutitiwari" style="color: #f0b94a;">@coachshrutitiwari</a>
