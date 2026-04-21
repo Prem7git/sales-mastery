@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
         });
     }
 
-    // Confirmation email bhejo
+    // Confirmation email bhejo (USER ko)
     await resend.emails.send({
       from: 'Coach Shruti Tiwari <onboarding@resend.dev>',
       to: email,
@@ -82,6 +82,31 @@ module.exports = async (req, res) => {
           </p>
           <p style="color: #f0b94a; font-size: 18px; margin-top: 32px;">See you Sunday! 🚀</p>
           <p style="color: #888; font-size: 12px;">— Coach Shruti Tiwari</p>
+        </div>
+      `
+    });
+
+    // 🔥🔥 ADMIN KO NOTIFICATION 🔥🔥
+    // APNI EMAIL ID YAHAN DAL - example: 'shrutitiwari@gmail.com'
+    await resend.emails.send({
+      from: 'Coach Shruti Tiwari <onboarding@resend.dev>',
+      to: 'TERI_EMAIL_ID_DAL_YAHAN',  // ← YAHAN APNA EMAIL DAAL
+      subject: '💰 NEW PAYMENT RECEIVED!',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0c0a0e; color: #ffffff; padding: 40px; border-radius: 12px;">
+          <h2 style="color: #f0b94a;">🎉 New Registration & Payment!</h2>
+          <div style="background: #1a1520; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p><strong>👤 Name:</strong> ${name}</p>
+            <p><strong>📧 Email:</strong> ${email}</p>
+            <p><strong>📞 Phone:</strong> ${phone}</p>
+            <p><strong>💼 Profession:</strong> ${profession}</p>
+            <p><strong>💰 Amount:</strong> ₹99</p>
+            <p><strong>🆔 Payment ID:</strong> ${razorpay_payment_id}</p>
+            <p><strong>📦 Order ID:</strong> ${razorpay_order_id}</p>
+          </div>
+          <p>Check Supabase dashboard for complete details.</p>
+          <hr style="border-color: rgba(240,185,74,0.2); margin: 20px 0;">
+          <p style="color: #888; font-size: 12px;">— Coach Shruti Tiwari System</p>
         </div>
       `
     });
