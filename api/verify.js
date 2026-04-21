@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
 
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature, name, email, phone, profession } = req.body;
 
-  // Signature verify karo
+  // Signature verify
   const body = razorpay_order_id + '|' + razorpay_payment_id;
   const expectedSignature = crypto
     .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
@@ -29,14 +29,13 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // Pehle check karo record exist karta hai ya nahi
+    // Supabase update
     const { data: existing } = await supabase
       .from('registrations')
       .select('*')
       .eq('razorpay_order_id', razorpay_order_id);
 
     if (existing && existing.length > 0) {
-      // Update karo
       await supabase
         .from('registrations')
         .update({
@@ -45,22 +44,20 @@ module.exports = async (req, res) => {
         })
         .eq('razorpay_order_id', razorpay_order_id);
     } else {
-      // Naya record insert karo (agar create-order mein save nahi hua toh)
       await supabase
         .from('registrations')
         .insert({
-          name: name,
-          email: email,
-          phone: phone,
-          profession: profession,
-          razorpay_order_id: razorpay_order_id,
-          razorpay_payment_id: razorpay_payment_id,
+          name, email, phone, profession,
+          razorpay_order_id,
+          razorpay_payment_id,
           payment_status: 'paid'
         });
     }
 
-    // Confirmation email bhejo (USER ko)
-    await resend.emails.send({
+    // ========================================
+    // 🔥 USER EMAIL - Customer ko
+    // ========================================
+    const userEmailSent = await resend.emails.send({
       from: 'Coach Shruti Tiwari <onboarding@resend.dev>',
       to: email,
       subject: '✅ Registration Confirmed — Sales Mastery Session',
@@ -78,7 +75,7 @@ module.exports = async (req, res) => {
             <p style="color: #ffffff; margin: 8px 0;">🔗 <strong>Zoom Link:</strong> <span style="color: #f0b94a;">Will be sent via email 24 hours before the session</span></p>
           </div>
           <p style="color: #cccccc; font-size: 14px;">
-            Follow us on Instagram for updates: <a href="https://instagram.com/coachshrutitiwari" style="color: #f0b94a;">@coachshrutitiwari</a>
+            Koi sawaal? Instagram pe message karo: <a href="https://instagram.com/coachshrutitiwari" style="color: #f0b94a;">@coachshrutitiwari</a>
           </p>
           <p style="color: #f0b94a; font-size: 18px; margin-top: 32px;">See you Sunday! 🚀</p>
           <p style="color: #888; font-size: 12px;">— Coach Shruti Tiwari</p>
@@ -86,11 +83,12 @@ module.exports = async (req, res) => {
       `
     });
 
-    // 🔥🔥 ADMIN KO NOTIFICATION 🔥🔥
-    // APNI EMAIL ID YAHAN DAL - example: 'shrutitiwari@gmail.com'
-    await resend.emails.send({
+    // ========================================
+    // 🔥 ADMIN EMAIL - Tujhe
+    // ========================================
+    const adminEmailSent = await resend.emails.send({
       from: 'Coach Shruti Tiwari <onboarding@resend.dev>',
-      to: 'premtiwari1105@gmail.com',  // ← YAHAN APNA EMAIL DAAL
+      to: 'premtiwari1105@gmail.com',
       subject: '💰 NEW PAYMENT RECEIVED!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0c0a0e; color: #ffffff; padding: 40px; border-radius: 12px;">
@@ -105,16 +103,16 @@ module.exports = async (req, res) => {
             <p><strong>📦 Order ID:</strong> ${razorpay_order_id}</p>
           </div>
           <p>Check Supabase dashboard for complete details.</p>
-          <hr style="border-color: rgba(240,185,74,0.2); margin: 20px 0;">
-          <p style="color: #888; font-size: 12px;">— Coach Shruti Tiwari System</p>
         </div>
       `
     });
 
+    console.log('✅ Emails sent - User:', userEmailSent.id, 'Admin:', adminEmailSent.id);
+
     return res.status(200).json({ success: true });
 
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Verification mein dikkat' });
+    console.error('❌ Error:', err);
+    return res.status(500).json({ error: 'Verification mein dikkat: ' + err.message });
   }
 };
