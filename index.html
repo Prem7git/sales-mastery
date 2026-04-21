@@ -972,16 +972,10 @@ footer {
 <section>
   <div id="about">
     <div class="about-img-wrap">
-      
-<img src="shruti.jpeg" alt="Coach Shruti Tiwari" style="
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 50%;
-  border: 3px solid rgba(201,147,58,0.4);
-">
-      
+      <div class="about-photo-placeholder">
+        <span class="ph-person">👤</span>
+        <span>Shruti Tiwari Portrait</span>
+      </div>
       <div class="about-img-accent">
         <div class="acc-num">11+</div>
         <div class="acc-label">Years of<br>Influence</div>
@@ -1199,10 +1193,52 @@ footer {
 <section id="pricing">
   <div class="pricing-header">
     <span class="s-label">Exclusive Offer</span>
-    <!--<h2 class="s-title">The <em>₹99</em> Experience</h2>
+    <h2 class="s-title">The <em>₹99</em> Experience</h2>
     <p class="s-sub">Why such a low price? Because I want growth to be accessible to everyone.</p>
-  </div>-->
-  <div class="pricing-wrap">
+  </div>
+<!-- REGISTRATION MODAL -->
+<div id="regModal" style="display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:linear-gradient(160deg,#1a1520,#3d1a5e); border:1px solid #f0b94a; border-radius:16px; padding:40px; max-width:480px; width:100%; position:relative; max-height:90vh; overflow-y:auto;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.5rem;cursor:pointer;">×</button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#f0b94a;margin-bottom:6px;">Almost There!</h2>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.88rem;margin-bottom:28px;font-weight:300;">Apni details bharo — phir ₹99 payment karke seat confirm karo!</p>
+    
+    <div id="formError" style="display:none;background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.3);border-radius:6px;padding:12px;margin-bottom:16px;color:#ff6b6b;font-size:0.85rem;"></div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Full Name *</label>
+        <input id="reg-name" type="text" placeholder="Apna poora naam likho" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Phone Number *</label>
+        <input id="reg-phone" type="tel" placeholder="10-digit mobile number" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Email Address *</label>
+        <input id="reg-email" type="email" placeholder="Email jahan Zoom link aayega" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+      </div>
+      <div>
+        <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#f0b94a;font-weight:600;display:block;margin-bottom:8px;">Profession *</label>
+        <select id="reg-profession" style="width:100%;padding:14px 16px;background:#1a1520;border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f0b94a'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+          <option value="">Select karo...</option>
+          <option>Entrepreneur / Business Owner</option>
+          <option>Freelancer</option>
+          <option>Sales Professional</option>
+          <option>Coach / Trainer</option>
+          <option>Student</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <button onclick="initiatePayment()" id="payBtn" style="width:100%;margin-top:24px;padding:16px;background:linear-gradient(135deg,#c9933a,#f0b94a);color:#0c0a0e;font-weight:700;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:transform 0.2s,box-shadow 0.3s;box-shadow:0 4px 24px rgba(201,147,58,0.4);">
+      Pay ₹99 & Confirm Seat 🔒
+    </button>
+    <p style="text-align:center;margin-top:12px;font-size:0.75rem;color:rgba(255,255,255,0.3);">🛡️ Secure payment via Razorpay</p>
+  </div>
+</div>  
+<div class="pricing-wrap">
     <div class="pricing-card">
       <div class="pricing-ribbon">🔥 Limited Time</div>
       <div class="pricing-tier">Full Session Access</div>
@@ -1355,6 +1391,125 @@ footer {
     el.style.transition = `opacity 0.5s ${i * 0.08}s ease, transform 0.5s ${i * 0.08}s ease, border-color 0.3s, background 0.3s`;
     observer.observe(el);
   });
+// Razorpay script load karo
+const rzpScript = document.createElement('script');
+rzpScript.src = 'https://checkout.razorpay.com/v1/checkout.js';
+document.head.appendChild(rzpScript);
+
+// Modal open/close
+function openModal() {
+  const modal = document.getElementById('regModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  const modal = document.getElementById('regModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Saare CTA buttons ko modal se connect karo
+document.querySelectorAll('a[href="#pricing"], a.pricing-cta, a.hero-card-cta').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal();
+  });
+});
+
+// Payment initiate karo
+async function initiatePayment() {
+  const name = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const profession = document.getElementById('reg-profession').value;
+  const errorDiv = document.getElementById('formError');
+  const payBtn = document.getElementById('payBtn');
+
+  // Validation
+  if (!name || !phone || !email || !profession) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Sabhi fields bharna zaroori hai!';
+    return;
+  }
+  if (!/^[0-9]{10}$/.test(phone)) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Phone number 10 digits ka hona chahiye!';
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Valid email daalo!';
+    return;
+  }
+
+  errorDiv.style.display = 'none';
+  payBtn.textContent = 'Processing...';
+  payBtn.disabled = true;
+
+  try {
+    // Backend se order create karo
+    const res = await fetch('/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, profession })
+    });
+    const data = await res.json();
+
+    if (!data.orderId) throw new Error('Order create nahi hua');
+
+    // Razorpay checkout open karo — ₹99 pre-filled
+    const options = {
+      key: data.keyId,
+      amount: data.amount, // 9900 paise = ₹99
+      currency: data.currency,
+      name: 'Coach Shruti Tiwari',
+      description: 'Sales Mastery Session — ₹99',
+      order_id: data.orderId,
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+      theme: { color: '#f0b94a' },
+      handler: async function(response) {
+        // Payment verify karo
+        const verifyRes = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            name,
+            email
+          })
+        });
+        const verifyData = await verifyRes.json();
+        if (verifyData.success) {
+          window.location.href = '/success.html';
+        } else {
+          alert('Payment verify nahi hua. Support se contact karo.');
+        }
+      },
+      modal: {
+        ondismiss: function() {
+          payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
+          payBtn.disabled = false;
+        }
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (err) {
+    console.error(err);
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = '⚠️ Kuch problem aayi. Dobara try karo!';
+    payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
+    payBtn.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
