@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
             <p style="color: #ffffff; margin: 8px 0;">🔗 <strong>Zoom Link:</strong> <span style="color: #f0b94a;">Will be sent via email 24 hours before the session</span></p>
           </div>
           <p style="color: #cccccc; font-size: 14px;">
-            Koi sawaal ho toh Instagram pe message karo: <a href="https://instagram.com/coachshrutitiwari" style="color: #f0b94a;">@coachshrutitiwari</a>
+            Follow us on Instagram for updates: <a href="https://instagram.com/coachshrutitiwari" style="color: #f0b94a;">@coachshrutitiwari</a>
           </p>
           <p style="color: #f0b94a; font-size: 18px; margin-top: 32px;">See you Sunday! 🚀</p>
           <p style="color: #888; font-size: 12px;">— Coach Shruti Tiwari</p>
@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
     // APNI EMAIL ID YAHAN DAL - example: 'shrutitiwari@gmail.com'
     await resend.emails.send({
       from: 'Coach Shruti Tiwari <onboarding@resend.dev>',
-      to: 'TERI_EMAIL_ID_DAL_YAHAN',  // ← YAHAN APNA EMAIL DAAL
+      to: 'premtiwari1105@gmail.com',  // ← YAHAN APNA EMAIL DAAL
       subject: '💰 NEW PAYMENT RECEIVED!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0c0a0e; color: #ffffff; padding: 40px; border-radius: 12px;">
