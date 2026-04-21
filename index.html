@@ -972,14 +972,10 @@ footer {
 <section>
   <div id="about">
     <div class="about-img-wrap">
-      <img src="shruti.jpeg" alt="Coach Shruti Tiwari" style="
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 50%;
-  border: 3px solid rgba(201,147,58,0.4);
-">
+      <div class="about-photo-placeholder">
+        <span class="ph-person">👤</span>
+        <span>Shruti Tiwari Portrait</span>
+      </div>
       <div class="about-img-accent">
         <div class="acc-num">11+</div>
         <div class="acc-label">Years of<br>Influence</div>
@@ -1395,125 +1391,6 @@ footer {
     el.style.transition = `opacity 0.5s ${i * 0.08}s ease, transform 0.5s ${i * 0.08}s ease, border-color 0.3s, background 0.3s`;
     observer.observe(el);
   });
-// Razorpay script load karo
-const rzpScript = document.createElement('script');
-rzpScript.src = 'https://checkout.razorpay.com/v1/checkout.js';
-document.head.appendChild(rzpScript);
-
-// Modal open/close
-function openModal() {
-  const modal = document.getElementById('regModal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-  const modal = document.getElementById('regModal');
-  modal.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-// Saare CTA buttons ko modal se connect karo
-document.querySelectorAll('a[href="#pricing"], a.pricing-cta, a.hero-card-cta').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    openModal();
-  });
-});
-
-// Payment initiate karo
-async function initiatePayment() {
-  const name = document.getElementById('reg-name').value.trim();
-  const phone = document.getElementById('reg-phone').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const profession = document.getElementById('reg-profession').value;
-  const errorDiv = document.getElementById('formError');
-  const payBtn = document.getElementById('payBtn');
-
-  // Validation
-  if (!name || !phone || !email || !profession) {
-    errorDiv.style.display = 'block';
-    errorDiv.textContent = '⚠️ Sabhi fields bharna zaroori hai!';
-    return;
-  }
-  if (!/^[0-9]{10}$/.test(phone)) {
-    errorDiv.style.display = 'block';
-    errorDiv.textContent = '⚠️ Phone number 10 digits ka hona chahiye!';
-    return;
-  }
-  if (!/\S+@\S+\.\S+/.test(email)) {
-    errorDiv.style.display = 'block';
-    errorDiv.textContent = '⚠️ Valid email daalo!';
-    return;
-  }
-
-  errorDiv.style.display = 'none';
-  payBtn.textContent = 'Processing...';
-  payBtn.disabled = true;
-
-  try {
-    // Backend se order create karo
-    const res = await fetch('/api/create-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email, profession })
-    });
-    const data = await res.json();
-
-    if (!data.orderId) throw new Error('Order create nahi hua');
-
-    // Razorpay checkout open karo — ₹99 pre-filled
-    const options = {
-      key: data.keyId,
-      amount: data.amount, // 9900 paise = ₹99
-      currency: data.currency,
-      name: 'Coach Shruti Tiwari',
-      description: 'Sales Mastery Session — ₹99',
-      order_id: data.orderId,
-      prefill: {
-        name: name,
-        email: email,
-        contact: phone
-      },
-      theme: { color: '#f0b94a' },
-      handler: async function(response) {
-        // Payment verify karo
-        const verifyRes = await fetch('/api/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-            name,
-            email
-          })
-        });
-        const verifyData = await verifyRes.json();
-        if (verifyData.success) {
-          window.location.href = '/success.html';
-        } else {
-          alert('Payment verify nahi hua. Support se contact karo.');
-        }
-      },
-      modal: {
-        ondismiss: function() {
-          payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
-          payBtn.disabled = false;
-        }
-      }
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-
-  } catch (err) {
-    console.error(err);
-    errorDiv.style.display = 'block';
-    errorDiv.textContent = '⚠️ Kuch problem aayi. Dobara try karo!';
-    payBtn.textContent = 'Pay ₹99 & Confirm Seat 🔒';
-    payBtn.disabled = false;
-  }
-}
 </script>
 </body>
 </html>
