@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, name, email } = req.body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, name, email, phone, profession } = req.body;
 
   // Signature verify karo
   const body = razorpay_order_id + '|' + razorpay_payment_id;
@@ -29,14 +29,35 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // Supabase update karo
-    await supabase
+    // Pehle check karo record exist karta hai ya nahi
+    const { data: existing } = await supabase
       .from('registrations')
-      .update({
-        payment_status: 'paid',
-        razorpay_payment_id
-      })
+      .select('*')
       .eq('razorpay_order_id', razorpay_order_id);
+
+    if (existing && existing.length > 0) {
+      // Update karo
+      await supabase
+        .from('registrations')
+        .update({
+          payment_status: 'paid',
+          razorpay_payment_id: razorpay_payment_id
+        })
+        .eq('razorpay_order_id', razorpay_order_id);
+    } else {
+      // Naya record insert karo (agar create-order mein save nahi hua toh)
+      await supabase
+        .from('registrations')
+        .insert({
+          name: name,
+          email: email,
+          phone: phone,
+          profession: profession,
+          razorpay_order_id: razorpay_order_id,
+          razorpay_payment_id: razorpay_payment_id,
+          payment_status: 'paid'
+        });
+    }
 
     // Confirmation email bhejo
     await resend.emails.send({
