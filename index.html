@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruti Tiwari — Sales Coach · Inspirational Speaker · Corporate Trainer</title>
+<meta name="description" content="Shruti Tiwari — India's trusted Sales Coach, Inspirational Speaker & Corporate Trainer. 11+ years, 1M+ lives transformed, 1000+ workshops Pan India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --black: #06050a;
+  --deep: #0d0b14;
+  --dark: #13101e;
+  --plum: #1e1030;
+  --violet: #2d1554;
+  --rose: #8b1a4a;
+  --rose-light: #c0325f;
+  --gold: #c8923a;
+  --gold-bright: #edb84e;
+  --gold-pale: #fdf0d4;
+  --cream: #faf5ed;
+  --white: #ffffff;
+  --w80: rgba(255,255,255,0.80);
+  --w50: rgba(255,255,255,0.50);
+  --w30: rgba(255,255,255,0.30);
+  --w10: rgba(255,255,255,0.08);
+  --w05: rgba(255,255,255,0.04);
+  --gold-border: rgba(200,146,58,0.22);
+  --gold-glow: rgba(200,146,58,0.14);
+  --rose-glow: rgba(192,50,95,0.14);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+  line-height:1;
+}
+
+/* ══ CUSTOM CURSOR ══ */
+#cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--gold-bright);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s,opacity .2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1.5px solid rgba(237,184,78,0.5);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .35s cubic-bezier(.17,.67,.38,1.1),
+             height .35s cubic-bezier(.17,.67,.38,1.1),
+             border-color .3s,opacity .3s;
+}
+body:hover #cursor{opacity:1}
+a:hover~#cursor,button:hover~#cursor{width:18px;height:18px}
+
+/* ══ NOISE OVERLAY ══ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9997;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:.55;
+}
+
+/* ══ SCROLL PROGRESS ══ */
+#sprogress{
+  position:fixed;top:0;left:0;height:2px;z-index:300;width:0%;
+  background:linear-gradient(90deg,var(--rose-light),var(--gold-bright));
+  transition:width .1s linear;
+}
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:70px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(6,5,10,0.75);
+  backdrop-filter:blur(28px);
+  border-bottom:1px solid rgba(200,146,58,0.1);
+  transition:height .3s,background .3s;
+}
+nav.scrolled{height:60px;background:rgba(6,5,10,0.95)}
+.nav-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;font-weight:700;
+  color:var(--gold-bright);text-decoration:none;
+  letter-spacing:.02em;
+}
+.nav-brand span{font-style:italic;color:var(--white);font-weight:400}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  color:var(--w50);text-decoration:none;
+  font-size:.8rem;font-weight:400;letter-spacing:.06em;
+  text-transform:uppercase;transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold-bright)}
+.nav-session{
+  padding:10px 24px;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--rose-light) 100%);
+  color:var(--white);font-weight:600;font-size:.78rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;
+  box-shadow:0 2px 20px rgba(192,50,95,.35);
+  transition:transform .2s,box-shadow .3s;
+  white-space:nowrap;
+}
+.nav-session:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(192,50,95,.5)}
+.nav-session-dot{
+  display:inline-block;width:6px;height:6px;
+  border-radius:50%;background:var(--gold-bright);
+  margin-right:8px;animation:blink 1.8s infinite;
+  vertical-align:middle;margin-top:-2px;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:90px 5% 60px;
+  position:relative;
+  overflow:hidden;
+  gap:60px;
+}
+.hero-blob{
+  position:absolute;border-radius:50%;pointer-events:none;
+}
+.blob-1{
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(45,21,84,.28) 0%,transparent 65%);
+  top:-200px;right:-150px;
+}
+.blob-2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(139,26,74,.14) 0%,transparent 65%);
+  bottom:-100px;left:-100px;
+}
+.blob-3{
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(200,146,58,.07) 0%,transparent 70%);
+  top:50%;left:40%;transform:translate(-50%,-50%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
+}
+.hero-left{position:relative;z-index:2}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 18px;
+  border:1px solid rgba(200,146,58,.35);
+  border-radius:100px;
+  background:rgba(200,146,58,.06);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-bright);font-weight:600;margin-bottom:28px;
+  animation:fadeUp .8s .1s both;
+}
+.eyebrow-pulse{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--gold-bright);
+  animation:pulse 2.2s infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(237,184,78,.5)}50%{box-shadow:0 0 0 6px rgba(237,184,78,0)}}
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,5.5vw,5.6rem);
+  font-weight:700;line-height:1.02;
+  margin-bottom:8px;
+  animation:fadeUp .8s .18s both;
+}
+.hero-h1 .italic{font-style:italic;color:var(--gold-bright)}
+.hero-h1 .thin{font-weight:300}
+.hero-role{
+  font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rose-light);font-weight:500;
+  margin-bottom:28px;
+  animation:fadeUp .8s .26s both;
+}
+.hero-desc{
+  font-size:1rem;color:var(--w50);line-height:1.8;
+  font-weight:300;max-width:480px;
+  margin-bottom:40px;
+  animation:fadeUp .8s .34s both;
+}
+.hero-btns{
+  display:flex;gap:14px;flex-wrap:wrap;
+  animation:fadeUp .8s .42s both;
+}
+.btn-gold{
+  padding:15px 38px;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);
+  color:var(--black);font-weight:700;font-size:.85rem;
+  letter-spacing:.07em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;
+  box-shadow:0 4px 28px rgba(200,146,58,.4);
+  transition:transform .2s,box-shadow .3s;display:inline-block;
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(200,146,58,.55)}
+.btn-outline{
+  padding:14px 30px;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--w80);font-size:.85rem;
+  text-decoration:none;border-radius:2px;
+  transition:border-color .2s,color .2s,transform .2s;
+  display:inline-block;
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-2px)}
+
+/* Stats bar under hero text */
+.hero-stats{
+  display:flex;gap:0;
+  margin-top:52px;
+  border:1px solid var(--gold-border);
+  border-radius:4px;overflow:hidden;
+  background:rgba(255,255,255,.03);backdrop-filter:blur(10px);
+  animation:fadeUp .8s .5s both;max-width:460px;
+}
+.hstat{flex:1;padding:16px 18px;border-right:1px solid var(--gold-border)}
+.hstat:last-child{border-right:none}
+.hstat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;font-weight:700;
+  color:var(--gold-bright);line-height:1;margin-bottom:3px;
+}
+.hstat-l{font-size:.62rem;color:var(--w30);letter-spacing:.1em;text-transform:uppercase}
+
+/* ── HERO RIGHT — Photo ── */
+.hero-right{position:relative;z-index:2;animation:fadeUp .8s .25s both}
+.hero-photo-frame{
+  position:relative;
+  max-width:440px;margin:0 auto;
+}
+.hero-photo-bg{
+  position:absolute;inset:-2px;
+  border-radius:18px;
+  background:linear-gradient(160deg,var(--rose) 0%,var(--gold) 40%,var(--violet) 100%);
+  opacity:.35;filter:blur(24px);
+  transform:scale(1.04);
+}
+.hero-photo{
+  position:relative;
+  width:100%;aspect-ratio:1/1;
+  object-fit:cover;object-position:top;
+  border-radius:16px;
+  border:1px solid rgba(200,146,58,.25);
+  display:block;
+}
+.hero-badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);
+  color:var(--black);
+  padding:18px 22px;border-radius:10px;
+  box-shadow:0 10px 36px rgba(200,146,58,.35);
+  text-align:center;
+}
+.hb-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:700;line-height:1;
+}
+.hb-l{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+
+/* ══ NEXT SESSION FLOATING CARD ══ */
+.session-float{
+  position:absolute;top:36px;left:-32px;
+  background:rgba(13,11,20,.92);
+  border:1px solid rgba(192,50,95,.45);
+  border-radius:12px;padding:18px 22px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px rgba(192,50,95,.1);
+  text-decoration:none;color:var(--white);
+  transition:transform .3s,box-shadow .3s;
+  max-width:220px;
+  animation:fadeUp .8s .6s both;
+}
+.session-float:hover{transform:translateY(-4px);box-shadow:0 22px 56px rgba(0,0,0,.6)}
+.sf-live{
+  display:flex;align-items:center;gap:6px;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--rose-light);font-weight:600;margin-bottom:8px;
+}
+.sf-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--rose-light);animation:blink 1.4s infinite;
+}
+.sf-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:600;line-height:1.35;
+  margin-bottom:10px;
+}
+.sf-meta{font-size:.72rem;color:var(--w50);margin-bottom:12px;line-height:1.6}
+.sf-btn{
+  display:flex;align-items:center;gap:6px;
+  font-size:.72rem;font-weight:600;
+  color:var(--gold-bright);letter-spacing:.05em;
+}
+.sf-arrow{transition:transform .2s}
+.session-float:hover .sf-arrow{transform:translateX(4px)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════════════
+   MARQUEE STRIP
+══════════════════════════════════════════ */
+.marquee-strip{
+  border-top:1px solid var(--gold-border);
+  border-bottom:1px solid var(--gold-border);
+  background:rgba(255,255,255,.025);
+  padding:16px 0;overflow:hidden;position:relative;
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:marquee 28s linear infinite;
+}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 40px;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--w30);font-weight:500;
+  border-right:1px solid rgba(200,146,58,.12);
+}
+.marquee-item .dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══════════════════════════════════════════
+   PROOF NUMBERS
+══════════════════════════════════════════ */
+#proof{
+  padding:80px 5%;
+  display:flex;justify-content:center;
+}
+.proof-inner{
+  max-width:1000px;width:100%;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  border:1px solid var(--gold-border);border-radius:8px;
+  overflow:hidden;background:var(--gold-border);
+}
+.proof-cell{
+  background:var(--dark);
+  padding:36px 28px;text-align:center;
+  transition:background .3s;
+}
+.proof-cell:hover{background:rgba(255,255,255,.04)}
+.pc-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;font-weight:700;
+  color:var(--gold-bright);line-height:1;margin-bottom:6px;
+}
+.pc-l{font-size:.68rem;color:var(--w30);letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+#about{
+  padding:100px 5%;
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:5fr 7fr;
+  gap:80px;align-items:center;
+}
+.about-img-col{position:relative}
+.about-photo-wrap{position:relative;display:inline-block;width:100%}
+.about-photo{
+  width:100%;aspect-ratio:4/5;
+  object-fit:cover;object-position:top center;
+  border-radius:14px;
+  border:1px solid var(--gold-border);display:block;
+}
+.about-photo-accent{
+  position:absolute;bottom:-22px;right:-22px;
+  background:var(--plum);
+  border:1px solid var(--gold-border);
+  border-radius:10px;padding:20px 24px;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);
+}
+.apa-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:700;
+  color:var(--gold-bright);line-height:1;
+}
+.apa-l{font-size:.62rem;color:var(--w50);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.about-line{
+  position:absolute;top:-24px;left:-24px;
+  width:120px;height:120px;
+  border-top:1px solid rgba(200,146,58,.18);
+  border-left:1px solid rgba(200,146,58,.18);
+  border-radius:2px;
+}
+
+.about-text .tag{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rose-light);font-weight:600;margin-bottom:14px;display:block;
+}
+.about-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:700;
+  line-height:1.08;margin-bottom:6px;
+}
+.about-name em{font-style:italic;color:var(--gold-bright)}
+.about-role-line{
+  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--w30);font-weight:400;margin-bottom:28px;
+}
+.about-body{
+  font-size:.96rem;color:var(--w50);line-height:1.85;
+  font-weight:300;
+}
+.about-body p{margin-bottom:14px}
+.about-body p:last-child{margin-bottom:0}
+
+.about-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:40px;padding-top:36px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.ag-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;
+  color:var(--gold-bright);line-height:1;margin-bottom:5px;
+}
+.ag-l{font-size:.7rem;color:var(--w30);line-height:1.4}
+
+/* ══════════════════════════════════════════
+   SESSION CARD (Upcoming Events)
+══════════════════════════════════════════ */
+#sessions{
+  padding:100px 5%;
+  background:linear-gradient(180deg,var(--black) 0%,var(--deep) 100%);
+}
+.sessions-header{
+  text-align:center;max-width:560px;margin:0 auto 64px;
+}
+.section-tag{
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;display:block;margin-bottom:14px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.9rem,3.5vw,3rem);
+  font-weight:700;line-height:1.12;
+}
+.section-title em{font-style:italic;color:var(--gold-bright)}
+.section-sub{
+  color:var(--w30);font-size:.92rem;
+  line-height:1.8;font-weight:300;margin-top:12px;
+}
+
+/* THE MAIN EVENT CARD */
+.event-card-mega{
+  max-width:1100px;margin:0 auto;
+  background:linear-gradient(140deg,var(--plum) 0%,var(--dark) 50%,var(--violet) 100%);
+  border:1px solid var(--gold-border);border-radius:20px;
+  overflow:hidden;position:relative;
+  box-shadow:0 0 100px rgba(45,21,84,.3),0 0 0 1px rgba(200,146,58,.05);
+  text-decoration:none;color:var(--white);
+  display:block;
+  transition:transform .4s ease,box-shadow .4s ease;
+}
+.event-card-mega:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 100px rgba(45,21,84,.5),0 0 60px rgba(192,50,95,.12);
+}
+.event-card-mega::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-bright) 40%,var(--rose-light) 70%,transparent);
+}
+.ecm-bg-img{
+  position:absolute;inset:0;
+  background-image:url('workshop3.jpeg');
+  background-size:cover;background-position:center;
+  opacity:.08;
+}
+.ecm-body{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;gap:48px;
+  padding:56px 60px;
+}
+.ecm-live{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;
+  background:rgba(192,50,95,.15);
+  border:1px solid rgba(192,50,95,.3);
+  border-radius:100px;
+  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--rose-light);font-weight:600;margin-bottom:20px;
+}
+.ecm-live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--rose-light);animation:blink 1.4s infinite;
+}
+.ecm-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);
+  font-weight:700;line-height:1.12;margin-bottom:12px;
+}
+.ecm-title em{font-style:italic;color:var(--gold-bright)}
+.ecm-desc{
+  font-size:.9rem;color:var(--w50);line-height:1.7;
+  font-weight:300;max-width:500px;margin-bottom:32px;
+}
+.ecm-meta{
+  display:flex;gap:32px;flex-wrap:wrap;margin-bottom:36px;
+}
+.ecm-meta-item{display:flex;flex-direction:column;gap:4px}
+.ecm-meta-label{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+.ecm-meta-val{font-size:.88rem;font-weight:500}
+.ecm-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 40px;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--rose-light) 100%);
+  color:var(--white);font-weight:700;font-size:.85rem;
+  letter-spacing:.07em;text-transform:uppercase;
+  border-radius:3px;
+  box-shadow:0 6px 28px rgba(192,50,95,.4);
+  transition:transform .2s,box-shadow .3s;
+  text-decoration:none;display:inline-block;
+}
+.ecm-cta:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(192,50,95,.55)}
+.ecm-price-col{text-align:center;flex-shrink:0}
+.ecm-price-was{
+  font-size:.82rem;color:var(--w30);
+  text-decoration:line-through;margin-bottom:4px;
+}
+.ecm-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;font-weight:700;
+  color:var(--gold-bright);line-height:1;
+}
+.ecm-price sup{font-size:2rem;vertical-align:top;margin-top:14px}
+.ecm-price-note{font-size:.72rem;color:var(--w30);margin-top:6px}
+.ecm-guarantee{
+  display:flex;align-items:center;gap:6px;
+  margin-top:12px;font-size:.72rem;color:var(--w50);
+}
+
+/* ══════════════════════════════════════════
+   WORK GALLERY
+══════════════════════════════════════════ */
+#gallery{
+  padding:100px 5%;
+  overflow:hidden;
+}
+.gallery-header{text-align:center;max-width:480px;margin:0 auto 56px}
+.gallery-mosaic{
+  max-width:1100px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:280px 280px;
+  gap:12px;
+}
+.gm-item{
+  position:relative;overflow:hidden;border-radius:12px;
+  cursor:pointer;
+}
+.gm-item:first-child{grid-row:span 2}
+.gm-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s ease,filter .4s;
+  filter:brightness(.88) saturate(.85);
+}
+.gm-item:hover img{transform:scale(1.06);filter:brightness(.75) saturate(1)}
+.gm-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(13,11,20,.85) 0%,transparent 50%);
+  opacity:0;transition:opacity .4s;
+  display:flex;align-items:flex-end;padding:20px;
+}
+.gm-item:hover .gm-overlay{opacity:1}
+.gm-label{
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-bright);font-weight:600;
+}
+.gm-border{border:1px solid rgba(200,146,58,.15)}
+
+/* ══════════════════════════════════════════
+   WHAT I DO — PILLARS
+══════════════════════════════════════════ */
+#pillars{
+  padding:100px 5%;
+  background:linear-gradient(180deg,var(--black) 0%,var(--deep) 100%);
+}
+.pillars-header{text-align:center;max-width:540px;margin:0 auto 64px}
+.pillars-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;max-width:1100px;margin:0 auto;
+}
+.pillar{
+  border:1px solid var(--gold-border);
+  border-radius:14px;padding:36px 28px;
+  background:var(--w05);
+  position:relative;overflow:hidden;
+  transition:transform .35s,border-color .35s,background .35s;
+}
+.pillar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--rose),var(--gold-bright),var(--rose));
+  transform:scaleX(0);transform-origin:left;transition:transform .45s;
+}
+.pillar:hover{transform:translateY(-8px);border-color:rgba(200,146,58,.35);background:rgba(255,255,255,.06)}
+.pillar:hover::after{transform:scaleX(1)}
+.pillar-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--violet) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:22px;
+}
+.pillar-num{
+  position:absolute;top:18px;right:22px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;font-weight:700;
+  color:rgba(200,146,58,.06);line-height:1;
+}
+.pillar-t{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--gold-bright);margin-bottom:10px;
+}
+.pillar-d{font-size:.85rem;color:var(--w30);line-height:1.75;font-weight:300}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
+#testimonials{padding:100px 5%}
+.testi-header{text-align:center;max-width:520px;margin:0 auto 64px}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;max-width:1100px;margin:0 auto;
+}
+.testi{
+  background:var(--w05);
+  border:1px solid var(--gold-border);
+  border-radius:14px;padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.testi:hover{border-color:rgba(200,146,58,.3);transform:translateY(-5px)}
+.testi::before{
+  content:'"';position:absolute;top:14px;right:20px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;font-weight:700;
+  color:rgba(200,146,58,.07);line-height:1;
+}
+.testi-stars{color:var(--gold);font-size:.75rem;letter-spacing:3px;margin-bottom:14px}
+.testi-text{
+  font-size:.9rem;color:var(--w80);line-height:1.78;
+  font-weight:300;font-style:italic;margin-bottom:22px;
+}
+.testi-person{display:flex;align-items:center;gap:12px}
+.testi-av{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--violet) 100%);
+  border:1.5px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.testi-n{font-weight:600;font-size:.85rem}
+.testi-r{font-size:.7rem;color:var(--rose-light);margin-top:2px}
+
+/* ══════════════════════════════════════════
+   BRANDS / CLIENTS
+══════════════════════════════════════════ */
+#clients{
+  padding:80px 5%;
+  border-top:1px solid rgba(200,146,58,.08);
+  border-bottom:1px solid rgba(200,146,58,.08);
+  background:var(--deep);
+}
+.clients-inner{max-width:1100px;margin:0 auto;text-align:center}
+.clients-label{
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--w30);font-weight:500;margin-bottom:40px;display:block;
+}
+.clients-row{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;align-items:center;
+  gap:12px 0;
+}
+.client-item{
+  padding:16px 36px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;
+  color:rgba(255,255,255,.25);
+  letter-spacing:.04em;
+  border-right:1px solid rgba(200,146,58,.1);
+  transition:color .3s;
+}
+.client-item:last-child{border-right:none}
+.client-item:hover{color:rgba(200,146,58,.6)}
+
+/* ══════════════════════════════════════════
+   QUOTE SECTION
+══════════════════════════════════════════ */
+#quote{
+  padding:120px 5%;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--plum) 0%,var(--dark) 50%,var(--violet) 100%);
+}
+#quote::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-60deg,transparent,transparent 40px,rgba(255,255,255,.012) 40px,rgba(255,255,255,.012) 80px);
+}
+.quote-inner{
+  max-width:800px;margin:0 auto;text-align:center;
+  position:relative;z-index:2;
+}
+.quote-mark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:8rem;font-weight:700;
+  color:rgba(200,146,58,.12);line-height:.6;
+  margin-bottom:24px;display:block;
+}
+.quote-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3vw,2.2rem);
+  font-weight:400;font-style:italic;
+  line-height:1.55;color:var(--w80);
+  margin-bottom:28px;
+}
+.quote-by{
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+
+/* ══════════════════════════════════════════
+   SOCIAL / CONTACT
+══════════════════════════════════════════ */
+#connect{
+  padding:100px 5%;
+  background:var(--deep);
+}
+.connect-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.connect-left .tag{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;display:block;margin-bottom:14px;
+}
+.connect-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700;line-height:1.1;margin-bottom:16px;
+}
+.connect-title em{font-style:italic;color:var(--gold-bright)}
+.connect-desc{
+  font-size:.95rem;color:var(--w50);line-height:1.8;
+  font-weight:300;margin-bottom:36px;
+}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.social-card{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  background:var(--w05);
+  border:1px solid var(--gold-border);
+  border-radius:10px;text-decoration:none;color:var(--white);
+  transition:border-color .3s,background .3s,transform .3s;
+}
+.social-card:hover{
+  border-color:rgba(200,146,58,.4);
+  background:rgba(255,255,255,.07);
+  transform:translateY(-3px);
+}
+.sc-icon{
+  width:38px;height:38px;border-radius:8px;
+  background:linear-gradient(135deg,var(--plum) 0%,var(--violet) 100%);
+  border:1px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.sc-platform{font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.sc-handle{font-size:.82rem;color:var(--w50);margin-top:2px}
+
+.connect-right{position:relative}
+.connect-img{
+  width:100%;aspect-ratio:4/5;
+  object-fit:cover;object-position:center top;
+  border-radius:16px;border:1px solid var(--gold-border);
+  display:block;
+}
+.connect-cta-box{
+  position:absolute;bottom:-20px;left:-24px;
+  background:var(--dark);border:1px solid var(--gold-border);
+  border-radius:12px;padding:24px 28px;
+  max-width:280px;
+  box-shadow:0 20px 56px rgba(0,0,0,.55);
+}
+.ccb-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:700;
+  margin-bottom:10px;
+}
+.ccb-title em{font-style:italic;color:var(--gold-bright)}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{
+  background:var(--black);
+  border-top:1px solid rgba(200,146,58,.08);
+  padding:40px 5% 24px;
+}
+.footer-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;gap:40px;flex-wrap:wrap;
+  margin-bottom:40px;
+  padding-bottom:36px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.footer-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:700;
+  color:var(--gold-bright);margin-bottom:8px;
+}
+.footer-brand em{font-style:italic;font-weight:400;color:var(--white)}
+.footer-tagline{font-size:.82rem;color:var(--w30);max-width:260px;line-height:1.7;font-weight:300}
+.footer-links-col h4{
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:16px;
+}
+.footer-links-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links-col ul a{
+  font-size:.82rem;color:var(--w30);text-decoration:none;transition:color .2s;
+}
+.footer-links-col ul a:hover{color:var(--gold-bright)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;flex-wrap:wrap;
+}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2)}
+.footer-love{font-size:.72rem;color:rgba(255,255,255,.2)}
+.footer-love span{color:var(--rose-light)}
+
+/* ══════════════════════════════════════════
+   STICKY BAR
+══════════════════════════════════════════ */
+.sticky-bottom{
+  position:fixed;bottom:0;left:0;right:0;z-index:150;
+  background:rgba(6,5,10,.96);
+  backdrop-filter:blur(24px);
+  border-top:1px solid rgba(200,146,58,.2);
+  padding:12px 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  transform:translateY(100%);transition:transform .4s ease;
+}
+.sticky-bottom.show{transform:translateY(0)}
+.sb-msg{font-size:.85rem;font-weight:500}
+.sb-msg span{color:var(--gold-bright)}
+.sb-cta{
+  padding:10px 28px;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--rose-light) 100%);
+  color:var(--white);font-weight:700;font-size:.78rem;
+  letter-spacing:.07em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;
+  box-shadow:0 2px 16px rgba(192,50,95,.35);
+  transition:transform .2s;white-space:nowrap;
+}
+.sb-cta:hover{transform:translateY(-1px)}
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;padding-top:90px}
+  .hero-right{display:none}
+  #about{grid-template-columns:1fr;max-width:640px;gap:48px}
+  .about-img-col{max-width:340px}
+  .pillars-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .connect-inner{grid-template-columns:1fr}
+  .connect-right{display:none}
+  .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gm-item:first-child{grid-row:span 1}
+  .nav-links{display:none}
+  .ecm-body{grid-template-columns:1fr;gap:28px}
+  .ecm-price-col{text-align:left}
+}
+@media(max-width:640px){
+  #hero{padding:80px 4% 48px}
+  .hero-stats{flex-direction:column;max-width:100%}
+  .hstat{border-right:none;border-bottom:1px solid var(--gold-border)}
+  .hstat:last-child{border-bottom:none}
+  .hero-btns{flex-direction:column}
+  .btn-gold,.btn-outline{text-align:center}
+  .proof-inner{grid-template-columns:1fr 1fr}
+  .pillars-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .social-grid{grid-template-columns:1fr}
+  .gallery-mosaic{grid-template-columns:1fr;grid-template-rows:auto}
+  .clients-row{gap:0}
+  .client-item{padding:12px 18px;font-size:.9rem}
+  .ecm-body{padding:32px 24px}
+  .footer-top{flex-direction:column}
+  .sticky-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="sprogress"></div>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="mainNav">
+  <a class="nav-brand" href="#">Shruti <em>Tiwari</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">Expertise</a></li>
+    <li><a href="#gallery">Impact</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <a class="nav-session" href="/smw">
+    <span class="nav-session-dot"></span>
+    Sales Mastery
+  </a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-pulse"></span>
+      Sales Coach · Speaker · Trainer
+    </div>
+    <h1 class="hero-h1">
+      <span class="thin">Helping You</span><br>
+      <span class="italic">Sell, Lead</span><br>
+      &amp; Transform
+    </h1>
+    <div class="hero-role">India's Trusted Growth Coach · Pan India</div>
+    <p class="hero-desc">
+      With 11+ years of transforming professionals and entrepreneurs, I help you master influence, close with confidence, and build a life that reflects your true potential.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-gold" href="#about">Know My Story</a>
+      <a class="btn-outline" href="/smw">Next Session →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n">1M+</div>
+        <div class="hstat-l">Lives Touched</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">1000+</div>
+        <div class="hstat-l">Workshops</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">11+</div>
+        <div class="hstat-l">Years</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-frame">
+      <div class="hero-photo-bg"></div>
+      <img class="hero-photo" src="shruti_hero.jpeg" alt="Coach Shruti Tiwari — Sales Coach and Inspirational Speaker">
+      <div class="hero-badge">
+        <div class="hb-n">11+</div>
+        <div class="hb-l">Years of<br>Influence</div>
+      </div>
+      <!-- Floating session card -->
+      <a class="session-float" href="/smw">
+        <div class="sf-live"><span class="sf-dot"></span>Next Session</div>
+        <div class="sf-title">Sales Mastery Workshop</div>
+        <div class="sf-meta">Sunday · 7–8:30 PM<br>Live on Zoom · ₹99 Only</div>
+        <div class="sf-btn">
+          Reserve Seat
+          <span class="sf-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <!-- set 1 -->
+    <span class="marquee-item"><span class="dot"></span>Sales Mastery</span>
+    <span class="marquee-item"><span class="dot"></span>Leadership Training</span>
+    <span class="marquee-item"><span class="dot"></span>Corporate Workshops</span>
+    <span class="marquee-item"><span class="dot"></span>Closing Frameworks</span>
+    <span class="marquee-item"><span class="dot"></span>Mindset Mastery</span>
+    <span class="marquee-item"><span class="dot"></span>Influence & Persuasion</span>
+    <span class="marquee-item"><span class="dot"></span>Objection Handling</span>
+    <span class="marquee-item"><span class="dot"></span>Communication Skills</span>
+    <span class="marquee-item"><span class="dot"></span>Goal Setting</span>
+    <span class="marquee-item"><span class="dot"></span>High Performance</span>
+    <!-- set 2 (duplicate for seamless loop) -->
+    <span class="marquee-item"><span class="dot"></span>Sales Mastery</span>
+    <span class="marquee-item"><span class="dot"></span>Leadership Training</span>
+    <span class="marquee-item"><span class="dot"></span>Corporate Workshops</span>
+    <span class="marquee-item"><span class="dot"></span>Closing Frameworks</span>
+    <span class="marquee-item"><span class="dot"></span>Mindset Mastery</span>
+    <span class="marquee-item"><span class="dot"></span>Influence & Persuasion</span>
+    <span class="marquee-item"><span class="dot"></span>Objection Handling</span>
+    <span class="marquee-item"><span class="dot"></span>Communication Skills</span>
+    <span class="marquee-item"><span class="dot"></span>Goal Setting</span>
+    <span class="marquee-item"><span class="dot"></span>High Performance</span>
+  </div>
+</div>
+
+<!-- ══ PROOF NUMBERS ══ -->
+<section id="proof">
+  <div class="proof-inner reveal">
+    <div class="proof-cell">
+      <div class="pc-n" data-count="1000000">0</div>
+      <div class="pc-l">Lives<br>Empowered</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pc-n" data-count="1000">0</div>
+      <div class="pc-l">Workshops<br>Conducted</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pc-n" data-count="11">0</div>
+      <div class="pc-l">Years of<br>Experience</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pc-n">Pan India</div>
+      <div class="pc-l">Training<br>Reach</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section>
+  <div id="about">
+    <div class="about-img-col reveal">
+      <div class="about-photo-wrap">
+        <div class="about-line"></div>
+        <img class="about-photo" src="shruti_corporate.jpeg" alt="Shruti Tiwari training a corporate team">
+        <div class="about-photo-accent">
+          <div class="apa-n">1M+</div>
+          <div class="apa-l">Lives<br>Transformed</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal reveal-delay-2">
+      <span class="tag">The Story</span>
+      <h2 class="about-name">Shruti <em>Tiwari</em></h2>
+      <div class="about-role-line">Sales Coach · Inspirational Speaker · Corporate Trainer</div>
+      <div class="about-body">
+        <p>I'm Shruti Tiwari — on a mission to help you grow, thrive, and succeed. What started as a passion for people has become an 11-year journey of transforming professionals, entrepreneurs, and organizations across India.</p>
+        <p>I've trained teams at Vedantu, Aamani Group, Simero, and many more — turning ordinary salespeople into top closers and helping leaders discover the authority in their own voice.</p>
+        <p>My approach is simple: sales isn't about talking — it's about listening, leading, and creating genuine transformation. When you sell from a place of purpose, everything changes.</p>
+      </div>
+      <div class="about-grid">
+        <div>
+          <div class="ag-n">1M+</div>
+          <div class="ag-l">Lives Transformed</div>
+        </div>
+        <div>
+          <div class="ag-n">1000+</div>
+          <div class="ag-l">Workshops Done</div>
+        </div>
+        <div>
+          <div class="ag-n">Pan India</div>
+          <div class="ag-l">Reach & Impact</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ UPCOMING SESSION CARD ══ -->
+<section id="sessions">
+  <div class="sessions-header reveal">
+    <span class="section-tag">Upcoming Event</span>
+    <h2 class="section-title">Next <em>Live Session</em></h2>
+    <p class="section-sub">Join thousands who have already transformed their sales game.</p>
+  </div>
+  <a class="event-card-mega reveal" href="/smw">
+    <div class="ecm-bg-img"></div>
+    <div class="ecm-body">
+      <div>
+        <div class="ecm-live">
+          <span class="ecm-live-dot"></span>
+          Registrations Open
+        </div>
+        <h3 class="ecm-title">Sales Mastery<br><em>Workshop</em></h3>
+        <p class="ecm-desc">Stop pitching and start winning. Master the psychology of closing, handle every objection like a pro, and 2x your conversions — live with Coach Shruti.</p>
+        <div class="ecm-meta">
+          <div class="ecm-meta-item">
+            <span class="ecm-meta-label">📅 Date</span>
+            <span class="ecm-meta-val">This Sunday</span>
+          </div>
+          <div class="ecm-meta-item">
+            <span class="ecm-meta-label">🕙 Time</span>
+            <span class="ecm-meta-val">7:00 – 8:30 PM</span>
+          </div>
+          <div class="ecm-meta-item">
+            <span class="ecm-meta-label">📍 Venue</span>
+            <span class="ecm-meta-val">Live on Zoom</span>
+          </div>
+          <div class="ecm-meta-item">
+            <span class="ecm-meta-label">🌐 Language</span>
+            <span class="ecm-meta-val">Hinglish</span>
+          </div>
+        </div>
+        <span class="ecm-cta">Reserve My Seat →</span>
+      </div>
+      <div class="ecm-price-col">
+        <div class="ecm-price-was">Value: ₹4,999/-</div>
+        <div class="ecm-price"><sup>₹</sup>99</div>
+        <div class="ecm-price-note">Includes GST · Today's Offer</div>
+        <div class="ecm-guarantee">🛡️ 100% Money-Back Guarantee</div>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <span class="section-tag">Real Impact</span>
+    <h2 class="section-title">Where <em>Transformation</em> Happens</h2>
+  </div>
+  <div class="gallery-mosaic">
+    <div class="gm-item gm-border reveal">
+      <img src="shruti_event.jpeg" alt="Shruti on stage with a large crowd">
+      <div class="gm-overlay"><span class="gm-label">Live Events</span></div>
+    </div>
+    <div class="gm-item gm-border reveal reveal-delay-1">
+      <img src="shruti_workshop1.jpeg" alt="Shruti conducting a workshop">
+      <div class="gm-overlay"><span class="gm-label">Corporate Workshops</span></div>
+    </div>
+    <div class="gm-item gm-border reveal reveal-delay-2">
+      <img src="shruti_personal1.jpeg" alt="Shruti Tiwari">
+      <div class="gm-overlay"><span class="gm-label">The Mentor</span></div>
+    </div>
+    <div class="gm-item gm-border reveal reveal-delay-3" style="grid-column:span 2">
+      <img src="shruti_corporate.jpeg" alt="Shruti training in a boardroom">
+      <div class="gm-overlay"><span class="gm-label">Boardroom Training</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PILLARS ══ -->
+<section id="pillars">
+  <div class="pillars-header reveal">
+    <span class="section-tag">Expertise</span>
+    <h2 class="section-title">What I <em>Help You</em> Master</h2>
+    <p class="section-sub">Designed for entrepreneurs, coaches, and sales professionals at every stage.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <span class="pillar-num">01</span>
+      <div class="pillar-icon">🧠</div>
+      <div class="pillar-t">Sales Psychology</div>
+      <p class="pillar-d">Understand the buyer's mind — what they think, feel, and need before they say yes. Sell with empathy and authority.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-1">
+      <span class="pillar-num">02</span>
+      <div class="pillar-icon">🎯</div>
+      <div class="pillar-t">Closing Mastery</div>
+      <p class="pillar-d">Move from "I'll think about it" to a confident yes using proven 3-step closing frameworks that feel natural.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <span class="pillar-num">03</span>
+      <div class="pillar-icon">🛡️</div>
+      <div class="pillar-t">Objection Alchemy</div>
+      <p class="pillar-d">Turn every "no" and stall into an opportunity. Script every objection response before your next sales call.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-1">
+      <span class="pillar-num">04</span>
+      <div class="pillar-icon">🌟</div>
+      <div class="pillar-t">Leadership & Influence</div>
+      <p class="pillar-d">Lead teams, inspire rooms, and build your personal authority — because the best leaders sell their vision every day.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <span class="pillar-num">05</span>
+      <div class="pillar-icon">🔥</div>
+      <div class="pillar-t">Corporate Training</div>
+      <p class="pillar-d">Customized training for enterprise teams — boosting performance, communication, and revenue outcomes at scale.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-3">
+      <span class="pillar-num">06</span>
+      <div class="pillar-icon">💡</div>
+      <div class="pillar-t">Money Mindset</div>
+      <p class="pillar-d">Break the blocks around money, pricing, and self-worth so you charge what you deserve and never undersell again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLIENTS ══ -->
+<section id="clients">
+  <div class="clients-inner">
+    <span class="clients-label">Trusted by India's Leading Organisations</span>
+    <div class="clients-row reveal">
+      <div class="client-item">Vedantu</div>
+      <div class="client-item">Aamani Group</div>
+      <div class="client-item">Simero</div>
+      <div class="client-item">Govt. Institutions</div>
+      <div class="client-item">Educational Bodies</div>
+      <div class="client-item">Startups & SMEs</div>
+      <div class="client-item">& Many More</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="testi-header reveal">
+    <span class="section-tag">Student Stories</span>
+    <h2 class="section-title">Real People. <em>Real Results.</em></h2>
+    <p class="section-sub">Across India, professionals are unlocking their potential with Shruti's coaching.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Shruti's objection handling script literally changed my business. I used it on a call the same evening and closed a ₹50k deal that had been stalling for 2 weeks!"</p>
+      <div class="testi-person">
+        <div class="testi-av">👤</div>
+        <div>
+          <div class="testi-n">Aman Singh</div>
+          <div class="testi-r">Freelance Consultant, Delhi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi reveal reveal-delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I was afraid to ask for money. After Shruti's workshop, my pricing confidence doubled. I raised my rates and still landed 3 new clients that month."</p>
+      <div class="testi-person">
+        <div class="testi-av">👤</div>
+        <div>
+          <div class="testi-n">Priya Verma</div>
+          <div class="testi-r">Business Coach, Pune</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi reveal reveal-delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The ROI on ₹99 was insane. I learned more in 90 minutes than in 6 months of paid sales courses. Shruti's energy and clarity is unmatched."</p>
+      <div class="testi-person">
+        <div class="testi-av">👤</div>
+        <div>
+          <div class="testi-n">Rahul Kapoor</div>
+          <div class="testi-r">E-commerce Founder, Mumbai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<section id="quote">
+  <div class="quote-inner reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">Your net worth is a direct reflection of your ability to sell your vision — to your clients, your team, and most importantly, to yourself.</p>
+    <div class="quote-by">— Shruti Tiwari, Sales Coach & Inspirational Speaker</div>
+  </div>
+</section>
+
+<!-- ══ CONNECT / SOCIAL ══ -->
+<section id="connect">
+  <div class="connect-inner">
+    <div class="connect-left reveal">
+      <span class="tag">Let's Connect</span>
+      <h2 class="connect-title">Follow the <em>Journey</em></h2>
+      <p class="connect-desc">Catch live sessions, behind-the-scenes training, daily sales tips, and inspiration across social media. The community is free — the growth is real.</p>
+      <div class="social-grid">
+        <a class="social-card" href="https://instagram.com/coachshrutitiwari" target="_blank" rel="noopener">
+          <span class="sc-icon">📸</span>
+          <div>
+            <div class="sc-platform">Instagram</div>
+            <div class="sc-handle">@coachshrutitiwari</div>
+          </div>
+        </a>
+        <a class="social-card" href="https://www.youtube.com/@coachshrutitiwari" target="_blank" rel="noopener">
+          <span class="sc-icon">▶️</span>
+          <div>
+            <div class="sc-platform">YouTube</div>
+            <div class="sc-handle">@coachshrutitiwari</div>
+          </div>
+        </a>
+        <a class="social-card" href="https://t.me/coachshrutitiwari" target="_blank" rel="noopener">
+          <span class="sc-icon">✈️</span>
+          <div>
+            <div class="sc-platform">Telegram</div>
+            <div class="sc-handle">@coachshrutitiwari</div>
+          </div>
+        </a>
+        <a class="social-card" href="#" target="_blank" rel="noopener">
+          <span class="sc-icon">💼</span>
+          <div>
+            <div class="sc-platform">LinkedIn</div>
+            <div class="sc-handle">Shruti Tiwari</div>
+          </div>
+        </a>
+        <a class="social-card" href="#" target="_blank" rel="noopener">
+          <span class="sc-icon">📘</span>
+          <div>
+            <div class="sc-platform">Facebook</div>
+            <div class="sc-handle">Shruti Tiwari</div>
+          </div>
+        </a>
+        <a class="social-card" href="#" target="_blank" rel="noopener">
+          <span class="sc-icon">𝕏</span>
+          <div>
+            <div class="sc-platform">X (Twitter)</div>
+            <div class="sc-handle">@shruti_tiwari04</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="connect-right reveal reveal-delay-2">
+      <img class="connect-img" src="shruti_hero.jpeg" alt="Coach Shruti Tiwari">
+      <div class="connect-cta-box">
+        <div class="ccb-title">Ready to master<br><em>Sales & Influence?</em></div>
+        <a class="btn-gold" style="font-size:.8rem;padding:13px 28px;display:inline-block;margin-top:4px;" href="/smw">Join Next Session →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Shruti <em>Tiwari</em></div>
+      <div class="footer-tagline">Empowering professionals to master influence, close with confidence, and build extraordinary lives.</div>
+    </div>
+    <div class="footer-links-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#about">About Shruti</a></li>
+        <li><a href="#pillars">Expertise</a></li>
+        <li><a href="#gallery">Impact</a></li>
+        <li><a href="#testimonials">Stories</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+    </div>
+    <div class="footer-links-col">
+      <h4>Sessions</h4>
+      <ul>
+        <li><a href="/smw">Sales Mastery Workshop</a></li>
+        <li><a href="https://instagram.com/coachshrutitiwari" target="_blank">Instagram</a></li>
+        <li><a href="https://www.youtube.com/@coachshrutitiwari" target="_blank">YouTube</a></li>
+        <li><a href="https://t.me/coachshrutitiwari" target="_blank">Telegram Community</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Coach Shruti Tiwari · All Rights Reserved · coachshrutitiwari.com</div>
+    <div class="footer-love">Made with <span>♥</span> for growth</div>
+  </div>
+</footer>
+
+<!-- ══ STICKY BAR ══ -->
+<div class="sticky-bottom" id="stickyBar">
+  <span class="sb-msg">🔥 Next Session: <span>Sales Mastery Workshop</span> — Only ₹99</span>
+  <a class="sb-cta" href="/smw">Register Now</a>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='18px';cursor.style.height='18px';
+    ring.style.width='52px';ring.style.height='52px';
+    ring.style.borderColor='rgba(237,184,78,.7)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='10px';cursor.style.height='10px';
+    ring.style.width='36px';ring.style.height='36px';
+    ring.style.borderColor='rgba(237,184,78,.5)';
+  });
+});
+
+/* ── SCROLL PROGRESS ── */
+const prog=document.getElementById('sprogress');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,t=document.body.scrollHeight-window.innerHeight;
+  prog.style.width=(s/t*100)+'%';
+  document.getElementById('mainNav').classList.toggle('scrolled',s>60);
+  document.getElementById('stickyBar').classList.toggle('show',s>500);
+});
+
+/* ── SCROLL REVEAL ── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ── COUNT UP ── */
+function countUp(el,target,suffix=''){
+  const dur=2000,fps=60,inc=target/(dur/1000*fps);
+  let cur=0;
+  const t=setInterval(()=>{
+    cur+=inc;
+    if(cur>=target){cur=target;clearInterval(t);}
+    if(target>=100000){
+      el.textContent=(cur/1000000>=1?(cur/1000000).toFixed(1)+'M':(cur/1000).toFixed(0)+'K')+suffix;
+    } else if(target>=1000){
+      el.textContent=(cur/1000).toFixed(0)+'K'+suffix;
+    } else {
+      el.textContent=Math.floor(cur)+suffix;
+    }
+  },1000/fps);
+}
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const n=parseInt(e.target.dataset.count);
+      if(!isNaN(n)) countUp(e.target,n);
+      countObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
+</script>
+</body>
+</html>
