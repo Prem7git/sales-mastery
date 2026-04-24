@@ -1491,7 +1491,7 @@ async function initiatePayment() {
         });
         const verifyData = await verifyRes.json();
         if (verifyData.success) {
-          window.location.href = '/success.html';
+          window.location.href = '/smw/success.html';
         } else {
           alert('Payment verify nahi hua. Support se contact karo.');
         }
