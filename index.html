@@ -978,7 +978,20 @@ footer{
     </p>
     <div class="hero-btns">
       <a class="btn-gold" href="#about">Know My Story</a>
-      <a class="btn-outline" href="/smw">Next Session →</a>
+      <a class="btn-outline" id="tipsBtn" href="#">Free Weekly Tips ↗</a>
+<a href="https://chat.whatsapp.com/I7BDmR0YXP74FhNIMYVgun" target="_blank" rel="noopener"
+   style="display:inline-flex;align-items:center;justify-content:center;
+          width:48px;height:48px;border-radius:50%;
+          background:#25D366;flex-shrink:0;
+          box-shadow:0 4px 16px rgba(37,211,102,.4);
+          transition:transform .2s,box-shadow .3s;text-decoration:none;"
+   onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(37,211,102,.55)'"
+   onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(37,211,102,.4)'">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.099 1.501 5.83L.057 23.5l5.805-1.42A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.343l-.37-.214-3.443.843.872-3.349-.234-.384A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
     </div>
     <div class="hero-stats">
       <div class="hstat">
@@ -1472,6 +1485,91 @@ const countObs=new IntersectionObserver(entries=>{
   });
 },{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
+</script>
+   <!-- LEADS MODAL -->
+<div id="tipsModal" style="display:none;position:fixed;inset:0;z-index:9996;
+     background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+     align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(160deg,#1e1030,#13101e);
+       border:1px solid rgba(200,146,58,.35);border-radius:16px;
+       padding:40px 36px;max-width:420px;width:100%;position:relative;">
+    <button onclick="document.getElementById('tipsModal').style.display='none'"
+            style="position:absolute;top:14px;right:18px;background:none;
+                   border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;">×</button>
+    <div style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+                color:#edb84e;font-weight:600;margin-bottom:10px;">Free Weekly Tips</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;
+               font-weight:700;margin-bottom:6px;">Sales Booster Tips<br>
+               <em style="color:#edb84e;font-style:italic;">Every Week. Free.</em></h3>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.45);
+              font-weight:300;line-height:1.7;margin-bottom:24px;">
+      Get Shruti's best sales tips, scripts, and mindset shifts — straight to your inbox.</p>
+    <div id="tipsFormMsg" style="display:none;background:rgba(37,211,102,.1);
+         border:1px solid rgba(37,211,102,.3);border-radius:6px;
+         padding:12px;margin-bottom:16px;color:#25D366;font-size:.85rem;text-align:center;"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+      <input id="tl-name" type="text" placeholder="Your Name"
+             style="padding:13px 16px;background:rgba(255,255,255,.06);
+                    border:1px solid rgba(255,255,255,.12);border-radius:6px;
+                    color:#fff;font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;">
+      <input id="tl-phone" type="tel" placeholder="WhatsApp Number"
+             style="padding:13px 16px;background:rgba(255,255,255,.06);
+                    border:1px solid rgba(255,255,255,.12);border-radius:6px;
+                    color:#fff;font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;">
+      <input id="tl-email" type="email" placeholder="Email Address"
+             style="padding:13px 16px;background:rgba(255,255,255,.06);
+                    border:1px solid rgba(255,255,255,.12);border-radius:6px;
+                    color:#fff;font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;">
+    </div>
+    <button onclick="submitLead()"
+            style="width:100%;padding:15px;
+                   background:linear-gradient(135deg,#c8923a,#edb84e);
+                   color:#06050a;font-weight:700;font-size:.9rem;
+                   letter-spacing:.06em;text-transform:uppercase;
+                   border:none;border-radius:4px;cursor:pointer;">
+      Get Free Tips →
+    </button>
+  </div>
+</div>
+
+<script>
+// PASTE YOUR GOOGLE SHEET SCRIPT URL HERE
+const SHEET_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+document.getElementById('tipsBtn').addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById('tipsModal').style.display = 'flex';
+});
+
+async function submitLead() {
+  const name  = document.getElementById('tl-name').value.trim();
+  const phone = document.getElementById('tl-phone').value.trim();
+  const email = document.getElementById('tl-email').value.trim();
+  const msg   = document.getElementById('tipsFormMsg');
+  if (!name || !phone || !email) {
+    msg.style.display='block';
+    msg.style.color='#ff6b6b';
+    msg.style.background='rgba(255,0,0,.08)';
+    msg.style.border='1px solid rgba(255,0,0,.2)';
+    msg.textContent='⚠️ Please fill all fields';
+    return;
+  }
+  try {
+    await fetch(SHEET_URL, {
+      method:'POST',
+      body: JSON.stringify({name, phone, email}),
+    });
+    msg.style.display='block';
+    msg.style.color='#25D366';
+    msg.style.background='rgba(37,211,102,.1)';
+    msg.style.border='1px solid rgba(37,211,102,.3)';
+    msg.textContent='🎉 You\'re in! Check your email soon.';
+    setTimeout(()=> document.getElementById('tipsModal').style.display='none', 2500);
+  } catch(err) {
+    msg.style.display='block';
+    msg.textContent='⚠️ Something went wrong. Try again.';
+  }
+}
 </script>
 </body>
 </html>
