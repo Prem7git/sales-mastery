@@ -58,7 +58,29 @@ nav{position:sticky;top:0;z-index:500;height:64px;padding:0 5%;display:flex;alig
   height:100%;
   object-fit:cover;
   object-position:center;
+}
+
+.desktop-bg{
   opacity:.3;
+  display:block;
+}
+
+.mobile-bg{
+  opacity:.4;
+  display:none;
+}
+
+@media(max-width:768px){
+
+  .desktop-bg{
+    display:none !important;
+  }
+
+  .mobile-bg{
+    display:block !important;
+    object-position:center top;
+  }
+
 }
 .desktop-bg{display:block}
 .mobile-bg{display:none}
