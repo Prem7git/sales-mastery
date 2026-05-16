@@ -61,17 +61,7 @@ nav{position:sticky;top:0;z-index:500;height:64px;padding:0 5%;display:flex;alig
   opacity:.3;
 }
 
-@media(max-width:768px){
 
-  .hero-bg-img{
-    content:none;
-    content:url('Mobile.jpg');
-    object-fit:cover;
-    object-position:center top;
-    opacity:.4;
-  }
-
-}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 65% 80% at 30% 50%,rgba(11,11,15,.88) 0%,transparent 70%),linear-gradient(180deg,rgba(11,11,15,.4) 0%,rgba(11,11,15,.97) 100%)}
 .hero-left{position:relative;z-index:2;animation:fadeUp .8s .1s both}
 .hero-right{position:relative;z-index:2;animation:fadeUp .8s .25s both}
@@ -325,7 +315,12 @@ footer{background:var(--bg);border-top:1px solid var(--border-s);padding:16px 5%
 </nav>
 
 <section id="hero">
-  <img src="shruti_workshop1.jpg" alt="Shruti Tiwari Workshop" class="hero-bg-img">
+  <picture>
+  <source media="(max-width:768px)" srcset="Mobile.jpg">
+  <img src="shruti_workshop1.jpg"
+       alt="Shruti Tiwari Workshop"
+       class="hero-bg-img">
+</picture>
   <div class="hero-overlay"></div>
 
   <div class="hero-left">
