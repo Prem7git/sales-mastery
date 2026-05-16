@@ -335,7 +335,7 @@ footer{background:var(--bg);border-top:1px solid var(--border-s);padding:16px 5%
 </nav>
 
 <section id="hero">
-  <img src="shruti_workshop1.jpg" alt="Shruti Tiwari Workshop" class="hero-bg-img desktop-bg">
+  <img src="shruti_workshop1.jpg" alt="Shruti Tiwari Workshop" class="hero-bg-img desktop-bg" id="heroBg">
 <img src="Mobile.jpg" alt="Shruti Tiwari Mobile Background" class="hero-bg-img mobile-bg">
   <div class="hero-overlay"></div>
 
@@ -718,6 +718,9 @@ function showSuccess(){
     if(secs<=0){clearInterval(t);window.location.href=waLink;}
     else{timerEl.textContent=`Redirecting to WhatsApp group in ${secs} seconds...`;}
   },1000);
+}
+  if (window.innerWidth <= 768) {
+  document.getElementById('heroBg').src = 'Mobile.jpg';
 }
 </script>
 </body>
