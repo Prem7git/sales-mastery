@@ -292,6 +292,9 @@ footer{background:var(--bg);border-top:1px solid var(--border-s);padding:16px 5%
 /* RESPONSIVE */
 @media(max-width:960px){
   #hero{grid-template-columns:1fr;min-height:auto;padding-top:28px}
+  .hero-overlay {
+  background: linear-gradient(180deg, rgba(11,11,15,.6) 0%, rgba(11,11,15,.97) 100%);
+}
   .hero-right{max-width:440px}
   .about-inner{grid-template-columns:1fr;max-width:560px;gap:40px}
   .about-photo-wrap{max-width:280px}
@@ -718,9 +721,6 @@ function showSuccess(){
     if(secs<=0){clearInterval(t);window.location.href=waLink;}
     else{timerEl.textContent=`Redirecting to WhatsApp group in ${secs} seconds...`;}
   },1000);
-}
-  if (window.innerWidth <= 768) {
-  document.getElementById('heroBg').src = 'Mobile.jpg';
 }
 </script>
 </body>
