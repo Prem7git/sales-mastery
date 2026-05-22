@@ -117,6 +117,8 @@ nav{
   display:flex;flex-direction:column;gap:10px;
   max-width:360px;margin:0 auto 28px;text-align:left;
 }
+.blink-seats{color:var(--gold2);animation:blink-anim 1.2s ease-in-out infinite;}
+@keyframes blink-anim{0%,100%{opacity:1}50%{opacity:0.3}}
 .hc{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--white)}
 .hc-icon{
   width:22px;height:22px;border-radius:50%;flex-shrink:0;
@@ -614,7 +616,7 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
 
 <!-- STICKY BOTTOM BAR -->
 <div class="sticky-bar">
-  <div class="sb-urgency">Almost Full <span>· Only Limited Seats Left</span></div>
+  <div class="sb-urgency">Almost Full <span class="blink-seats">· Only Limited Seats Left</span></div>
   <div class="sb-reg-end">Registrations End <strong> Soon! </strong></div>
   <button class="sb-btn" onclick="openModal()">Join Now For FREE!</button>
 </div>
