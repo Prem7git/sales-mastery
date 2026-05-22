@@ -2,636 +2,865 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Join Coach Shruti Tiwari's FREE Live Sales Webinar. Learn high-ticket closing strategies, handle objections with confidence. Register Now!">
 <title>Sales Warrior Blueprint | FREE Live Webinar by Coach Shruti Tiwari</title>
-<link rel="icon" type="image/png" sizes="512x512" href="/swb/favicon.png?v=3">
-<link rel="shortcut icon" href="/swb/favicon.png?v=3">
-<link rel="apple-touch-icon" href="/swb/favicon.png?v=3">
-<meta name="description" content="Join Coach Shruti Tiwari's FREE Live Sales Webinar. Learn high-ticket closing strategies, handle objections with confidence. Register Now Limited Seats!">
-<meta property="og:title" content="FREE Live Webinar: Sales Warrior Blueprint | Coach Shruti Tiwari">
-<meta property="og:description" content="Discover the exact psychology to close high-ticket deals with confidence. 100% FREE. Limited Seats.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:       #0B0B0F;
-  --bg-2:     #111116;
-  --bg-3:     #18181f;
-  --bg-card:  rgba(255,255,255,0.04);
-  --gold:     #F5C542;
-  --gold-dim: #c9993a;
-  --gold-glow:rgba(245,197,66,0.18);
-  --red:      #E03E1E;
-  --white:    #FFFFFF;
-  --para:     #BDBDBD;
-  --border:   rgba(245,197,66,0.2);
-  --border-s: rgba(255,255,255,0.07);
-  --r:        8px;
+:root{
+  --bg:#1a1a2e;
+  --bg2:#16213e;
+  --bg3:#0f3460;
+  --card:#222236;
+  --gold:#f5a000;
+  --gold2:#d98c00;
+  --gold-light:#ffc84a;
+  --white:#ffffff;
+  --light:#f5f1e8;
+  --green:#3ecf6e;
+  --red:#e84040;
+  --muted:#a0a8c0;
+  --border:rgba(255,255,255,0.09);
+  --dark-card:#1e1e30;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1}
+body{font-family:'Poppins',sans-serif;background:#1c1c2e;color:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
-a{text-decoration:none}
 
-/* PROGRESS */
-#prog{position:fixed;top:0;left:0;height:3px;z-index:9000;background:linear-gradient(90deg,var(--red),var(--gold));width:0%;transition:width .1s linear}
+/* ═══ STICKY BOTTOM BAR ═══ */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:9999;
+  background:#fff;
+  border-top:3px solid var(--gold);
+  padding:8px 16px 12px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  box-shadow:0 -6px 32px rgba(0,0,0,0.4);
+}
+.sb-urgency{
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;
+  color:var(--red);text-align:center;
+}
+.sb-urgency span{color:var(--gold2)}
+.sb-reg-end{font-size:11px;color:#555;font-style:italic;text-align:center;margin-bottom:3px}
+.sb-reg-end strong{color:var(--red)}
+.sb-btn{
+  width:100%;max-width:440px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:15px;padding:14px 20px;border-radius:9px;border:none;cursor:pointer;
+  text-align:center;
+  box-shadow:0 4px 18px rgba(245,160,0,0.4);
+}
 
-/* TOPBAR */
-.topbar{background:var(--red);padding:10px 5%;text-align:center;font-family:'Poppins',sans-serif;font-size:.77rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.topbar span{color:var(--gold)}
+/* ═══ TOP STRIP ═══ */
+.top-strip{
+  background:var(--red);text-align:center;padding:9px 16px;
+  font-size:12px;font-weight:700;letter-spacing:0.2px;display:flex;
+  align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
+}
+.top-strip .fire{font-size:14px}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:500;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,15,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s)}
-.nav-logo{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:var(--gold)}
-.nav-logo span{color:var(--para);font-weight:400;font-size:.82rem}
-.nav-links{display:flex;gap:26px;list-style:none}
-.nav-links a{color:var(--para);font-family:'Poppins',sans-serif;font-size:.76rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--gold)}
-.nav-btn{padding:9px 22px;background:var(--gold);color:var(--bg);font-family:'Poppins',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;transition:opacity .2s,transform .2s;box-shadow:0 0 18px var(--gold-glow)}
-.nav-btn:hover{opacity:.9;transform:translateY(-1px)}
+/* ═══ NAV ═══ */
+nav{
+  background:#1c1c2e;
+  padding:13px 20px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);
+}
+.nav-brand{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--gold)}
+.nav-brand span{color:var(--white);font-weight:400;font-size:12px}
+.nav-btn{
+  background:transparent;border:2px solid var(--gold);
+  color:var(--gold);font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:11px;padding:8px 16px;border-radius:6px;cursor:pointer;letter-spacing:0.5px;
+}
 
-/* HERO */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:60px 5%;position:relative;overflow:hidden}
-.hero-bg-img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.32}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 65% 80% at 30% 50%,rgba(11,11,15,.88) 0%,transparent 70%),linear-gradient(180deg,rgba(11,11,15,.4) 0%,rgba(11,11,15,.97) 100%)}
-.hero-left{position:relative;z-index:2;animation:fadeUp .8s .1s both}
-.hero-right{position:relative;z-index:2;animation:fadeUp .8s .25s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:rgba(224,62,30,.12);border:1px solid rgba(224,62,30,.35);border-radius:4px;font-family:'Poppins',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#ff8060;margin-bottom:22px}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
-.hero-h1{font-family:'Poppins',sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.01em}
-.hero-h1 .gold{color:var(--gold)}
-.hero-sub{font-family:'Inter',sans-serif;font-size:.96rem;color:var(--para);line-height:1.75;max-width:500px;margin-bottom:26px}
-.hero-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
-.hero-bullets li{display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:.87rem;color:var(--white);font-weight:500}
-.hb-check{width:20px;height:20px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.56rem;color:var(--bg);font-weight:900}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
-.btn-gold{padding:14px 30px;background:var(--gold);color:var(--bg);font-family:'Poppins',sans-serif;font-weight:700;font-size:.86rem;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;box-shadow:0 4px 26px var(--gold-glow);transition:transform .2s,box-shadow .2s;display:inline-block}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,197,66,.4)}
-.btn-outline{padding:13px 22px;border:1.5px solid rgba(255,255,255,.2);color:var(--para);font-family:'Poppins',sans-serif;font-size:.83rem;font-weight:500;border-radius:4px;transition:border-color .2s,color .2s;display:inline-block}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.event-pills{display:flex;gap:8px;flex-wrap:wrap}
-.e-pill{padding:7px 12px;background:var(--bg-card);border:1px solid var(--border-s);border-radius:4px;font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:500;color:var(--para)}
-.e-pill strong{color:var(--gold)}
-
-/* REG CARD */
-.reg-card{background:var(--bg-3);border:1px solid var(--border);border-radius:12px;padding:34px 28px;box-shadow:0 0 60px rgba(245,197,66,.06),0 32px 64px rgba(0,0,0,.5);position:relative;overflow:hidden}
-.reg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold-dim),var(--gold))}
-.reg-card-title{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:700;color:var(--gold);margin-bottom:5px}
-.reg-card-sub{font-family:'Inter',sans-serif;font-size:.8rem;color:var(--para);margin-bottom:22px;line-height:1.5}
-.form-group{margin-bottom:13px}
-.form-label{display:block;font-family:'Poppins',sans-serif;font-size:.63rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.form-input,.form-select{width:100%;padding:12px 13px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:'Inter',sans-serif;font-size:.87rem;outline:none;transition:border-color .2s,background .2s;appearance:none}
-.form-input::placeholder{color:rgba(255,255,255,.22)}
-.form-input:focus,.form-select:focus{border-color:var(--gold);background:rgba(255,255,255,.06)}
-.form-select option{background:#18181f;color:#fff}
-.form-error{display:none;background:rgba(224,62,30,.1);border:1px solid rgba(224,62,30,.3);border-radius:6px;padding:10px 13px;font-family:'Inter',sans-serif;color:#ff7a5c;font-size:.81rem;margin-bottom:12px}
-.reg-submit{width:100%;padding:14px;margin-top:6px;background:var(--gold);color:var(--bg);font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;box-shadow:0 4px 22px var(--gold-glow);transition:transform .2s,box-shadow .2s}
-.reg-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,197,66,.38)}
-.reg-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.reg-trust{text-align:center;margin-top:9px;font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.28)}
-
-/* PROOF */
-.proof-strip{background:rgba(255,255,255,.02);border-top:1px solid var(--border-s);border-bottom:1px solid var(--border-s);padding:20px 5%;display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap}
-.proof-num{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold);line-height:1;margin-bottom:3px}
-.proof-lbl{font-family:'Inter',sans-serif;font-size:.67rem;color:var(--para);letter-spacing:.07em;text-transform:uppercase}
-.proof-sep{width:1px;height:36px;background:var(--border-s)}
-
-/* SECTION COMMONS */
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,66,.15),transparent)}
-.s-eyebrow{display:block;font-family:'Poppins',sans-serif;font-size:.63rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
-.s-title{font-family:'Poppins',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;line-height:1.2;letter-spacing:-.01em}
-.s-title .gold{color:var(--gold)}
-.s-sub{font-family:'Inter',sans-serif;color:var(--para);font-size:.93rem;line-height:1.75;margin-top:11px}
-.sec-cta{text-align:center;margin-top:34px}
-
-/* URGENCY BAR */
-.urgency-bar{background:linear-gradient(90deg,var(--bg-2),rgba(245,197,66,.05),var(--bg-2));border-top:1px solid rgba(224,62,30,.18);border-bottom:1px solid rgba(224,62,30,.18);padding:14px 5%;text-align:center;font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.04em}
-.urgency-bar span{color:var(--gold)}
-.urgency-bar a{color:var(--gold);border-bottom:1px solid var(--gold)}
-
-/* LEARN */
-#learn{padding:84px 5%}
-.learn-header{text-align:center;max-width:540px;margin:0 auto 48px}
-.learn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1020px;margin:0 auto}
-.learn-card{background:var(--bg-card);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 20px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s}
-.learn-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .3s}
-.learn-card:hover{transform:translateY(-4px);border-color:var(--border);background:rgba(255,255,255,.055)}
-.learn-card:hover::after{transform:scaleY(1)}
-.learn-icon{font-size:1.3rem;margin-bottom:10px}
-.learn-title{font-family:'Poppins',sans-serif;font-size:.97rem;font-weight:700;color:var(--gold);margin-bottom:6px}
-.learn-desc{font-family:'Inter',sans-serif;font-size:.83rem;color:var(--para);line-height:1.7}
-
-/* WHY FAIL */
-#why-fail{padding:84px 5%;background:var(--bg-2)}
-.wf-inner{max-width:1020px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
-.fail-list{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:11px}
-.fail-list li{display:flex;align-items:flex-start;gap:10px;font-family:'Inter',sans-serif;font-size:.86rem;color:var(--para);line-height:1.6}
-.fail-x{width:20px;height:20px;border-radius:50%;background:rgba(224,62,30,.12);border:1px solid rgba(224,62,30,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;color:var(--red);margin-top:1px}
-.fail-card{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;position:relative;overflow:hidden}
-.fail-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.fail-quote{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:600;line-height:1.55;color:var(--white);margin-bottom:20px;border-left:3px solid var(--gold);padding-left:14px}
-.promise-list{list-style:none;display:flex;flex-direction:column;gap:9px}
-.promise-list li{display:flex;align-items:flex-start;gap:9px;font-family:'Inter',sans-serif;font-size:.83rem;color:var(--para);line-height:1.5}
-.p-check{width:17px;height:17px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.52rem;color:var(--bg);font-weight:900;margin-top:1px}
-
-/* FOR WHO */
-#for-who{padding:84px 5%}
-.fw-header{text-align:center;max-width:520px;margin:0 auto 44px}
-.fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1020px;margin:0 auto 20px}
-.fw-card{background:var(--bg-card);border:1px solid var(--border-s);border-radius:var(--r);padding:20px 16px;display:flex;gap:11px;align-items:flex-start;transition:transform .25s,border-color .25s}
-.fw-card:hover{transform:translateY(-3px);border-color:var(--border)}
-.fw-icon{width:34px;height:34px;border-radius:6px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:var(--bg)}
-.fw-title{font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:3px}
-.fw-desc{font-family:'Inter',sans-serif;font-size:.76rem;color:var(--para);line-height:1.5}
-.esp-box{max-width:1020px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 26px}
-.esp-title{font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.esp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.esp-item{display:flex;gap:7px;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--para);line-height:1.5}
-.esp-arr{color:var(--gold);font-weight:700;flex-shrink:0}
-
-/* TESTIMONIALS */
-#testimonials{padding:84px 5%;background:var(--bg-2)}
-.testi-header{text-align:center;max-width:500px;margin:0 auto 44px}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1020px;margin:0 auto 24px}
-.testi-card{background:var(--bg-card);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 20px;transition:border-color .25s,transform .25s}
-.testi-card:hover{border-color:var(--border);transform:translateY(-3px)}
-.testi-stars{color:var(--gold);font-size:.73rem;letter-spacing:3px;margin-bottom:11px}
-.testi-text{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--para);line-height:1.75;font-style:italic;margin-bottom:16px}
-.testi-person{display:flex;align-items:center;gap:9px}
-.testi-av{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  overflow:hidden;
-  border:1px solid var(--border);
-  flex-shrink:0;
+/* ═══ HERO ═══ */
+.hero{
+  background:#1c1c2e;
+  text-align:left;padding:28px 20px 0;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;top:0;right:-40px;width:220px;height:220px;
+  background:radial-gradient(circle,rgba(245,160,0,0.07) 0%,transparent 70%);
   pointer-events:none;
-  user-select:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1.5px solid rgba(245,160,0,0.45);
+  border-radius:30px;padding:6px 14px;font-size:11px;font-weight:600;
+  color:rgba(255,255,255,0.85);margin-bottom:20px;
+  background:rgba(245,160,0,0.07);
+}
+.hero-badge .dot{width:7px;height:7px;background:var(--gold);border-radius:50%;display:inline-block;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(28px,8vw,44px);font-weight:900;line-height:1.15;margin-bottom:16px;
+  color:var(--white);
+}
+.hero h1 .gold{color:var(--gold);display:block}
+.hero .sub{
+  font-size:14px;color:rgba(255,255,255,0.7);
+  max-width:420px;margin:0 0 24px;line-height:1.75;
+}
+.hero-checks{
+  display:flex;flex-direction:column;gap:10px;
+  max-width:360px;margin:0 0 28px;
+}
+.hc{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--white)}
+.hc-icon{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:var(--gold);color:#000;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;
+}
+.hero-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:0;padding-bottom:0}
+.btn-primary{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;max-width:420px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:15px;text-align:center;padding:17px 20px;
+  border-radius:9px;border:none;cursor:pointer;
+  box-shadow:0 6px 28px rgba(245,160,0,0.35);
+  letter-spacing:0.2px;
+}
+.btn-secondary{
+  display:block;width:100%;max-width:420px;
+  background:transparent;border:1.5px solid rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.85);font-family:'Montserrat',sans-serif;font-weight:700;
+  font-size:13px;text-align:center;padding:14px 20px;
+  border-radius:9px;cursor:pointer;
+}
+/* whatsapp fab */
+.wa-fab{
+  position:fixed;bottom:90px;right:16px;z-index:9998;
+  width:52px;height:52px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(37,211,102,0.5);cursor:pointer;
+  font-size:26px;text-decoration:none;
 }
 
-.testi-av img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  pointer-events:none;
-  user-select:none;
+/* ═══ COACH PHOTO ═══ */
+.coach-photo-section{
+  background:#1c1c2e;
+  display:flex;justify-content:center;align-items:flex-end;
+  padding:0;overflow:hidden;position:relative;
 }
-.testi-name{font-family:'Poppins',sans-serif;font-weight:600;font-size:.8rem}
-.testi-role{font-family:'Inter',sans-serif;font-size:.68rem;color:var(--gold);margin-top:2px}
-.testi-note{max-width:680px;margin:0 auto;text-align:center;font-family:'Inter',sans-serif;font-size:.78rem;color:var(--para);font-style:italic;padding:13px 18px;background:var(--bg-card);border:1px dashed var(--border);border-radius:6px}
-
-/* ABOUT */
-#about{padding:84px 5%}
-.about-inner{max-width:1020px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:68px;align-items:center}
-.about-photo-wrap{position:relative}
-.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:var(--r);border:1px solid var(--border)}
-.about-photo-ph{width:100%;aspect-ratio:3/4;background:var(--bg-3);border-radius:var(--r);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(245,197,66,.28);font-size:.74rem;font-family:'Poppins',sans-serif;text-transform:uppercase;letter-spacing:.08em}
-.about-accent{position:absolute;bottom:-13px;right:-13px;background:var(--gold);color:var(--bg);padding:13px 17px;border-radius:6px;text-align:center;box-shadow:0 6px 22px var(--gold-glow)}
-.acc-num{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;line-height:1}
-.acc-lbl{font-family:'Poppins',sans-serif;font-size:.53rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
-.about-name{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:9px 0 3px;line-height:1.15}
-.about-role-t{font-family:'Poppins',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.about-body{font-family:'Inter',sans-serif;font-size:.9rem;color:var(--para);line-height:1.8;margin-bottom:20px}
-.about-creds{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.about-creds li{display:flex;gap:8px;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--para);line-height:1.5}
-.ac-dot{color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
-.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:22px;border-top:1px solid var(--border-s)}
-.astat-num{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--gold);line-height:1}
-.astat-lbl{font-family:'Inter',sans-serif;font-size:.63rem;color:var(--para);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
-
-/* FAQ */
-#faq{padding:84px 5%;background:var(--bg-2)}
-.faq-inner{max-width:660px;margin:0 auto}
-.faq-header{text-align:center;margin-bottom:40px}
-.faq-item{border-bottom:1px solid var(--border-s)}
-.faq-btn{width:100%;background:none;border:none;color:var(--white);font-family:'Poppins',sans-serif;font-size:.9rem;font-weight:600;padding:17px 0;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .2s}
-.faq-btn:hover,.faq-btn.open{color:var(--gold)}
-.faq-toggle{width:23px;height:23px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--gold);flex-shrink:0;transition:transform .3s}
-.faq-btn.open .faq-toggle{transform:rotate(45deg)}
-.faq-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-family:'Inter',sans-serif;font-size:.84rem;color:var(--para);line-height:1.75}
-.faq-body.open{max-height:200px;padding-bottom:16px}
-
-/* FINAL CTA */
-#final-cta{padding:84px 5%;text-align:center;background:linear-gradient(160deg,rgba(245,197,66,.05) 0%,var(--bg) 60%);border-top:1px solid var(--border)}
-.final-badges{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
-.final-badge{padding:5px 13px;background:rgba(245,197,66,.08);border:1px solid var(--border);border-radius:4px;font-family:'Poppins',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-.final-h2{font-family:'Poppins',sans-serif;font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800;line-height:1.15;margin-bottom:12px;letter-spacing:-.01em}
-.final-h2 .gold{color:var(--gold)}
-.final-sub{font-family:'Inter',sans-serif;color:var(--para);font-size:.93rem;line-height:1.7;max-width:560px;margin:0 auto 28px}
-.final-note{margin-top:12px;font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.22)}
-
-/* CONTACT */
-#contact{padding:64px 5% 44px;border-top:1px solid var(--border-s)}
-.contact-inner{max-width:1020px;margin:0 auto;display:flex;justify-content:space-between;gap:44px;flex-wrap:wrap;align-items:flex-start}
-.c-logo{font-family:'Poppins',sans-serif;font-size:1.28rem;font-weight:800;color:var(--gold);margin-bottom:7px}
-.c-tag{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--para);line-height:1.7;margin-bottom:20px}
-.social-lbl{font-family:'Poppins',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
-.social-links{display:flex;flex-direction:column;gap:5px}
-.soc-link{display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:.78rem;color:var(--para);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s}
-.soc-link:last-child{border-bottom:none}
-.soc-link:hover{color:var(--gold)}
-.soc-ic{
-  width:23px;
-  height:23px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.05rem;
-  flex-shrink:0;
-  background:none;
-  border:none;
-  border-radius:0;
-}}
-.c-cta-title{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:14px;line-height:1.2}
-.c-cta-title .gold{color:var(--gold)}
-.c-note{margin-top:9px;font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.22)}
-
-footer{background:var(--bg);border-top:1px solid var(--border-s);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.foot-copy{font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.22)}
-.foot-links{display:flex;gap:16px}
-.foot-links a{font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.26);transition:color .2s}
-.foot-links a:hover{color:var(--gold)}
-
-/* STICKY */
-.sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(11,11,15,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform .4s ease}
-.sticky-bar.show{transform:translateY(0)}
-.sb-text{font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600}
-.sb-text span{color:var(--gold)}
-.sb-btn{padding:9px 22px;background:var(--gold);color:var(--bg);font-family:'Poppins',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;white-space:nowrap;box-shadow:0 2px 12px var(--gold-glow);transition:transform .2s}
-.sb-btn:hover{transform:translateY(-1px)}
-
-/* MODAL */
-#regModal{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
-.modal-box{background:var(--bg-3);border:1px solid var(--border);border-radius:12px;padding:36px 28px;max-width:420px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
-.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold-dim),var(--gold));border-radius:12px 12px 0 0}
-.modal-close{position:absolute;top:11px;right:13px;background:none;border:none;color:rgba(255,255,255,.35);font-size:1.35rem;cursor:pointer;line-height:1}
-.modal-title{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:700;color:var(--gold);margin-bottom:4px}
-.modal-sub{font-family:'Inter',sans-serif;font-size:.78rem;color:var(--para);margin-bottom:20px;line-height:1.5}
-
-/* SUCCESS */
-#successPage{display:none;position:fixed;inset:0;z-index:9000;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;overflow-y:auto}
-#successPage.show{display:flex}
-.sp-icon{font-size:3.2rem;margin-bottom:16px}
-.sp-title{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:800;color:var(--gold);margin-bottom:9px}
-.sp-sub{font-family:'Inter',sans-serif;color:var(--para);font-size:.92rem;line-height:1.7;margin-bottom:24px;max-width:460px}
-.sp-steps{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--r);padding:22px 28px;max-width:440px;text-align:left;margin-bottom:24px;width:100%}
-.sp-step{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border-s)}
-.sp-step:last-child{border-bottom:none}
-.sp-step-num{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Poppins',sans-serif;font-weight:800;font-size:.7rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sp-step-txt{font-family:'Inter',sans-serif;font-size:.84rem;color:var(--para);line-height:1.5}
-.sp-step-txt strong{color:var(--white)}
-.sp-wa{display:inline-flex;align-items:center;gap:9px;padding:14px 34px;background:#25D366;color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;box-shadow:0 4px 20px rgba(37,211,102,.28);transition:transform .2s}
-.sp-wa:hover{transform:translateY(-2px)}
-.sp-redir{margin-top:12px;font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.26)}
-.wa-float{
-  position:fixed;
-  width:62px;
-  height:62px;
-  bottom:24px;
-  right:24px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:2rem;
-  box-shadow:0 8px 25px rgba(37,211,102,.45);
-  z-index:9999;
-  transition:transform .2s ease, box-shadow .2s ease;
-  animation:waPulse 2s infinite;
+.coach-photo-section::before{
+  content:'';position:absolute;
+  bottom:0;left:50%;transform:translateX(-50%);
+  width:320px;height:160px;
+  background:radial-gradient(ellipse,rgba(245,160,0,0.15) 0%,transparent 70%);
+}
+.coach-photo-section img{
+  width:100%;max-width:340px;object-fit:cover;object-position:top center;
+  position:relative;z-index:1;display:block;
 }
 
-.wa-float:hover{
-  transform:scale(1.08);
-  box-shadow:0 10px 30px rgba(37,211,102,.6);
+/* ═══ URGENCY STRIP ═══ */
+.urgency-strip{
+  background:var(--light);padding:14px 16px;text-align:center;
+}
+.uf{font-weight:800;font-size:14px;color:#111}
+.uf .red{color:var(--red)}
+.ud{font-size:11px;color:#666;margin-top:3px;font-style:italic}
+.ud strong{color:var(--red)}
+
+/* ═══ EVENT DETAILS BOX ═══ */
+.event-details{
+  background:#1c1c2e;padding:24px 20px;
+}
+.event-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:440px;margin:0 auto 20px;
+}
+.ev-box{
+  background:rgba(245,160,0,0.08);border:1.5px solid rgba(245,160,0,0.3);
+  border-radius:10px;padding:14px 12px;display:flex;align-items:center;gap:10px;
+}
+.ev-icon{
+  width:36px;height:36px;background:var(--gold);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.ev-label{font-size:11px;color:var(--muted);margin-bottom:2px}
+.ev-val{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--white)}
+
+/* ═══ REGISTER FORM ═══ */
+.form-wrap{background:#1c1c2e;padding:0 20px 32px}
+.form-card{
+  background:var(--white);border-radius:14px;padding:26px 20px;
+  max-width:480px;margin:0 auto;color:#111;
+}
+.form-card h2{
+  font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;
+  color:#0d1b35;text-align:center;margin-bottom:5px;
+}
+.form-sub{font-size:12px;text-align:center;color:#666;margin-bottom:16px}
+.form-card input,.form-card select{
+  width:100%;padding:13px 14px;border:1.5px solid #dde3ef;border-radius:8px;
+  font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:10px;
+  outline:none;color:#111;background:#f8faff;transition:border-color 0.2s;
+}
+.form-card input:focus,.form-card select:focus{border-color:var(--gold)}
+.fbtn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:15px;border:none;border-radius:9px;cursor:pointer;margin-top:4px;
+  box-shadow:0 4px 18px rgba(245,160,0,0.35);
+}
+.fdiscl{font-size:11px;text-align:center;color:#888;margin-top:10px}
+
+/* ═══ STATS BAR ═══ */
+.stats-bar{
+  background:var(--light);padding:20px 16px;
+}
+.stats-inner{
+  display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:12px;
+  max-width:480px;margin:0 auto;
+}
+.stat-item{text-align:center}
+.sn{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--gold2);display:block}
+.sl{font-size:11px;color:#555;margin-top:1px}
+.stat-div{width:1px;height:36px;background:#ddd}
+/* also rated row */
+.rated-row{
+  text-align:center;padding:10px 0 0;
+  font-size:13px;font-weight:700;color:#111;
+}
+.rated-row .stars{color:var(--gold);font-size:16px;letter-spacing:2px;display:block;margin-bottom:2px}
+.stat-sub{font-size:11px;color:#666;text-align:center;padding-bottom:16px;}
+
+/* ═══ TOP PERFORMERS ═══ */
+.sec{padding:32px 20px}
+.sec.dark{background:#1c1c2e}
+.sec.mid{background:#22223a}
+.sec.light{background:var(--light);color:#111}
+
+.sec-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(20px,5.5vw,28px);font-weight:900;
+  text-align:center;margin-bottom:20px;line-height:1.3;
+}
+.sec-title .gold{color:var(--gold)}
+.sec-title.dark-t{color:#0d1b35}
+.sec-sub{text-align:center;font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.sec-sub.dark-s{color:#555}
+
+/* performers grid */
+.performers-grid{display:flex;flex-direction:column;gap:10px;max-width:480px;margin:0 auto 24px}
+.perf-card{
+  background:var(--dark-card);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;display:flex;align-items:center;gap:0;
+}
+.perf-img{width:80px;height:80px;object-fit:cover;flex-shrink:0}
+.perf-info{padding:12px 14px;flex:1}
+.perf-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--white)}
+.perf-role{font-size:11px;color:var(--muted);margin:2px 0 6px}
+.perf-earn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(245,160,0,0.1);border:1px solid rgba(245,160,0,0.3);
+  border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--gold);
 }
 
-@keyframes waPulse{
-  0%{
-    box-shadow:0 0 0 0 rgba(37,211,102,.5);
-  }
-  70%{
-    box-shadow:0 0 0 16px rgba(37,211,102,0);
-  }
-  100%{
-    box-shadow:0 0 0 0 rgba(37,211,102,0);
-  }
+/* ═══ CATEGORY CAROUSEL ═══ */
+.category-section{background:#1c1c2e;padding:28px 0}
+.cat-title{
+  font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;
+  text-align:center;margin-bottom:18px;color:var(--white);padding:0 20px;
 }
-/* RESPONSIVE */
-@media(max-width:960px){
-  #hero{grid-template-columns:1fr;min-height:auto;padding-top:28px}
-  .hero-right{max-width:440px}
-  .about-inner{grid-template-columns:1fr;max-width:560px;gap:40px}
-  .about-photo-wrap{max-width:280px}
-  .wf-inner{grid-template-columns:1fr}
-  .fw-grid{grid-template-columns:repeat(2,1fr)}
-  .testi-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto 24px}
-  .learn-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .contact-inner{flex-direction:column}
-  .esp-grid{grid-template-columns:1fr}
+.cat-scroll{
+  display:flex;gap:12px;overflow-x:auto;padding:0 20px 8px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
-@media(max-width:600px){
-  .hero-ctas{flex-direction:column}
-  .btn-gold,.btn-outline{text-align:center}
-  .fw-grid{grid-template-columns:1fr}
-  .proof-strip{gap:20px}
-  .proof-sep{display:none}
-  .about-stats{grid-template-columns:1fr 1fr}
-  .sticky-bar{flex-direction:column;text-align:center}
-  .modal-box{padding:26px 18px}
-  .sp-steps{padding:18px}
-  .final-badges{gap:7px}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-card{
+  flex-shrink:0;width:140px;
+  background:var(--dark-card);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;text-align:center;
 }
+.cat-card img{width:100%;height:90px;object-fit:cover}
+.cat-card-label{font-size:12px;font-weight:700;padding:8px 6px;color:var(--white)}
+
+/* ═══ FOR WHO ═══ */
+.for-who-list{
+  display:flex;flex-direction:column;gap:8px;max-width:480px;margin:0 auto 24px;
+}
+.fw-item{
+  background:rgba(245,160,0,0.06);border:1px solid rgba(245,160,0,0.18);
+  border-radius:10px;padding:13px 14px;
+  display:flex;align-items:center;gap:10px;font-size:13px;color:var(--white);
+}
+.fw-icon{
+  width:20px;height:20px;background:var(--gold);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#000;font-weight:900;flex-shrink:0;
+}
+
+/* ═══ WHAT YOU'LL LEARN ═══ */
+.learn-list{
+  display:flex;flex-direction:column;gap:8px;max-width:480px;margin:0 auto 24px;
+}
+.learn-item{
+  background:rgba(245,160,0,0.06);border:1px solid rgba(245,160,0,0.18);
+  border-radius:10px;padding:13px 14px;
+  display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--white);line-height:1.5;
+}
+.learn-icon{
+  width:20px;height:20px;background:var(--gold);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#000;font-weight:900;flex-shrink:0;margin-top:1px;
+}
+
+/* ═══ NO NEED ═══ */
+.no-need-list{
+  display:flex;flex-direction:column;gap:8px;max-width:480px;margin:0 auto 20px;
+}
+.nn-item{
+  background:rgba(62,207,110,0.05);border:1px solid rgba(62,207,110,0.18);
+  border-radius:10px;padding:13px 14px;
+  display:flex;align-items:center;gap:10px;font-size:13px;color:var(--white);
+}
+.nn-icon{
+  width:20px;height:20px;background:var(--green);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#000;font-weight:900;flex-shrink:0;
+}
+.no-need-footer{
+  max-width:480px;margin:0 auto;text-align:center;
+  font-family:'Montserrat',sans-serif;font-size:17px;font-weight:800;
+  color:var(--white);line-height:1.5;margin-bottom:22px;padding:0 10px;
+}
+
+/* ═══ MENTOR ═══ */
+.mentor-section{background:#22223a;padding:32px 20px;text-align:center}
+.mentor-photo-wrap{position:relative;display:inline-block;margin-bottom:18px}
+.mentor-photo-wrap img{
+  width:160px;height:160px;border-radius:50%;
+  object-fit:cover;object-position:top;
+  border:3px solid var(--gold);
+  box-shadow:0 0 0 8px rgba(245,160,0,0.1);
+}
+.mentor-badge{
+  position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:#000;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;
+  padding:4px 12px;border-radius:30px;white-space:nowrap;
+}
+.mentor-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--gold)}
+.mentor-role{font-size:13px;color:var(--muted);margin:4px 0 14px}
+.mentor-bio{font-size:13px;color:rgba(255,255,255,0.8);max-width:440px;margin:0 auto 14px;line-height:1.75}
+.mentor-list{list-style:none;text-align:left;max-width:380px;margin:0 auto 22px}
+.mentor-list li{
+  font-size:13px;padding:8px 0;color:rgba(255,255,255,0.8);
+  border-bottom:1px solid var(--border);
+}
+.mentor-list li::before{content:'✦ ';color:var(--gold)}
+
+/* ═══ TESTIMONIALS ═══ */
+.testi-grid{display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto}
+.testi-card{
+  background:var(--dark-card);border:1px solid var(--border);
+  border-radius:12px;padding:16px;
+}
+.testi-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.testi-avatar{
+  width:48px;height:48px;border-radius:50%;overflow:hidden;
+  border:2px solid var(--gold);flex-shrink:0;background:var(--bg3);
+}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-weight:700;font-size:13px}
+.testi-role{font-size:11px;color:var(--muted)}
+.testi-stars{color:var(--gold);font-size:12px;margin-bottom:6px;letter-spacing:1px}
+.testi-text{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.7}
+
+/* ═══ RATINGS BAR ═══ */
+.ratings-bar{
+  background:var(--light);padding:20px;text-align:center;
+  border-top:1px solid #e0ddd5;
+}
+.rb-stars{color:var(--gold2);font-size:24px;letter-spacing:3px;display:block;margin-bottom:5px}
+.rb-text{font-size:13px;color:#444}
+.rb-text strong{color:#111}
+.rb-sub{font-size:11px;color:#666;margin-top:4px}
+
+/* ═══ FAQ ═══ */
+.faq-list{max-width:480px;margin:0 auto}
+.faq-item{
+  background:var(--dark-card);border:1px solid var(--border);
+  border-radius:10px;margin-bottom:8px;overflow:hidden;
+}
+.faq-q{
+  font-weight:600;font-size:13px;display:flex;justify-content:space-between;
+  align-items:center;gap:10px;padding:15px 16px;cursor:pointer;
+}
+.faq-arrow{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--gold);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:900;flex-shrink:0;line-height:1;
+  transition:transform 0.3s;
+}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{
+  font-size:12px;color:rgba(255,255,255,0.7);
+  padding:0 16px 15px;line-height:1.65;display:none;
+}
+.faq-item.open .faq-a{display:block}
+
+/* ═══ FINAL URGENCY ═══ */
+.final-urgency{background:var(--light);padding:28px 20px;text-align:center;color:#111}
+.fu-almost{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--red);margin-bottom:2px}
+.fu-almost span{color:var(--gold2)}
+.fu-seats{font-size:22px;font-weight:900;color:#111;font-family:'Montserrat',sans-serif;margin-bottom:4px}
+.fu-reg-end{font-size:12px;font-style:italic;color:#666;margin-bottom:16px}
+.fu-reg-end strong{color:var(--red)}
+
+/* ═══ FOOTER ═══ */
+footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
+.foot-brand{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--gold);font-size:14px;margin-bottom:8px}
+.foot-tag{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;max-width:320px;margin-left:auto;margin-right:auto}
+.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:16px}
+.foot-links a{font-size:11px;color:var(--muted)}
+.foot-copy{font-size:10px;color:#2a2a4a;margin-top:8px}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.82);z-index:99999;
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.active{display:flex}
+.modal-box{
+  background:#fff;border-radius:14px;padding:26px 20px;
+  max-width:440px;width:100%;position:relative;
+  color:#111;max-height:90vh;overflow-y:auto;
+}
+.modal-close{position:absolute;top:12px;right:14px;font-size:22px;cursor:pointer;color:#666;background:none;border:none;line-height:1}
+.modal-box h2{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:#0d1b35;text-align:center;margin-bottom:5px}
+.modal-sub{font-size:12px;text-align:center;color:#666;margin-bottom:16px}
+.modal-box input,.modal-box select{
+  width:100%;padding:12px 14px;border:1.5px solid #dde3ef;border-radius:8px;
+  font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:10px;
+  outline:none;color:#111;background:#f8faff;
+}
+.modal-box input:focus,.modal-box select:focus{border-color:var(--gold)}
+.modal-box .mbtn{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:15px;border:none;border-radius:9px;cursor:pointer;margin-top:4px;
+}
+
+/* ═══ SUCCESS ═══ */
+.success-screen{display:none;text-align:center;padding:8px 0}
+.ss-icon{font-size:48px;margin-bottom:12px}
+.ss-title{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:900;color:#0d1b35;margin-bottom:8px}
+.ss-sub{font-size:13px;color:#555;line-height:1.6;margin-bottom:16px}
+.ss-steps{list-style:none;text-align:left;margin-bottom:18px}
+.ss-steps li{font-size:13px;padding:8px 0;border-bottom:1px solid #eee;color:#333;display:flex;gap:10px}
+.ss-steps li .si{color:var(--gold);font-weight:800;flex-shrink:0}
+.wa-join-btn{display:block;width:100%;padding:14px;background:#25D366;color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;border-radius:9px;border:none;cursor:pointer;text-align:center}
+
+/* ═══ SHARED BUTTON ═══ */
+.btn{
+  display:block;width:calc(100% - 0px);max-width:480px;margin:0 auto;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:15px;text-align:center;padding:16px 20px;
+  border-radius:9px;border:none;cursor:pointer;
+  box-shadow:0 6px 28px rgba(245,160,0,0.3);
+  letter-spacing:0.2px;
+}
+
+@media(max-width:380px){.stats-inner{gap:8px}.event-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<div id="prog"></div>
+<!-- STICKY BOTTOM BAR -->
+<div class="sticky-bar">
+  <div class="sb-urgency">Almost Full <span>· Only Limited Seats Left</span></div>
+  <div class="sb-reg-end">Registrations End on <strong>Today!</strong></div>
+  <button class="sb-btn" onclick="openModal()">Join Now For FREE!</button>
+</div>
 
-<div class="topbar">🔥 <span>LIMITED SEATS</span> - Registration Closes Today! Secure Your Free Spot Now!</div>
+<!-- WHATSAPP FAB -->
+<a class="wa-fab" href="https://wa.me/919999999999" target="_blank">💬</a>
 
-<nav id="mainNav">
-  <a class="nav-logo" href="#">Shruti Tiwari <span>· Sales Warrior Blueprint</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#learn">Curriculum</a></li>
-    <li><a href="#for-who">Is This For You?</a></li>
-    <li><a href="#testimonials">Stories</a></li>
-  </ul>
-  <a class="nav-btn" href="#" onclick="openModal();return false;">Register FREE</a>
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <span class="fire">🔥</span>
+  <span>LIMITED SEATS – REGISTRATION CLOSES TODAY! SECURE YOUR FREE SPOT NOW!</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Shruti Tiwari <span>· Sales Warrior Blueprint</span></div>
+  <button class="nav-btn" onclick="openModal()">REGISTER FREE</button>
 </nav>
 
-<section id="hero">
-  <img src="shruti_workshop1.jpg" alt="Shruti Tiwari Workshop" class="hero-bg-img">
-  <div class="hero-overlay"></div>
-
-  <div class="hero-left">
-    <div class="hero-badge"><span class="badge-dot"></span>FREE Live Webinar &nbsp;·&nbsp; Limited Seats</div>
-    <h1 class="hero-h1">Become an Unstoppable<br><span class="gold">Sales Champion</span></h1>
-    <p class="hero-sub">Discover the exact on-ground sales psychology to confidently turn hesitant prospects into paying clients without sounding pushy, desperate, or "salesy."</p>
-    <ul class="hero-bullets">
-      <li><span class="hb-check">✓</span> Close High-Ticket Deals With Confidence</li>
-      <li><span class="hb-check">✓</span> Handle Any Objection Like a Pro</li>
-      <li><span class="hb-check">✓</span> Build Authority & Stop Sounding Desperate</li>
-    </ul>
-    <div class="hero-ctas">
-      <a class="btn-gold" href="#" onclick="openModal();return false;">🎯 Register For FREE Now</a>
-      <a class="btn-outline" href="#learn">See What You'll Learn →</a>
-    </div>
-    <div class="event-pills">
-      <div class="e-pill">📅 <strong>Date:</strong> [WEBINAR_DATE]</div>
-      <div class="e-pill">🕙 <strong>Time:</strong> [WEBINAR_TIME]</div>
-      <div class="e-pill">📍 <strong>Zoom</strong> Live Session</div>
-      <div class="e-pill">🗣️ <strong>Hindi</strong> + Easy English</div>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> FREE LIVE WEBINAR &nbsp;·&nbsp; LIMITED SEATS</div>
+  <h1>Become an Unstoppable <span class="gold">Sales Champion</span></h1>
+  <p class="sub">Discover the exact on-ground sales psychology to confidently turn hesitant prospects into paying clients without sounding pushy, desperate, or "salesy."</p>
+  <div class="hero-checks">
+    <div class="hc"><span class="hc-icon">✓</span> Close High-Ticket Deals With Confidence</div>
+    <div class="hc"><span class="hc-icon">✓</span> Handle Any Objection Like a Pro</div>
+    <div class="hc"><span class="hc-icon">✓</span> Build Authority &amp; Stop Sounding Desperate</div>
   </div>
-
-  <div class="hero-right">
-    <div class="reg-card">
-      <div class="reg-card-title">Register Now For FREE</div>
-      <p class="reg-card-sub">Fill your details below to secure your spot instantly 👇</p>
-      <div id="heroError" class="form-error"></div>
-      <div class="form-group">
-        <label class="form-label">Full Name *</label>
-        <input id="h-name" type="text" class="form-input" placeholder="Enter your full name">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Mobile Number *</label>
-        <input id="h-phone" type="tel" class="form-input" placeholder="10-digit WhatsApp number">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email Address *</label>
-        <input id="h-email" type="email" class="form-input" placeholder="Your email ID">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Your Profession *</label>
-        <select id="h-profession" class="form-select">
-          <option value="">Select your profession...</option>
-          <option>Direct Selling Professional</option>
-          <option>Insurance Advisor / Agent</option>
-          <option>Network Marketer</option>
-          <option>Coach / Consultant</option>
-          <option>Business Owner</option>
-          <option>Sales Professional</option>
-          <option>Housewife</option>
-          <option>Student</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <button class="reg-submit" id="heroBtn" onclick="submitForm('hero')">🎯 REGISTER MY FREE SEAT NOW</button>
-      <p class="reg-trust">🔒 100% FREE &nbsp;·&nbsp; No Credit Card Required &nbsp;·&nbsp; Limited Seats</p>
-    </div>
+  <div class="hero-btns" style="padding-bottom:28px">
+    <button class="btn-primary" onclick="openModal()">🎯 REGISTER FOR FREE NOW</button>
+    <a href="#learn" class="btn-secondary">See What You'll Learn →</a>
   </div>
 </section>
 
-<div class="proof-strip">
-  <div class="proof-item"><div class="proof-num"> 1M+</div><div class="proof-lbl"> Lives Empowered</div></div>
-  <div class="proof-sep"></div>
-  <div class="proof-item"><div class="proof-num"> 1000+</div><div class="proof-lbl"> Workshops Done</div></div>
-  <div class="proof-sep"></div>
-  <div class="proof-item"><div class="proof-num">11+</div><div class="proof-lbl">Years Experience</div></div>
-  <div class="proof-sep"></div>
-  <div class="proof-item"><div class="proof-num">Global</div><div class="proof-lbl">Training Reach</div></div>
+<!-- COACH PHOTO -->
+<div class="coach-photo-section">
+  <img src="https://www.coachshrutitiwari.com/shruti_workshop1.jpg"
+       onerror="this.src='https://www.coachshrutitiwari.com/swb/shruti.jpg'"
+       alt="Coach Shruti Tiwari">
 </div>
-<div class="divider"></div>
-<section id="about">
-  <div class="about-inner">
-    <div class="about-photo-wrap">
-      <img src="./swb/shruti.jpg" alt="Coach Shruti Tiwari" class="about-photo">
-      <div class="about-photo-ph" style="display:none"><span style="font-size:2.5rem;opacity:.22">👤</span><span>Shruti Tiwari</span></div>
-      <div class="about-accent"><div class="acc-num">11+</div><div class="acc-lbl">Years of<br>Influence</div></div>
+
+<!-- URGENCY STRIP -->
+<div class="urgency-strip">
+  <div class="uf">Filling Fast &nbsp;<span class="red">· Registration Closes Today!</span></div>
+  <div class="ud">100% FREE · No Credit Card Required · <strong>Limited Seats Only</strong></div>
+</div>
+
+<!-- STATS + RATINGS -->
+<div class="stats-bar">
+  <div class="rated-row">
+    <span class="stars">★★★★★</span>
+    Rated 4.9 out of 2,949 Reviews
+  </div>
+  <div class="stats-inner" style="margin-top:14px">
+    <div class="stat-item"><span class="sn">1M+</span><span class="sl">Lives Empowered</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="sn">1000+</span><span class="sl">Live Sessions</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="sn">11+</span><span class="sl">Years Exp.</span></div>
+  </div>
+  <div class="stat-sub" style="margin-top:12px">
+    ✅ Without Any Coaching Knowledge &nbsp;·&nbsp; ✅ Without Business Experience &nbsp;·&nbsp; ✅ Without Investing a lot of Money
+  </div>
+</div>
+
+<!-- EVENT + FORM -->
+<div class="event-details" id="register">
+  <h2 class="sec-title" style="margin-bottom:18px">Register Now For <span class="gold">FREE</span></h2>
+  <div class="event-grid">
+    <div class="ev-box">
+      <div class="ev-icon">📅</div>
+      <div><div class="ev-label">Date</div><div class="ev-val">[WEBINAR_DATE]</div></div>
     </div>
-    <div>
-      <span class="s-eyebrow">Your Coach</span>
-      <h2 class="about-name">Shruti Tiwari</h2>
-      <div class="about-role-t">Lifecoach & Sales Trainer</div>
-      <p class="about-body">Shruti Tiwari helps sales professionals, direct sellers, and insurance advisors master real-world closing skills that create confidence, authority, and higher income.</p>
-      <ul class="about-creds">
-        <li><span class="ac-dot">✦</span> Practical on-ground sales experience across industries</li>
-        <li><span class="ac-dot">✦</span> Specialized in high-ticket closing psychology</li>
-        <li><span class="ac-dot">✦</span> Focused on real sales situations not generic theory</li>
-        <li><span class="ac-dot">✦</span> Simple, actionable techniques anyone can apply immediately</li>
-        <li><span class="ac-dot">✦</span> Helps people improve confidence & communication</li>
-      </ul>
-      <div class="about-stats">
-        <div><div class="astat-num">1M+</div><div class="astat-lbl">Lives Transformed</div></div>
-        <div><div class="astat-num">1000+</div><div class="astat-lbl">Workshops Done</div></div>
-        <div><div class="astat-num">Global</div><div class="astat-lbl">Training Reach</div></div>
+    <div class="ev-box">
+      <div class="ev-icon">🕐</div>
+      <div><div class="ev-label">Time</div><div class="ev-val">[WEBINAR_TIME]</div></div>
+    </div>
+    <div class="ev-box">
+      <div class="ev-icon">🎥</div>
+      <div><div class="ev-label">Venue</div><div class="ev-val">Zoom</div></div>
+    </div>
+    <div class="ev-box">
+      <div class="ev-icon">🌐</div>
+      <div><div class="ev-label">Language</div><div class="ev-val">Hindi + English</div></div>
+    </div>
+  </div>
+</div>
+<div class="form-wrap">
+  <div class="form-card">
+    <h2>Secure Your FREE Seat</h2>
+    <p class="form-sub">Fill your details below to register instantly</p>
+    <input type="text" id="f-name" placeholder="Full Name *" required>
+    <input type="tel" id="f-phone" placeholder="Mobile Number *" required maxlength="10">
+    <input type="email" id="f-email" placeholder="Email Address *" required>
+    <select id="f-prof">
+      <option value="" disabled selected>Your Profession *</option>
+      <option>Direct Selling Professional</option>
+      <option>Insurance Advisor / Agent</option>
+      <option>Network Marketer</option>
+      <option>Coach / Consultant</option>
+      <option>Business Owner</option>
+      <option>Sales Professional</option>
+      <option>Housewife</option>
+      <option>Student</option>
+      <option>Other</option>
+    </select>
+    <button class="fbtn" onclick="submitInlineForm(this)">JOIN NOW FOR FREE!</button>
+    <p class="fdiscl">100% FREE · No Credit Card Required · Limited Seats</p>
+  </div>
+</div>
+
+<!-- TOP PERFORMERS -->
+<section class="sec dark">
+  <h2 class="sec-title">Top Performing <span class="gold">Students</span></h2>
+  <p class="sec-sub">Real people who transformed their sales careers after the training.</p>
+  <div class="performers-grid">
+    <div class="perf-card">
+      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/brajbala.jpg" alt="Brajbala Chouhan">
+      <div class="perf-info">
+        <div class="perf-name">Brajbala Chouhan</div>
+        <div class="perf-role">Sales Professional</div>
+        <div class="perf-earn">💰 CONFIDENCE TRANSFORMED</div>
+      </div>
+    </div>
+    <div class="perf-card">
+      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/mitul.jpg" alt="Mitul Daxini">
+      <div class="perf-info">
+        <div class="perf-name">Mitul Daxini</div>
+        <div class="perf-role">Entrepreneur</div>
+        <div class="perf-earn">🏆 TOP EARNER</div>
+      </div>
+    </div>
+    <div class="perf-card">
+      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/mohit.jpg" alt="Mohit Kummar Manwani">
+      <div class="perf-info">
+        <div class="perf-name">Mohit Kummar Manwani</div>
+        <div class="perf-role">Direct Seller</div>
+        <div class="perf-earn">🚀 INCOME DOUBLED</div>
+      </div>
+    </div>
+    <div class="perf-card">
+      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/kishan.jpg" alt="Kishan Prajapati">
+      <div class="perf-info">
+        <div class="perf-name">Kishan Prajapati</div>
+        <div class="perf-role">Wellness Businessman</div>
+        <div class="perf-earn">⭐ LIFE CHANGING</div>
       </div>
     </div>
   </div>
-</section>
-<section id="learn">
-  <div class="learn-header">
-    <span class="s-eyebrow">The Curriculum</span>
-    <h2 class="s-title">What You'll Learn <span class="gold">Inside</span></h2>
-    <p class="s-sub">5 powerful modules packed in 90 minutes of live, actionable training.</p>
-  </div>
-  <div class="learn-grid">
-    <div class="learn-card"><div class="learn-icon">⚠️</div><div class="learn-title">The "Deal-Killer" Mistake</div><p class="learn-desc">The psychological mistake that silently destroys trust before you even pitch your product and exactly how to avoid it forever.</p></div>
-    <div class="learn-card"><div class="learn-icon">⚡</div><div class="learn-title">The "Instant YES" Formula</div><p class="learn-desc">Exact words to handle "It's too expensive", "I'll think about it", "Let me ask my family" and turn hesitation into closed deals.</p></div>
-    <div class="learn-card"><div class="learn-icon">🎤</div><div class="learn-title">The Alpha Voice Technique</div><p class="learn-desc">Speak with authority so clients respect you like an expert not just another salesperson trying to push something.</p></div>
-    <div class="learn-card"><div class="learn-icon">🏆</div><div class="learn-title">High-Ticket Closing Strategy</div><p class="learn-desc">Step-by-step practical system to confidently close premium deals face-to-face with zero pressure.</p></div>
-    <div class="learn-card"><div class="learn-icon">🧲</div><div class="learn-title">Stop Sounding Desperate</div><p class="learn-desc">Build natural influence and make people WANT to buy from you without chasing, begging, or discounting your price.</p></div>
-    <div class="learn-card" style="border-color:var(--border);background:rgba(245,197,66,.03)"><div class="learn-icon">🎁</div><div class="learn-title">BONUS: Live Q&A Session</div><p class="learn-desc">Get your specific sales challenges answered LIVE by Coach Shruti. Real answers for real situations.</p></div>
-  </div>
-  <div class="sec-cta"><a class="btn-gold" href="#" onclick="openModal();return false;">👉 YES! I WANT TO REGISTER FREE</a></div>
+  <button class="btn" onclick="openModal()">Join Now For FREE!</button>
 </section>
 
-<div class="urgency-bar">⏳ Seats Are Filling Fast - <span>Registration Closes Today!</span> &nbsp;<a href="#" onclick="openModal();return false;">Reserve My FREE Spot →</a></div>
-
-<section id="why-fail">
-  <div class="wf-inner">
-    <div>
-      <span class="s-eyebrow">The Harsh Reality</span>
-      <h2 class="s-title">Why Most Salespeople <span class="gold">Fail</span></h2>
-      <ul class="fail-list">
-        <li><span class="fail-x">✕</span> Work hard but never close premium clients</li>
-        <li><span class="fail-x">✕</span> Watch endless YouTube videos but freeze in real conversations</li>
-        <li><span class="fail-x">✕</span> Lose confidence after just one rejection</li>
-        <li><span class="fail-x">✕</span> Sound needy instead of authoritative</li>
-        <li><span class="fail-x">✕</span> Give presentations daily but still struggle financially</li>
-      </ul>
-      <div style="margin-top:28px"><a class="btn-gold" href="#" onclick="openModal();return false;">This Webinar Will Change That →</a></div>
+<!-- CATEGORY SKILLS (Turn Your Knowledge Into Sales) -->
+<div class="category-section">
+  <div class="cat-title">Turn Your Skills &amp; Knowledge Into <span style="color:var(--gold)">Sales Success</span></div>
+  <div class="cat-scroll">
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=120&fit=crop" alt="Direct Sales">
+      <div class="cat-card-label">Direct Sales</div>
     </div>
-    <div class="fail-card">
-      <p class="fail-quote">"This webinar will show you how to break out of that cycle and become a confident, high-earning sales closer."</p>
-      <ul class="promise-list">
-        <li><span class="p-check">✓</span> Real on-ground closing psychology</li>
-        <li><span class="p-check">✓</span> Proven scripts you can use immediately</li>
-        <li><span class="p-check">✓</span> Confidence building techniques</li>
-        <li><span class="p-check">✓</span> Live Q&A for your specific situation</li>
-        <li><span class="p-check">✓</span> 100% Free </li>
-      </ul>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=120&fit=crop" alt="Insurance">
+      <div class="cat-card-label">Insurance</div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=200&h=120&fit=crop" alt="Network Marketing">
+      <div class="cat-card-label">Network Marketing</div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=120&fit=crop" alt="Coaching">
+      <div class="cat-card-label">Coaching</div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&h=120&fit=crop" alt="Business">
+      <div class="cat-card-label">Business</div>
     </div>
   </div>
+</div>
+
+<!-- FOR WHO -->
+<section class="sec mid" id="for-who">
+  <h2 class="sec-title">This Workshop Is For You If <span class="gold">You...</span></h2>
+  <div class="for-who-list">
+    <div class="fw-item"><div class="fw-icon">✓</div>Are looking for a consistent and high-paying source of income through sales.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Want to have a first-mover advantage as a top sales closer.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Are searching for a fail-proof method to handle objections and close deals.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Already in sales but struggling to convert premium clients.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Want to know the secrets of top earners in your industry.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Want to build authority without being pushy or desperate.</div>
+    <div class="fw-item"><div class="fw-icon">✓</div>Want to close high-ticket deals and become the #1 earner in your field.</div>
+  </div>
+  <button class="btn" onclick="openModal()">Join Now For FREE!</button>
 </section>
 
-<section id="for-who">
-  <div class="fw-header">
-    <span class="s-eyebrow">Ideal Audience</span>
-    <h2 class="s-title">This Webinar Is <span class="gold">For You If...</span></h2>
-    <p class="s-sub">Built for people who sell in the real world not generic theory.</p>
+<!-- WHAT YOU'LL LEARN -->
+<section class="sec dark" id="learn">
+  <h2 class="sec-title">What You'll Learn In <span class="gold">The Webinar</span></h2>
+  <div class="learn-list">
+    <div class="learn-item"><div class="learn-icon">✓</div>How to find the #1 mistake that silently kills your sales deals before you even pitch.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>The exact "Instant YES" formula to handle "too expensive," "I'll think about it," and "let me ask family."</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>How to speak with the Alpha Voice technique so clients respect you like an expert.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>Step-by-step system to confidently close high-ticket deals face-to-face with zero pressure.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>How to build natural influence and make people WANT to buy from you — without chasing or discounting.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>Real on-ground closing psychology from 11+ years of practical sales experience across India.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>Proven scripts you can use the very next day in your sales conversations.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>Live Q&amp;A — get your specific sales challenges answered live by Coach Shruti.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>How to stop losing confidence after rejection and build an unshakeable sales mindset.</div>
+    <div class="learn-item"><div class="learn-icon">✓</div>How to stop sounding "salesy" and become a trusted advisor your clients love to buy from.</div>
   </div>
-  <div class="fw-grid">
-    <div class="fw-card"><div class="fw-icon">💼</div><div><div class="fw-title">Direct Selling Professionals</div><p class="fw-desc">Close more deals without pressure tactics</p></div></div>
-    <div class="fw-card"><div class="fw-icon">🛡️</div><div><div class="fw-title">Insurance Advisors & Agents</div><p class="fw-desc">Convert prospects after great presentations</p></div></div>
-    <div class="fw-card"><div class="fw-icon">🌐</div><div><div class="fw-title">Network Marketers</div><p class="fw-desc">Build authority and stop sounding desperate</p></div></div>
-    <div class="fw-card"><div class="fw-icon">🎯</div><div><div class="fw-title">Coaches & Consultants</div><p class="fw-desc">Close high-ticket clients with confidence</p></div></div>
-    <div class="fw-card"><div class="fw-icon">🏪</div><div><div class="fw-title">Business Owners</div><p class="fw-desc">Better sales without expensive agencies</p></div></div>
-    <div class="fw-card"><div class="fw-icon">🚀</div><div><div class="fw-title">Anyone Who Sells</div><p class="fw-desc">Who wants to become the #1 earner in their field</p></div></div>
-  </div>
-  <div class="esp-box">
-    <div class="esp-title">✦ Especially If You...</div>
-    <div class="esp-grid">
-      <div class="esp-item"><span class="esp-arr">→</span> Fear rejection from premium clients</div>
-      <div class="esp-item"><span class="esp-arr">→</span> Struggle to close after presentations</div>
-      <div class="esp-item"><span class="esp-arr">→</span> Feel stuck despite working hard</div>
-      <div class="esp-item"><span class="esp-arr">→</span> Are tired of generic sales advice</div>
-      <div class="esp-item"><span class="esp-arr">→</span> Want to become a confident closer</div>
-      <div class="esp-item"><span class="esp-arr">→</span> Want to be the #1 earner in your field</div>
-    </div>
-  </div>
-  <div class="sec-cta"><a class="btn-gold" href="#" onclick="openModal();return false;">🚀 CLAIM YOUR FREE SEAT NOW</a></div>
+  <button class="btn" onclick="openModal()">Join Now For FREE!</button>
 </section>
 
-<section id="testimonials">
-  <div class="testi-header">
-    <span class="s-eyebrow">Success Stories</span>
-    <h2 class="s-title">Real Results, <span class="gold">Real Stories</span></h2>
-    <p class="s-sub">What past attendees say after the training.</p>
+<!-- MAKE PROFITS / NO NEED SECTION -->
+<section class="sec mid">
+  <h2 class="sec-title" style="color:var(--white)">Close More Deals — <span class="gold">No Matter What!</span></h2>
+  <p class="sec-sub">Work part-time or full-time — build a real sales career on your terms.</p>
+  <div class="no-need-list">
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need years of sales experience.</div>
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need to be a natural-born talker.</div>
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need a big team or expensive tools.</div>
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need to know how to handle every objection (yet).</div>
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need to be pushy or aggressive.</div>
+    <div class="nn-item"><div class="nn-icon">✓</div>You don't need any prior knowledge of sales psychology.</div>
   </div>
+  <div class="no-need-footer">All we ask is that you be persistent and patient — we will take care of the rest.</div>
+  <button class="btn" onclick="openModal()">Join Now For FREE!</button>
+</section>
+
+<!-- MEET YOUR MENTOR -->
+<div class="mentor-section" id="about">
+  <div class="mentor-photo-wrap">
+    <img src="https://www.coachshrutitiwari.com/swb/shruti.jpg"
+         onerror="this.src='https://ui-avatars.com/api/?name=Shruti+Tiwari&size=300&background=22223a&color=f5a000'"
+         alt="Coach Shruti Tiwari">
+    <span class="mentor-badge">11+ Years of Influence</span>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Meet Your Mentor</div>
+  <div class="mentor-name">Shruti Tiwari</div>
+  <div class="mentor-role">Life Coach &amp; Sales Trainer</div>
+  <p class="mentor-bio">Hi, I'm Shruti Tiwari. Using the power of real on-ground sales psychology, I have helped more than 1 million people boost their confidence, close more deals, and transform their income. My practical, actionable approach will help you become the top earner in your field.</p>
+  <ul class="mentor-list">
+    <li>Practical on-ground sales experience across industries</li>
+    <li>Specialized in high-ticket closing psychology</li>
+    <li>Focused on real sales situations — not generic theory</li>
+    <li>Simple, actionable techniques anyone can apply immediately</li>
+    <li>1M+ Lives Empowered · 1000+ Workshops · 11+ Years Exp.</li>
+  </ul>
+  <button class="btn" onclick="openModal()">Join Now For FREE!</button>
+</div>
+
+<!-- TESTIMONIALS / REAL RESULTS -->
+<section class="sec dark" id="testimonials">
+  <h2 class="sec-title">Real Results, <span class="gold">Real Stories</span></h2>
+  <p class="sec-sub">What past attendees say after training with Coach Shruti.</p>
   <div class="testi-grid">
-    <div class="testi-card"><div class="testi-person"><div class="testi-av"> <img src="./swb/brajbala.jpg" alt="Mohit Kummar Manwani"> </div><div><div class="testi-name">Brajbala Chouhan</div><div class="testi-role">Sales Professional</div></div></div><br><div class="testi-stars">★★★★★</div><p class="testi-text">"Dear Shruti tiwari ma'am you are truly a gem of a person.So much talented at such a young age, full of positivity and and confidence that has in turn helped me boost confidence in myself. I have been able able to discover myself as a human being and now I know that there is no substitution for hardwork and perseverance. Thank you so much for doing what you do"</p><br><br><br><br><br><div class="testi-person"><div class="testi-av"> <img src="./swb/mitul.jpg" alt="Mohit Kummar Manwani"> </div><div><div class="testi-name">Mitul Daxini</div><div class="testi-role">Entrepreneur</div></div></div><br><div class="testi-stars">★★★★★</div><p class="testi-text">"We arrenge so many training session but we find Shruti mam one of the best speaker. Excellent"</p></div>
-    <div class="testi-card"><div class="testi-person"><div class="testi-av"> <img src="./swb/mohit.jpg" alt="Mohit Kummar Manwani"> </div><div><div class="testi-name">Mohit Kummar Manwani</div><div class="testi-role">Direct Seller</div></div></div><br><div class="testi-stars">★★★★★</div><p class="testi-text">"Superb, Awesome, Inspirational, Life changing words & Knowledge you have, which is helping me & my to Grow Fast... Your Daily Dose of Morning Motivation is helping my Team to get a Day start with full of energy... God bless you Shruti ji... Aapke jaise logo ki iss Duniya ko bahut zarurat hai...Iss Duniya ko aur bhi Khubsurat banane ke liye... You are doing a Great work & Contributing to our Country India you are very Hardworking, Passionate & Committed towards Your Profession... We see you many times you are continuesly Travelling as well you are not taking rest you are continuously giving Training sessions to People & giving your 100% no matter where you are... God bless you Good Health & Success 26 we are proud we have Trainer like you... Thanks Shruti ji"</p></div>
-    <div class="testi-card"><div class="testi-person"><div class="testi-av"> <img src="./swb/kishan.jpg" alt="Mohit Kummar Manwani"> </div><div><div class="testi-name">Kishan Prajapati</div><div class="testi-role">Wellness Businessman</div></div></div><br><div class="testi-stars">★★★★★</div><p class="testi-text">"Shruti mam is the real example and inspiration of women empowerment... Really great and enthusiastic personality...she giving realistic practical examples to understand and relate with our practical life its best uniqueness in her training session... Best communicate with participatant... She always gives extra effort in all the sessions... really thanks to Shruti tiwari ma'am for the great learning sessions... Thank you so much ma'am..."</p><br><div class="testi-person"><div class="testi-av"> <img src="./swb/suraj.jpg" alt="Mohit Kummar Manwani"> </div><div><div class="testi-name">Suraj Gupta</div><div class="testi-role">Businessman</div></div></div><br><div class="testi-stars">★★★★★</div><p class="testi-text">"Really it's a pleasure to learn from Shruti mam...she is truly a "Gem" at such a young age and have a very special talent to inspire others."</p></div>
-  </div>
-  <!-- <div class="testi-note">📸 Add real WhatsApp screenshots, income proofs & success stories from past attendees here for maximum conversion.</div> -->
-</section>
-
-<div class="urgency-bar">⏳ <span>Only Limited Spots Left</span> For This Live Session! &nbsp;<a href="#" onclick="openModal();return false;">YES! I WANT TO REGISTER FREE →</a></div>
-<section id="faq">
-  <div class="faq-inner">
-    <div class="faq-header">
-      <span class="s-eyebrow">Got Questions?</span>
-      <h2 class="s-title">Frequently Asked <span class="gold">Questions</span></h2>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar"><img src="https://www.coachshrutitiwari.com/swb/brajbala.jpg" alt="Brajbala Chouhan"></div>
+        <div><div class="testi-name">Brajbala Chouhan</div><div class="testi-role">Sales Professional</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Dear Shruti Tiwari ma'am you are truly a gem of a person. So much talented at such a young age, full of positivity and confidence that has in turn helped me boost confidence in myself. I have been able to discover myself as a human being. Thank you so much for doing what you do."</div>
     </div>
-    <div class="faq-item"><button class="faq-btn" onclick="faqToggle(this)">Will there be a recording?<span class="faq-toggle">+</span></button><div class="faq-body">No. This is a LIVE-only training session. Attend live to get the complete experience, actionable insights, and the Q&A with Coach Shruti.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="faqToggle(this)">How long is the webinar?<span class="faq-toggle">+</span></button><div class="faq-body">Approximately 90 minutes of practical live learning, followed by a live Q&A where you can ask Coach Shruti your specific questions.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="faqToggle(this)">Is this really free?<span class="faq-toggle">+</span></button><div class="faq-body">Yes! 100% free. No credit card required. But seats are strictly limited. Register now before it closes.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="faqToggle(this)">Who should attend?<span class="faq-toggle">+</span></button><div class="faq-body">Anyone in sales, direct selling, insurance, network marketing, or business who wants to improve confidence and closing skills. Both beginners and experienced professionals benefit.</div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="faqToggle(this)">Will this work for beginners?<span class="faq-toggle">+</span></button><div class="faq-body">Absolutely. The strategies are simple, practical, and beginner-friendly. This is the perfect foundation if you're just starting out.</div></div>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar"><img src="https://www.coachshrutitiwari.com/swb/mitul.jpg" alt="Mitul Daxini"></div>
+        <div><div class="testi-name">Mitul Daxini</div><div class="testi-role">Entrepreneur</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"We arrange so many training sessions but we find Shruti ma'am one of the best speakers. Excellent training, practical and impactful."</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar"><img src="https://www.coachshrutitiwari.com/swb/mohit.jpg" alt="Mohit Kummar Manwani"></div>
+        <div><div class="testi-name">Mohit Kummar Manwani</div><div class="testi-role">Direct Seller</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Superb, Awesome, Inspirational, Life changing words &amp; Knowledge. Your Daily Dose of Morning Motivation is helping my team to get a day start with full of energy. Thanks Shruti ji!"</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar"><img src="https://www.coachshrutitiwari.com/swb/kishan.jpg" alt="Kishan Prajapati"></div>
+        <div><div class="testi-name">Kishan Prajapati</div><div class="testi-role">Wellness Businessman</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Shruti ma'am is the real example and inspiration of women empowerment. She always gives extra effort in all the sessions. Really thankful for the great learning."</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-header">
+        <div class="testi-avatar"><img src="https://www.coachshrutitiwari.com/swb/suraj.jpg" alt="Suraj Gupta"></div>
+        <div><div class="testi-name">Suraj Gupta</div><div class="testi-role">Businessman</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Really it's a pleasure to learn from Shruti ma'am. She is truly a 'Gem' at such a young age and has a very special talent to inspire others."</div>
+    </div>
+  </div>
+  <div style="margin-top:24px">
+    <button class="btn" onclick="openModal()">Only Limited Spots Left — Register FREE</button>
   </div>
 </section>
 
-<section id="final-cta">
-  <div class="final-badges">
-    <span class="final-badge">🔥 100% FREE</span>
-    <span class="final-badge">⚡ Limited Live Seats</span>
-    <span class="final-badge">🎯 Actionable Training</span>
-    <span class="final-badge">⚠️ No Recording</span>
-  </div>
-  <h2 class="final-h2">Don't Miss This <span class="gold">Opportunity</span></h2>
-  <p class="final-sub">If you truly want to increase your confidence, close more deals, and become a powerful sales leader, this webinar is for you. Spots are running out.</p>
-  <a class="btn-gold" style="font-size:.92rem;padding:16px 44px" href="#" onclick="openModal();return false;">👉 JOIN THE FREE LIVE WEBINAR NOW</a>
-  <p class="final-note">Secure your seat before registration closes today.</p>
-</section>
-
-<section id="contact">
-  <div class="contact-inner">
-    <div>
-      <div class="c-logo">Shruti Tiwari</div>
-      <p class="c-tag">Empowering sales professionals to master influence and close more deals with confidence and authenticity.</p>
-      <div class="social-lbl">Follow & Connect</div>
-      <div class="social-links">
-  <a class="soc-link" href="https://instagram.com/coachshrutitiwari" target="_blank"><span class="soc-ic"><i class="fab fa-instagram"></i></span> Instagram · @coachshrutitiwari</a>
-  <a class="soc-link" href="#" target="_blank"><span class="soc-ic"><i class="fab fa-facebook-f"></i></span> Facebook · Shruti Tiwari</a>
-  <a class="soc-link" href="#" target="_blank"><span class="soc-ic"><i class="fab fa-linkedin-in"></i></span> LinkedIn · Shruti Tiwari</a>
-  <a class="soc-link" href="https://t.me/coachshrutitiwari" target="_blank"><span class="soc-ic"><i class="fab fa-telegram-plane"></i></span> Telegram · @coachshrutitiwari</a>
-  <a class="soc-link" href="#" target="_blank"><span class="soc-ic"><i class="fab fa-x-twitter"></i></span> X · @shruti_tiwari04</a>
+<!-- RATINGS -->
+<div class="ratings-bar">
+  <span class="rb-stars">★★★★★</span>
+  <div class="rb-text"><strong>Rated 4.9/5</strong> by past webinar attendees</div>
+  <div class="rb-sub">1M+ Lives Empowered &nbsp;·&nbsp; 1000+ Workshops Done &nbsp;·&nbsp; 11+ Years Experience</div>
 </div>
+
+<!-- FAQ -->
+<section class="sec mid">
+  <h2 class="sec-title">FAQ<span class="gold">'s</span></h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q">What If I Am Unable to Attend the Webinar Live? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">This is a LIVE-only training session. If for any reason you cannot attend, please inform us in advance and we will do our best to help. No recording will be provided — attending live is the only way to get full value.</div>
     </div>
-    <div style="text-align:center">
-      <h3 class="c-cta-title">Start Your Journey To<br><span class="gold">Sales Mastery</span></h3>
-      <a class="btn-gold" style="font-size:.9rem;padding:15px 40px" href="#" onclick="openModal();return false;">REGISTER YOUR FREE SEAT</a>
-      <p class="c-note">Seats are filling fast. Register before it's too late.</p>
+    <div class="faq-item">
+      <div class="faq-q">How Can I Join the Webinar? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">After registering, you will receive a Zoom link via email and WhatsApp. Simply click the link at the scheduled time to join the live session.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I Ask Questions During the Webinar? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Absolutely! There is a dedicated Live Q&amp;A session where Coach Shruti will answer your specific sales challenges in real time.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is This Really 100% Free? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Yes! The webinar is completely free. No credit card required. Seats are strictly limited, so register now before it closes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What Should I Do If I Have Any Additional Queries? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Reach out to us on Instagram @coachshrutitiwari or join our Telegram channel @coachshrutitiwari. We're happy to help!</div>
     </div>
   </div>
 </section>
 
+<!-- FINAL URGENCY -->
+<div class="final-urgency">
+  <div class="fu-almost">Almost Full <span>· Only Limited Seats Left</span></div>
+  <div class="fu-seats">Don't Miss This Opportunity!</div>
+  <div class="fu-reg-end">Registrations End on <strong>Today!</strong></div>
+  <button class="btn" style="max-width:420px;margin-bottom:10px" onclick="openModal()">JOIN THE FREE LIVE WEBINAR NOW</button>
+  <div style="font-size:12px;color:#888;margin-top:6px">Secure your seat before registration closes today.</div>
+</div>
+
+<!-- FOOTER -->
 <footer>
+  <div class="foot-brand">Shruti Tiwari · Sales Warrior Blueprint</div>
+  <p class="foot-tag">Empowering sales professionals to master influence and close more deals with confidence and authenticity.</p>
+  <div class="foot-links">
+    <a href="https://instagram.com/coachshrutitiwari">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+    <a href="https://t.me/coachshrutitiwari">Telegram</a>
+    <a href="#">X / Twitter</a>
+  </div>
+  <div style="margin-bottom:16px">
+    <button class="btn" style="max-width:320px;font-size:14px;margin-bottom:8px" onclick="openModal()">REGISTER YOUR FREE SEAT</button>
+  </div>
+  <div style="margin-bottom:10px;font-size:11px;color:var(--muted)">
+    <a href="https://www.coachshrutitiwari.com" style="color:var(--muted)">Home</a> &nbsp;·&nbsp;
+    <a href="#" style="color:var(--muted)">Terms</a> &nbsp;·&nbsp;
+    <a href="#" style="color:var(--muted)">Privacy</a>
+  </div>
   <div class="foot-copy">© 2026 Coach Shruti Tiwari · Sales Warrior Blueprint · All Rights Reserved</div>
-  <div class="foot-links"><a href="../">Home</a><a href="#">Terms</a><a href="#">Privacy</a></div>
 </footer>
 
-<div class="sticky-bar" id="stickyBar">
-  <span class="sb-text">🔥 <span>Limited Seats Left</span> Register FREE Before It Closes!</span>
-  <a class="sb-btn" href="#" onclick="openModal();return false;">Register FREE →</a>
-</div>
-
 <!-- MODAL -->
-<div id="regModal">
+<div class="modal-overlay" id="modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-title">Register For FREE</div>
-    <p class="modal-sub">Secure your spot in the live webinar 👇</p>
-    <div id="modalError" class="form-error"></div>
-    <div class="form-group"><label class="form-label">Full Name *</label><input id="m-name" type="text" class="form-input" placeholder="Enter your full name"></div>
-    <div class="form-group"><label class="form-label">Mobile Number *</label><input id="m-phone" type="tel" class="form-input" placeholder="10-digit WhatsApp number"></div>
-    <div class="form-group"><label class="form-label">Email Address *</label><input id="m-email" type="email" class="form-input" placeholder="Your email ID"></div>
-    <div class="form-group">
-      <label class="form-label">Your Profession *</label>
-      <select id="m-profession" class="form-select">
-        <option value="">Select your profession...</option>
+    <div id="modal-form-view">
+      <h2>Register For FREE</h2>
+      <p class="modal-sub">Secure your spot in the live webinar</p>
+      <input type="text" id="m-name" placeholder="Full Name *">
+      <input type="tel" id="m-phone" placeholder="Mobile Number *" maxlength="10">
+      <input type="email" id="m-email" placeholder="Email Address *">
+      <select id="m-prof">
+        <option value="" disabled selected>Your Profession *</option>
         <option>Direct Selling Professional</option>
         <option>Insurance Advisor / Agent</option>
         <option>Network Marketer</option>
@@ -642,120 +871,58 @@ footer{background:var(--bg);border-top:1px solid var(--border-s);padding:16px 5%
         <option>Student</option>
         <option>Other</option>
       </select>
+      <button class="mbtn" onclick="submitModal()">JOIN NOW FOR FREE!</button>
+      <p style="font-size:11px;text-align:center;color:#888;margin-top:10px">100% FREE · No Credit Card Required · Limited Seats</p>
     </div>
-    <button class="reg-submit" id="modalBtn" onclick="submitForm('modal')">🎯 REGISTER MY FREE SEAT NOW</button>
-    <p class="reg-trust">🔒 100% FREE · No Credit Card Required</p>
+    <div class="success-screen" id="modal-success-view">
+      <div class="ss-icon">🎉</div>
+      <div class="ss-title">YOU'RE REGISTERED!</div>
+      <p class="ss-sub">You're successfully registered for the <strong>Sales Warrior Blueprint</strong> FREE Live Webinar!</p>
+      <ul class="ss-steps">
+        <li><span class="si">1</span><span><strong>Check your email</strong> — confirmation &amp; webinar joining link sent to your inbox</span></li>
+        <li><span class="si">2</span><span><strong>Join our WhatsApp Group</strong> to get reminders, tips &amp; exclusive insights</span></li>
+        <li><span class="si">3</span><span><strong>Add to your calendar</strong> and mark the date so you don't miss it</span></li>
+        <li><span class="si">!</span><span><strong>No recording</strong> will be provided — attend LIVE to get full value</span></li>
+      </ul>
+      <a href="https://whatsapp.com/channel/0029VaCWY3h1t90U6tdNWx3x" class="wa-join-btn" target="_blank">JOIN OUR WHATSAPP GROUP</a>
+    </div>
   </div>
-</div>
-
-<!-- SUCCESS PAGE -->
-<div id="successPage">
-  <div class="sp-icon">🎉</div>
-  <h1 class="sp-title">YOU'RE REGISTERED!</h1>
-  <p class="sp-sub">You're Successfully Registered for the Sales Warrior Blueprint FREE Live Webinar! Check your email confirmation & joining link sent.</p>
-  <div class="sp-steps">
-    <div class="sp-step"><span class="sp-step-num">1</span><div class="sp-step-txt"><strong>Check your email</strong> - confirmation & webinar joining link sent to your inbox</div></div>
-    <div class="sp-step"><span class="sp-step-num">2</span><div class="sp-step-txt"><strong>Join our WhatsApp Group</strong> to get reminders, tips & exclusive insights</div></div>
-    <div class="sp-step"><span class="sp-step-num">3</span><div class="sp-step-txt"><strong>Add to your calendar</strong> and mark the date so you don't miss it</div></div>
-    <div class="sp-step"><span class="sp-step-num">⚠</span><div class="sp-step-txt"><strong>No recording</strong> will be provided, you MUST attend LIVE to get full value</div></div>
-  </div>
-  <a class="sp-wa" id="waBtn" href="#" target="_blank">💬 JOIN OUR WHATSAPP GROUP</a>
-  <p class="sp-redir" id="spTimer"></p>
 </div>
 
 <script>
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY,t=document.body.scrollHeight-window.innerHeight;
-  document.getElementById('prog').style.width=(s/t*100)+'%';
-  document.getElementById('stickyBar').classList.toggle('show',s>600);
+function openModal(){document.getElementById('modal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()})
+
+function validate(ids){
+  let ok=true;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el||!el.value.trim()){if(el)el.style.borderColor='#e84040';ok=false}
+    else el.style.borderColor='#dde3ef';
+  });
+  return ok;
+}
+
+function submitInlineForm(btn){
+  if(!validate(['f-name','f-phone','f-email','f-prof']))return;
+  btn.textContent="Registering... ✓";
+  btn.style.background='linear-gradient(135deg,#3ecf6e,#28a855)';
+  btn.style.color='#fff';
+  btn.disabled=true;
+  setTimeout(()=>{ window.location.href='success.html'; }, 600);
+}
+
+function submitModal(){
+  if(!validate(['m-name','m-phone','m-email','m-prof']))return;
+  document.querySelector('.mbtn').textContent='Registering... ✓';
+  document.querySelector('.mbtn').disabled=true;
+  setTimeout(()=>{ window.location.href='success.html'; }, 600);
+}
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>item.classList.toggle('open'));
 });
-
-function faqToggle(btn){
-  const body=btn.nextElementSibling,open=body.classList.contains('open');
-  document.querySelectorAll('.faq-body').forEach(b=>b.classList.remove('open'));
-  document.querySelectorAll('.faq-btn').forEach(b=>b.classList.remove('open'));
-  if(!open){body.classList.add('open');btn.classList.add('open');}
-}
-
-function openModal(){
-  document.getElementById('regModal').style.display='flex';
-  document.body.style.overflow='hidden';
-}
-function closeModal(){
-  document.getElementById('regModal').style.display='none';
-  document.body.style.overflow='';
-}
-
-// Card animations
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});
-},{threshold:.08});
-document.querySelectorAll('.learn-card,.fw-card,.testi-card').forEach((el,i)=>{
-  el.style.opacity='0';el.style.transform='translateY(20px)';
-  el.style.transition=`opacity .42s ${i*.055}s ease,transform .42s ${i*.055}s ease,border-color .25s,background .25s`;
-  obs.observe(el);
-});
-
-function validate(name,phone,email,profession,errEl){
-  if(!name||!phone||!email||!profession){errEl.style.display='block';errEl.textContent='⚠️ Please fill all fields to register!';return false;}
-  if(!/^[0-9]{10}$/.test(phone)){errEl.style.display='block';errEl.textContent='⚠️ Enter a valid 10-digit mobile number!';return false;}
-  if(!/\S+@\S+\.\S+/.test(email)){errEl.style.display='block';errEl.textContent='⚠️ Enter a valid email address!';return false;}
-  errEl.style.display='none';return true;
-}
-
-async function submitForm(src){
-  const p=src==='hero'?'h':'m';
-  const name=document.getElementById(`${p}-name`).value.trim();
-  const phone=document.getElementById(`${p}-phone`).value.trim();
-  const email=document.getElementById(`${p}-email`).value.trim();
-  const profession=document.getElementById(`${p}-profession`).value;
-  const errEl=document.getElementById(src==='hero'?'heroError':'modalError');
-  const btn=document.getElementById(src==='hero'?'heroBtn':'modalBtn');
-  if(!validate(name,phone,email,profession,errEl))return;
-  errEl.style.display='none';
-  btn.textContent='Registering...';btn.disabled=true;
-  try{
-    const res=await fetch('/api/register-free',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,phone,email,profession})
-    });
-    let data={};
-    try{data=await res.json();}catch(e){}
-    if(res.ok&&data.success){
-      closeModal();showSuccess();
-    }else{
-      throw new Error(data.error||'Registration failed. Please try again.');
-    }
-  }catch(err){
-    console.error(err);
-    errEl.style.display='block';
-    errEl.textContent='⚠️ '+(err.message||'Something went wrong. Please try again!');
-    btn.textContent='🎯 REGISTER MY FREE SEAT NOW';
-    btn.disabled=false;
-  }
-}
-
-function showSuccess(){
-  const waLink='WHATSAPP_GROUP_LINK_PLACEHOLDER'; // ← REPLACE with actual link
-  document.getElementById('waBtn').href=waLink;
-  const sp=document.getElementById('successPage');
-  sp.classList.add('show');
-  document.body.style.overflow='hidden';
-  let secs=7;
-  const timerEl=document.getElementById('spTimer');
-  timerEl.textContent=`Redirecting to WhatsApp group in ${secs} seconds...`;
-  const t=setInterval(()=>{
-    secs--;
-    if(secs<=0){clearInterval(t);window.location.href=waLink;}
-    else{timerEl.textContent=`Redirecting to WhatsApp group in ${secs} seconds...`;}
-  },1000);
-}
 </script>
-  <a href="https://whatsapp.com/channel/0029VaCWY3h1t90U6tdNWx3x"
-   class="wa-float"
-   target="_blank">
-   <i class="fab fa-whatsapp"></i>
-</a>
 </body>
 </html>
