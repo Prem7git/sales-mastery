@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Join Coach Shruti Tiwari's FREE Live Sales Webinar. Learn high-ticket closing strategies, handle objections with confidence. Register Now!">
 <title>Sales Warrior Blueprint | FREE Live Webinar by Coach Shruti Tiwari</title>
+<link rel="icon" type="image/jpeg" href="https://www.coachshrutitiwari.com/swb/shruti.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -79,11 +80,11 @@ nav{
 /* ═══ HERO ═══ */
 .hero{
   background:#1c1c2e;
-  text-align:left;padding:28px 20px 0;position:relative;overflow:hidden;
+  text-align:center;padding:28px 20px 0;position:relative;overflow:hidden;
 }
 .hero::after{
-  content:'';position:absolute;top:0;right:-40px;width:220px;height:220px;
-  background:radial-gradient(circle,rgba(245,160,0,0.07) 0%,transparent 70%);
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:300px;
+  background:radial-gradient(circle,rgba(245,160,0,0.06) 0%,transparent 70%);
   pointer-events:none;
 }
 .hero-badge{
@@ -103,11 +104,11 @@ nav{
 .hero h1 .gold{color:var(--gold);display:block}
 .hero .sub{
   font-size:14px;color:rgba(255,255,255,0.7);
-  max-width:420px;margin:0 0 24px;line-height:1.75;
+  max-width:420px;margin:0 auto 20px;line-height:1.75;
 }
 .hero-checks{
   display:flex;flex-direction:column;gap:10px;
-  max-width:360px;margin:0 0 28px;
+  max-width:360px;margin:0 auto 28px;text-align:left;
 }
 .hc{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--white)}
 .hc-icon{
@@ -115,7 +116,7 @@ nav{
   background:var(--gold);color:#000;
   display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;
 }
-.hero-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:0;padding-bottom:0}
+.hero-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:0;padding-bottom:0;align-items:center;}
 .btn-primary{
   display:flex;align-items:center;justify-content:center;gap:8px;
   width:100%;max-width:420px;
@@ -144,19 +145,27 @@ nav{
 
 /* ═══ COACH PHOTO ═══ */
 .coach-photo-section{
-  background:#1c1c2e;
-  display:flex;justify-content:center;align-items:flex-end;
-  padding:0;overflow:hidden;position:relative;
+  background:transparent;
+  display:flex;justify-content:center;align-items:center;
+  padding:20px 20px 0;position:relative;
 }
 .coach-photo-section::before{
   content:'';position:absolute;
-  bottom:0;left:50%;transform:translateX(-50%);
-  width:320px;height:160px;
-  background:radial-gradient(ellipse,rgba(245,160,0,0.15) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(245,160,0,0.12) 0%,transparent 70%);
+  pointer-events:none;
 }
-.coach-photo-section img{
-  width:100%;max-width:340px;object-fit:cover;object-position:top center;
-  position:relative;z-index:1;display:block;
+.coach-img-circle{
+  position:relative;z-index:1;
+  width:200px;height:200px;border-radius:50%;
+  border:4px solid var(--gold);
+  overflow:hidden;
+  box-shadow:0 0 0 10px rgba(245,160,0,0.12), 0 8px 40px rgba(245,160,0,0.25);
+}
+.coach-img-circle img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  display:block;
 }
 
 /* ═══ URGENCY STRIP ═══ */
@@ -506,6 +515,14 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
   <div class="hero-badge"><span class="dot"></span> FREE LIVE WEBINAR &nbsp;·&nbsp; LIMITED SEATS</div>
   <h1>Become an Unstoppable <span class="gold">Sales Champion</span></h1>
   <p class="sub">Discover the exact on-ground sales psychology to confidently turn hesitant prospects into paying clients without sounding pushy, desperate, or "salesy."</p>
+  <div class="coach-photo-section">
+    <div class="coach-img-circle">
+      <img src="https://www.coachshrutitiwari.com/shruti_workshop1.jpg"
+           onerror="this.src='https://www.coachshrutitiwari.com/swb/shruti.jpg'"
+           alt="Coach Shruti Tiwari">
+    </div>
+  </div>
+
   <div class="hero-checks">
     <div class="hc"><span class="hc-icon">✓</span> Close High-Ticket Deals With Confidence</div>
     <div class="hc"><span class="hc-icon">✓</span> Handle Any Objection Like a Pro</div>
@@ -516,13 +533,6 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
     <a href="#learn" class="btn-secondary">See What You'll Learn →</a>
   </div>
 </section>
-
-<!-- COACH PHOTO -->
-<div class="coach-photo-section">
-  <img src="https://www.coachshrutitiwari.com/shruti_workshop1.jpg"
-       onerror="this.src='https://www.coachshrutitiwari.com/swb/shruti.jpg'"
-       alt="Coach Shruti Tiwari">
-</div>
 
 <!-- URGENCY STRIP -->
 <div class="urgency-strip">
