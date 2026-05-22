@@ -70,7 +70,14 @@ nav{
   position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);
 }
 .nav-brand{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--gold)}
-.nav-brand span{color:var(--white);font-weight:400;font-size:12px}
+.nav-brand span{
+  color:var(--white);font-weight:700;font-size:12px;
+  background:rgba(245,160,0,0.12);
+  border:1px solid rgba(245,160,0,0.35);
+  border-radius:4px;
+  padding:2px 8px;
+  margin-left:4px;
+}
 .nav-btn{
   background:transparent;border:2px solid var(--gold);
   color:var(--gold);font-family:'Montserrat',sans-serif;font-weight:800;
@@ -90,11 +97,11 @@ nav{
 .hero-badge{
   display:inline-flex;align-items:center;gap:7px;
   border:1.5px solid rgba(245,160,0,0.45);
-  border-radius:30px;padding:6px 14px;font-size:11px;font-weight:600;
+  border-radius:6px;padding:6px 14px;font-size:11px;font-weight:600;
   color:rgba(255,255,255,0.85);margin-bottom:20px;
   background:rgba(245,160,0,0.07);
 }
-.hero-badge .dot{width:7px;height:7px;background:var(--gold);border-radius:50%;display:inline-block;animation:pulse 1.6s ease-in-out infinite}
+.hero-badge .dot{width:8px;height:8px;background:var(--gold);border-radius:50%;display:inline-block;animation:pulse 1.6s ease-in-out infinite;flex-shrink:0;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
 .hero h1{
   font-family:'Montserrat',sans-serif;
