@@ -50,24 +50,22 @@ body{
 
 /* ══ CUSTOM CURSOR ══ */
 #cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--gold-bright);border-radius:50%;
+  position:fixed;width:6px;height:6px;
+  background:#ffffff;border-radius:50%;
   pointer-events:none;z-index:9999;
   transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,background .2s,opacity .2s;
-  mix-blend-mode:difference;
+  transition:width .15s,height .15s,opacity .2s;
 }
 #cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1.5px solid rgba(237,184,78,0.5);
+  position:fixed;width:32px;height:32px;
+  border:1px solid rgba(237,184,78,0.6);
   border-radius:50%;pointer-events:none;z-index:9998;
   transform:translate(-50%,-50%);
-  transition:width .35s cubic-bezier(.17,.67,.38,1.1),
-             height .35s cubic-bezier(.17,.67,.38,1.1),
-             border-color .3s,opacity .3s;
+  transition:width .4s cubic-bezier(.17,.67,.38,1.1),
+             height .4s cubic-bezier(.17,.67,.38,1.1),
+             border-color .3s;
 }
 body:hover #cursor{opacity:1}
-a:hover~#cursor,button:hover~#cursor{width:18px;height:18px}
 
 /* ══ NOISE OVERLAY ══ */
 body::after{
@@ -1431,14 +1429,16 @@ function animRing(){
 animRing();
 document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>{
-    cursor.style.width='18px';cursor.style.height='18px';
-    ring.style.width='52px';ring.style.height='52px';
-    ring.style.borderColor='rgba(237,184,78,.7)';
+    cursor.style.width='0px';cursor.style.height='0px';
+    ring.style.width='48px';ring.style.height='48px';
+    ring.style.borderColor='rgba(237,184,78,1)';
+    ring.style.background='rgba(237,184,78,0.08)';
   });
   el.addEventListener('mouseleave',()=>{
-    cursor.style.width='10px';cursor.style.height='10px';
-    ring.style.width='36px';ring.style.height='36px';
-    ring.style.borderColor='rgba(237,184,78,.5)';
+    cursor.style.width='6px';cursor.style.height='6px';
+    ring.style.width='32px';ring.style.height='32px';
+    ring.style.borderColor='rgba(237,184,78,0.6)';
+    ring.style.background='transparent';
   });
 });
 
