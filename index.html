@@ -49,23 +49,7 @@ body{
 }
 
 /* ══ CUSTOM CURSOR ══ */
-#cursor{
-  position:fixed;width:6px;height:6px;
-  background:#ffffff;border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .15s,height .15s,opacity .2s;
-}
-#cursor-ring{
-  position:fixed;width:32px;height:32px;
-  border:1px solid rgba(237,184,78,0.6);
-  border-radius:50%;pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
-  transition:width .4s cubic-bezier(.17,.67,.38,1.1),
-             height .4s cubic-bezier(.17,.67,.38,1.1),
-             border-color .3s;
-}
-body:hover #cursor{opacity:1}
+
 
 /* ══ NOISE OVERLAY ══ */
 body::after{
@@ -936,8 +920,7 @@ footer{
 <body>
 
 <!-- Cursor -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+
 <div id="sprogress"></div>
 
 <!-- ══ NAVBAR ══ -->
@@ -1414,33 +1397,7 @@ footer{
 
 <script>
 /* ── CURSOR ── */
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cursor.style.left=mx+'px';cursor.style.top=my+'px';
-});
-function animRing(){
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
-}
-animRing();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{
-    cursor.style.width='0px';cursor.style.height='0px';
-    ring.style.width='48px';ring.style.height='48px';
-    ring.style.borderColor='rgba(237,184,78,1)';
-    ring.style.background='rgba(237,184,78,0.08)';
-  });
-  el.addEventListener('mouseleave',()=>{
-    cursor.style.width='6px';cursor.style.height='6px';
-    ring.style.width='32px';ring.style.height='32px';
-    ring.style.borderColor='rgba(237,184,78,0.6)';
-    ring.style.background='transparent';
-  });
-});
+
 
 /* ── SCROLL PROGRESS ── */
 const prog=document.getElementById('sprogress');
