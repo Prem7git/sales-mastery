@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
             <p style="margin:6px 0;color:#cccccc;font-size:14px;">2. Save the date — 31st May 2026 at 7:00 PM IST.</p>
             <p style="margin:6px 0;color:#cccccc;font-size:14px;">3. Attend the session live. No recording will be made available.</p>
           </div>
-          <a href="https://whatsapp.com/channel/0029VaCWY3h1t90U6tdNWx3x"
+          <a href="https://chat.whatsapp.com/F2MRR8f6Q0s6osqdk4N4zY?s=cl&p=a&mlu=1"
              style="display:block;text-align:center;background:#25D366;color:#ffffff;padding:14px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:15px;margin:20px 0;">
             Join WhatsApp Group
           </a>
