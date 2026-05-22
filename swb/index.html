@@ -1035,20 +1035,53 @@ function validate(ids){
   return ok;
 }
 
-function submitInlineForm(btn){
-  if(!validate(['f-name','f-phone','f-email','f-prof']))return;
-  btn.textContent="Registering... ✓";
-  btn.style.background='linear-gradient(135deg,#3ecf6e,#28a855)';
-  btn.style.color='#fff';
-  btn.disabled=true;
-  setTimeout(()=>{ window.location.href='success.html'; }, 600);
+async function submitInlineForm(btn) {
+  if (!validate(['f-name','f-phone','f-email','f-prof'])) return;
+  btn.textContent = "Registering...";
+  btn.style.background = 'linear-gradient(135deg,#3ecf6e,#28a855)';
+  btn.style.color = '#fff';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://www.coachshrutitiwari.com/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('f-name').value.trim(),
+        phone: document.getElementById('f-phone').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        profession: document.getElementById('f-prof').value
+      })
+    });
+    const data = await res.json();
+    if (data.success) window.location.href = 'success.html';
+    else { btn.textContent = 'Try Again'; btn.disabled = false; }
+  } catch(e) {
+    btn.textContent = 'Try Again'; btn.disabled = false;
+  }
 }
 
-function submitModal(){
-  if(!validate(['m-name','m-phone','m-email','m-prof']))return;
-  document.querySelector('.mbtn').textContent='Registering... ✓';
-  document.querySelector('.mbtn').disabled=true;
-  setTimeout(()=>{ window.location.href='success.html'; }, 600);
+async function submitModal() {
+  if (!validate(['m-name','m-phone','m-email','m-prof'])) return;
+  const btn = document.querySelector('.mbtn');
+  btn.textContent = 'Registering...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://www.coachshrutitiwari.com/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('m-name').value.trim(),
+        phone: document.getElementById('m-phone').value.trim(),
+        email: document.getElementById('m-email').value.trim(),
+        profession: document.getElementById('m-prof').value
+      })
+    });
+    const data = await res.json();
+    if (data.success) window.location.href = 'success.html';
+    else { btn.textContent = 'Try Again'; btn.disabled = false; }
+  } catch(e) {
+    btn.textContent = 'Try Again'; btn.disabled = false;
+  }
 }
 
 document.querySelectorAll('.faq-item').forEach(item=>{
