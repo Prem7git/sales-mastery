@@ -1053,7 +1053,7 @@ async function submitInlineForm(btn) {
       })
     });
     const data = await res.json();
-    if (data.success) window.location.href = 'success.html';
+    if (data.success) window.location.href = '/swb/success.html';
     else { btn.textContent = 'Try Again'; btn.disabled = false; }
   } catch(e) {
     btn.textContent = 'Try Again'; btn.disabled = false;
@@ -1077,7 +1077,7 @@ async function submitModal() {
       })
     });
     const data = await res.json();
-    if (data.success) window.location.href = 'success.html';
+    if (data.success) window.location.href = '/swb/success.html';
     else { btn.textContent = 'Try Again'; btn.disabled = false; }
   } catch(e) {
     btn.textContent = 'Try Again'; btn.disabled = false;
