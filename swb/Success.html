@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Registered! | Sales Warrior Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1c1c2e;
+  --gold:#f5a000;
+  --gold2:#d98c00;
+  --green:#25D366;
+  --green2:#1da851;
+  --white:#ffffff;
+  --muted:#a0a8c0;
+  --border:rgba(255,255,255,0.09);
+  --card:#22223a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── TOP BAR ── */
+.top-bar{
+  background:var(--green);
+  text-align:center;
+  padding:10px 16px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:12px;
+  color:#fff;
+  letter-spacing:0.3px;
+}
+
+/* ── CONFETTI CANVAS ── */
+#confetti-canvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+
+/* ── MAIN WRAP ── */
+.wrap{
+  position:relative;z-index:1;
+  max-width:480px;margin:0 auto;
+  padding:28px 20px 100px;
+  text-align:center;
+}
+
+/* ── SUCCESS ICON ── */
+.success-icon-wrap{
+  margin:0 auto 20px;
+  width:90px;height:90px;
+  background:linear-gradient(135deg,#3ecf6e,#25D366);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;
+  box-shadow:0 0 0 12px rgba(37,211,102,0.12), 0 8px 32px rgba(37,211,102,0.3);
+  animation:pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+@keyframes pop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+
+/* ── HEADLINE ── */
+.reg-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(22px,6vw,30px);
+  font-weight:900;
+  color:var(--white);
+  margin-bottom:8px;
+  animation:fadeUp 0.5s 0.15s both;
+}
+.reg-sub{
+  font-size:14px;
+  color:rgba(255,255,255,0.7);
+  line-height:1.65;
+  margin-bottom:22px;
+  animation:fadeUp 0.5s 0.25s both;
+}
+.reg-sub strong{color:var(--gold)}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ── EVENT REMINDER BOX ── */
+.event-box{
+  background:rgba(245,160,0,0.08);
+  border:1.5px solid rgba(245,160,0,0.3);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:24px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:14px;
+  animation:fadeUp 0.5s 0.3s both;
+}
+.ev-item{font-size:13px;font-weight:500;color:var(--white)}
+.ev-item b{color:var(--gold)}
+
+/* ── WHATSAPP SECTION ── */
+.wa-section{
+  background:rgba(37,211,102,0.07);
+  border:2px solid rgba(37,211,102,0.35);
+  border-radius:16px;
+  padding:22px 18px;
+  margin-bottom:24px;
+  animation:fadeUp 0.5s 0.4s both;
+}
+.wa-lock-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,211,102,0.15);
+  border:1px solid rgba(37,211,102,0.3);
+  border-radius:20px;padding:5px 14px;
+  font-size:11px;font-weight:700;color:#3ecf6e;
+  margin-bottom:12px;
+}
+.wa-section h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:18px;font-weight:900;
+  color:var(--white);margin-bottom:8px;
+}
+.wa-section p{
+  font-size:13px;color:rgba(255,255,255,0.7);
+  line-height:1.6;margin-bottom:16px;
+}
+.wa-perks{
+  list-style:none;text-align:left;margin-bottom:18px;
+}
+.wa-perks li{
+  font-size:13px;padding:6px 0;
+  color:rgba(255,255,255,0.85);
+  display:flex;align-items:center;gap:9px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.wa-perks li:last-child{border-bottom:none}
+.wa-perks li .wi{
+  width:20px;height:20px;background:var(--green);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#fff;font-weight:900;flex-shrink:0;
+}
+/* BIG GREEN WHATSAPP BUTTON */
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:18px 20px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:16px;border:none;border-radius:12px;cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 8px 32px rgba(37,211,102,0.45);
+  transition:transform 0.18s,filter 0.18s;
+  animation:pulse-green 2s ease-in-out infinite;
+}
+.wa-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.wa-btn svg{width:26px;height:26px;flex-shrink:0}
+.wa-compulsory{
+  font-size:11px;color:rgba(255,255,255,0.5);
+  margin-top:10px;font-style:italic;
+}
+.wa-compulsory strong{color:#3ecf6e}
+@keyframes pulse-green{
+  0%,100%{box-shadow:0 8px 32px rgba(37,211,102,0.45)}
+  50%{box-shadow:0 8px 48px rgba(37,211,102,0.7)}
+}
+
+/* ── STEPS CARD ── */
+.steps-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;padding:20px 18px;
+  margin-bottom:24px;text-align:left;
+  animation:fadeUp 0.5s 0.5s both;
+}
+.steps-card h3{
+  font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;
+  color:var(--gold);margin-bottom:14px;text-align:center;
+}
+.step-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.step-item:last-child{border-bottom:none}
+.step-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:13px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step-text{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.55}
+.step-text strong{color:var(--white)}
+
+/* ── NO RECORDING WARNING ── */
+.no-rec{
+  background:rgba(232,64,64,0.08);
+  border:1.5px solid rgba(232,64,64,0.3);
+  border-radius:10px;padding:12px 16px;
+  font-size:12px;color:rgba(255,255,255,0.75);
+  line-height:1.6;margin-bottom:20px;
+  display:flex;align-items:flex-start;gap:10px;
+  animation:fadeUp 0.5s 0.6s both;
+}
+.no-rec .icon{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ── SHARE SECTION ── */
+.share-section{
+  margin-bottom:24px;
+  animation:fadeUp 0.5s 0.65s both;
+}
+.share-section h3{
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;
+  color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;
+}
+.share-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.share-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 16px;border-radius:8px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;
+  border:none;cursor:pointer;color:#fff;
+}
+.share-btn.wa{background:#25D366}
+.share-btn.ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.share-btn.copy{background:var(--card);border:1px solid var(--border);color:var(--muted)}
+
+/* ── BACK LINK ── */
+.back-link{
+  font-size:12px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:5px;
+  animation:fadeUp 0.5s 0.7s both;
+}
+.back-link:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="top-bar">🎉 YOU'RE IN! Check your email for the joining link.</div>
+
+<div class="wrap">
+
+  <!-- SUCCESS ICON -->
+  <div class="success-icon-wrap">🎉</div>
+
+  <!-- HEADLINE -->
+  <h1 class="reg-title">You're Registered!</h1>
+  <p class="reg-sub">
+    Welcome to <strong>Sales Warrior Blueprint</strong> FREE Live Webinar by Coach Shruti Tiwari.<br>
+    Your seat is confirmed. 🙌
+  </p>
+
+  <!-- EVENT REMINDER -->
+  <div class="event-box">
+    <div class="ev-item"><b>📅 Date:</b> [WEBINAR_DATE]</div>
+    <div class="ev-item"><b>🕐 Time:</b> [WEBINAR_TIME]</div>
+    <div class="ev-item"><b>🎥 Platform:</b> Zoom Live</div>
+    <div class="ev-item"><b>🌐 Language:</b> Hindi + English</div>
+  </div>
+
+  <!-- WHATSAPP GROUP — COMPULSORY JOIN -->
+  <div class="wa-section">
+    <div class="wa-lock-badge">🔒 NEXT STEP — COMPULSORY</div>
+    <h2>Join Our WhatsApp Group Now!</h2>
+    <p>
+      The <strong>Zoom joining link</strong>, webinar reminders, and exclusive pre-session tips will be shared <strong>only on this WhatsApp Group</strong>. You must join to receive them.
+    </p>
+    <ul class="wa-perks">
+      <li><span class="wi">✓</span> Receive your Zoom link directly on WhatsApp</li>
+      <li><span class="wi">✓</span> Get reminders 1 day, 1 hour &amp; 10 mins before the webinar</li>
+      <li><span class="wi">✓</span> Exclusive pre-session sales tips from Coach Shruti</li>
+      <li><span class="wi">✓</span> Connect with 1000s of fellow sales warriors</li>
+      <li><span class="wi">✓</span> Bonus resources shared before the live session</li>
+    </ul>
+    <a class="wa-btn" href="https://whatsapp.com/channel/0029VaCWY3h1t90U6tdNWx3x" target="_blank">
+      <!-- WhatsApp SVG icon -->
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 3C8.82 3 3 8.82 3 16c0 2.39.65 4.62 1.77 6.55L3 29l6.63-1.73A13 13 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3z" fill="#fff" fill-opacity=".15"/>
+        <path d="M21.5 18.6c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.8-1.48-1.78-1.66-2.08-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.03 1.01-1.03 2.46s1.05 2.85 1.2 3.05c.15.2 2.07 3.16 5.01 4.43.7.3 1.25.48 1.67.62.7.22 1.34.19 1.84.11.56-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.34z" fill="#fff"/>
+      </svg>
+      JOIN WHATSAPP GROUP NOW
+    </a>
+    <p class="wa-compulsory">⚠️ <strong>Important:</strong> Joining the group is compulsory to receive your Zoom link &amp; reminders.</p>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="steps-card">
+    <h3>📋 Your Next Steps</h3>
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Join the WhatsApp Group</strong> above to get your Zoom joining link and all reminders.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Check your email</strong> — a confirmation has been sent to your inbox with session details.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Save the date &amp; time</strong> in your calendar so you don't miss this life-changing session.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Tell a friend</strong> who is in sales — share this webinar with someone who needs it!</div>
+    </div>
+  </div>
+
+  <!-- NO RECORDING WARNING -->
+  <div class="no-rec">
+    <span class="icon">⚠️</span>
+    <span><strong style="color:#ff6b6b">No recording will be provided.</strong> This is a LIVE-only session. You must attend live to get the complete value, insights, and the Q&amp;A with Coach Shruti.</span>
+  </div>
+
+  <!-- SHARE WITH FRIENDS -->
+  <div class="share-section">
+    <h3>Share with a friend in sales</h3>
+    <div class="share-btns">
+      <button class="share-btn wa" onclick="shareWA()">📲 Share on WhatsApp</button>
+      <button class="share-btn copy" onclick="copyLink()">🔗 Copy Link</button>
+    </div>
+  </div>
+
+  <!-- BACK LINK -->
+  <a href="index.html" class="back-link">← Back to Webinar Page</a>
+
+</div>
+
+<script>
+/* ── CONFETTI ── */
+(function(){
+  const canvas=document.getElementById('confetti-canvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
+  const colors=['#f5a000','#ffc84a','#25D366','#3ecf6e','#ffffff','#ff6b6b','#4dabf7'];
+  const pieces=[];
+  for(let i=0;i<120;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height-canvas.height,
+      w:Math.random()*10+5,h:Math.random()*6+4,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      rot:Math.random()*360,
+      spin:Math.random()*6-3,
+      vx:Math.random()*2-1,
+      vy:Math.random()*3+2,
+      opacity:1
+    });
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.save();
+      ctx.globalAlpha=p.opacity;
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+      p.y+=p.vy;p.x+=p.vx;p.rot+=p.spin;
+      if(frame>180)p.opacity-=0.008;
+    });
+    frame++;
+    if(frame<400)requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+})();
+
+/* ── SHARE ── */
+function shareWA(){
+  const text=encodeURIComponent("Yaar maine Sales Warrior Blueprint FREE Live Webinar ke liye register kar liya 🎯\n\nCoach Shruti Tiwari se seekho — High-Ticket Closing, Objection Handling aur Sales Confidence!\n\n100% FREE hai — tu bhi join kar 👇\nhttps://www.coachshrutitiwari.com/swb");
+  window.open('https://wa.me/?text='+text,'_blank');
+}
+function copyLink(){
+  navigator.clipboard.writeText('https://www.coachshrutitiwari.com/swb').then(()=>{
+    const btn=document.querySelector('.share-btn.copy');
+    btn.textContent='✅ Copied!';
+    setTimeout(()=>btn.textContent='🔗 Copy Link',2000);
+  });
+}
+</script>
+</body>
+</html>
