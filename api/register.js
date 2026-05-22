@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
     // User confirmation email
     await transporter.sendMail({
-      from: `"Coach Shruti Tiwari" <${process.env.GMAIL_USER}>`,
+      from: `"Team Shruti Tiwari" <${process.env.GMAIL_USER}>`,
       to: email,
       subject: 'Registration Confirmed — Sales Warrior Blueprint Free Webinar',
       html: `
