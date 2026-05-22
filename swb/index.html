@@ -282,6 +282,14 @@ nav{
 .cat-scroll{
   display:flex;gap:12px;overflow-x:auto;padding:0 20px 8px;
   scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+@media (max-width:768px){
+  .cat-scroll{
+    justify-content:flex-start;
+    flex-wrap:nowrap;
+  }
 }
 .cat-scroll::-webkit-scrollbar{display:none}
 .cat-card{
