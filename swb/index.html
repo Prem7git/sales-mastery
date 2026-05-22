@@ -484,6 +484,115 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
 }
 
 @media(max-width:380px){.stats-inner{gap:8px}.event-grid{grid-template-columns:1fr}}
+/* ===== SESSION CAROUSEL STYLES ===== */
+.session-carousel-container {
+  position: relative;
+  max-width: 700px;
+  margin: 24px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #1e1e30;
+}
+
+.session-carousel-wrapper {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  scroll-behavior: smooth;
+}
+
+.session-slide {
+  flex: 0 0 100%;
+  text-align: center;
+  padding: 0;
+}
+
+.session-slide img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px 16px 0 0;
+}
+
+.session-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--white);
+  background: #0f0f1c;
+  padding: 14px 12px;
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(245,160,0,0.3);
+}
+
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: var(--gold);
+  font-size: 28px;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.carousel-arrow:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+/* Dots */
+.carousel-dots {
+  text-align: center;
+  padding: 16px 0 20px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 6px;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dot.active {
+  background-color: var(--gold);
+  width: 24px;
+  border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+  .session-name {
+    font-size: 15px;
+  }
+}
 </style>
 </head>
 <body>
@@ -496,7 +605,11 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
 </div>
 
 <!-- WHATSAPP FAB -->
-<a class="wa-fab" href="https://wa.me/919999999999" target="_blank">💬</a>
+<a class="wa-fab" href="https://wa.me/919999999999" target="_blank" aria-label="WhatsApp Chat">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="white">
+    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222.1 99.6-222.1 222.1 0 39.1 10.2 77.7 29.6 111.9L0 480l117.4-30.9c32.6 17.7 69.8 27 107.6 27h.1c122.3 0 224.1-99.6 224.1-222.1 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94.1-25.7l-6.8-4-69.9 18.3L73 324.2l-4.4-6.9c-18.4-29.5-28.1-63.6-28.1-98.8 0-101.6 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.7-3.3 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-65.7-5.7-9.7 5.7-9 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.7 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.8 23.7 9.3 31.8 11.9 13.4 4.2 25.6 3.6 35.2 2.2 10.8-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.5-1.3-2.3-4.9-3.6-10.4-6.4z"/>
+  </svg>
+</a>
 
 <!-- TOP STRIP -->
 <div class="top-strip">
@@ -606,40 +719,42 @@ footer{background:#0d0d1a;padding:24px 20px 110px;text-align:center}
 <section class="sec dark">
   <h2 class="sec-title">Coach Shruti's <span class="gold">Sessions</span></h2>
   <p class="sec-sub">People have transformed their sales careers after attending Shruti's trainings.</p>
-  <div class="performers-grid">
-    <div class="perf-card">
-      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/brajbala.jpg" alt="Brajbala Chouhan">
-      <div class="perf-info">
-        <div class="perf-name">Brajbala Chouhan</div>
-        <div class="perf-role">Sales Professional</div>
-        <div class="perf-earn">💰 CONFIDENCE TRANSFORMED</div>
-      </div>
+  <!-- SESSION CAROUSEL (SLIDER) -->
+<div class="session-carousel-container">
+  <div class="session-carousel-wrapper" id="sessionCarousel">
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop" alt="Sales Psychology Mastery">
+      <div class="session-name">Sales Psychology Mastery</div>
     </div>
-    <div class="perf-card">
-      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/mitul.jpg" alt="Mitul Daxini">
-      <div class="perf-info">
-        <div class="perf-name">Mitul Daxini</div>
-        <div class="perf-role">Entrepreneur</div>
-        <div class="perf-earn">🏆 TOP EARNER</div>
-      </div>
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=400&fit=crop" alt="High Ticket Closing">
+      <div class="session-name">High Ticket Closing</div>
     </div>
-    <div class="perf-card">
-      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/mohit.jpg" alt="Mohit Kummar Manwani">
-      <div class="perf-info">
-        <div class="perf-name">Mohit Kummar Manwani</div>
-        <div class="perf-role">Direct Seller</div>
-        <div class="perf-earn">🚀 INCOME DOUBLED</div>
-      </div>
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=600&h=400&fit=crop" alt="Objection Handling Bootcamp">
+      <div class="session-name">Objection Handling Bootcamp</div>
     </div>
-    <div class="perf-card">
-      <img class="perf-img" src="https://www.coachshrutitiwari.com/swb/kishan.jpg" alt="Kishan Prajapati">
-      <div class="perf-info">
-        <div class="perf-name">Kishan Prajapati</div>
-        <div class="perf-role">Wellness Businessman</div>
-        <div class="perf-earn">⭐ LIFE CHANGING</div>
-      </div>
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop" alt="Face to Face Closing">
+      <div class="session-name">Face‑to‑Face Closing</div>
+    </div>
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Leadership & Team Sales">
+      <div class="session-name">Leadership & Team Sales</div>
+    </div>
+    <div class="session-slide">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Direct Selling Secrets">
+      <div class="session-name">Direct Selling Secrets</div>
     </div>
   </div>
+
+  <!-- Navigation Arrows -->
+  <button class="carousel-arrow prev" id="carouselPrev">❮</button>
+  <button class="carousel-arrow next" id="carouselNext">❯</button>
+
+  <!-- Dots (pagination) -->
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
   <button class="btn" onclick="openModal()">Join Now For FREE!</button>
 </section>
 
@@ -931,6 +1046,65 @@ function submitModal(){
 document.querySelectorAll('.faq-item').forEach(item=>{
   item.querySelector('.faq-q').addEventListener('click',()=>item.classList.toggle('open'));
 });
+// SESSION CAROUSEL LOGIC
+const wrapper = document.getElementById('sessionCarousel');
+const slides = document.querySelectorAll('.session-slide');
+const prevBtn = document.getElementById('carouselPrev');
+const nextBtn = document.getElementById('carouselNext');
+const dotsContainer = document.getElementById('carouselDots');
+
+let currentIndex = 0;
+const totalSlides = slides.length;
+
+// Create dots
+function createDots() {
+  dotsContainer.innerHTML = '';
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === currentIndex) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+}
+
+function updateDots() {
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, idx) => {
+    if (idx === currentIndex) dot.classList.add('active');
+    else dot.classList.remove('active');
+  });
+}
+
+function goToSlide(index) {
+  if (index < 0) index = totalSlides - 1;
+  if (index >= totalSlides) index = 0;
+  currentIndex = index;
+  wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+  updateDots();
+}
+
+function nextSlide() { goToSlide(currentIndex + 1); }
+function prevSlide() { goToSlide(currentIndex - 1); }
+
+// Event listeners
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+
+// Touch/swipe support (optional)
+let touchStartX = 0;
+wrapper.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+wrapper.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].screenX;
+  if (touchEndX + 40 < touchStartX) nextSlide();
+  if (touchEndX - 40 > touchStartX) prevSlide();
+});
+
+// Initialize
+createDots();
+goToSlide(0);
 </script>
 </body>
 </html>
