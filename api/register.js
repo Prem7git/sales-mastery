@@ -15,17 +15,17 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, phone, profession } = req.body;
+  const { name, email, phone, profession, city } = req.body;
   if (!name || !email || !phone || !profession) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
     // Google Sheets save
-    await fetch('https://script.google.com/macros/s/AKfycbxqoi7gGnZUvn1WiEVbaMaNEw-qRs_eLxBfiyH_y2w-n5_HRKX6gXocdsRkU0Y6WnHa1w/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbyXRIJJ7--1264Wkxo8mwAX-jDL02woPh4jM14bcZ8ubaDKAr9XFMXmiNTFxCWSAmZvPg/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, phone, profession })
+      body: JSON.stringify({ name, email, phone, profession, city })
     });
 
     // User confirmation email
