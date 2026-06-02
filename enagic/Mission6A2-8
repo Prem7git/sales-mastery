@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enagic Team CRM</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --bg: #f4f6fa;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --primary: #1e40af;
+    --primary-light: #dbeafe;
+    --primary-dark: #1e3a8a;
+    --accent: #0ea5e9;
+    --success: #16a34a;
+    --success-light: #dcfce7;
+    --warning: #d97706;
+    --warning-light: #fef3c7;
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --text-light: #94a3b8;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+  
+  /* AUTH */
+  #auth-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #0ea5e9 100%); padding: 20px; }
+  .auth-card { background: white; border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: var(--shadow-lg); }
+  .auth-logo { text-align: center; margin-bottom: 28px; }
+  .auth-logo h1 { font-size: 22px; font-weight: 700; color: var(--primary); }
+  .auth-logo p { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+  .auth-tabs { display: flex; background: var(--bg); border-radius: 8px; padding: 3px; margin-bottom: 24px; }
+  .auth-tab { flex: 1; padding: 8px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text-muted); transition: all 0.2s; border: none; background: none; }
+  .auth-tab.active { background: white; color: var(--primary); box-shadow: var(--shadow); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-control { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; color: var(--text); background: white; transition: border-color 0.2s; outline: none; }
+  .form-control:focus { border-color: var(--primary); }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; white-space: nowrap; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { background: #15803d; }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-warning { background: var(--warning); color: white; }
+  .btn-outline { background: white; color: var(--text); border: 1.5px solid var(--border); }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-full { width: 100%; justify-content: center; padding: 12px; }
+  .auth-error { background: var(--danger-light); color: var(--danger); padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; display: none; }
+
+  /* APP LAYOUT */
+  #app { display: none; min-height: 100vh; }
+  .sidebar { position: fixed; top: 0; left: 0; width: 240px; height: 100vh; background: var(--primary-dark); overflow-y: auto; z-index: 100; transition: transform 0.3s; }
+  .sidebar-logo { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-logo h2 { color: white; font-size: 16px; font-weight: 700; }
+  .sidebar-logo p { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 2px; }
+  .user-info { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .user-info .user-name { color: white; font-weight: 600; font-size: 13px; }
+  .user-info .user-role { font-size: 11px; margin-top: 2px; }
+  .role-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+  .role-creator { background: #fbbf24; color: #1a1a1a; }
+  .role-admin { background: #34d399; color: #1a1a1a; }
+  .role-member { background: rgba(255,255,255,0.2); color: white; }
+  .sidebar-nav { padding: 12px 0; }
+  .nav-section { padding: 8px 20px 4px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.15s; font-size: 13px; font-weight: 500; border: none; background: none; width: 100%; text-align: left; }
+  .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+  .nav-item.active { background: rgba(255,255,255,0.15); color: white; border-right: 3px solid #60a5fa; }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .nav-badge { margin-left: auto; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 20px; }
+  .main { margin-left: 240px; min-height: 100vh; }
+  .topbar { background: white; border-bottom: 1px solid var(--border); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .topbar h2 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .content { padding: 24px; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* DASHBOARD */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+  .stat-card .stat-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .stat-card .stat-value { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
+  .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+  .stat-blue .stat-icon { background: var(--primary-light); color: var(--primary); }
+  .stat-green .stat-icon { background: var(--success-light); color: var(--success); }
+  .stat-yellow .stat-icon { background: var(--warning-light); color: var(--warning); }
+  .stat-red .stat-icon { background: var(--danger-light); color: var(--danger); }
+  .stat-purple .stat-icon { background: var(--purple-light); color: var(--purple); }
+
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: gap; gap: 12px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--text); }
+
+  /* FILTERS BAR */
+  .filters-bar { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+  .filter-group { display: flex; flex-direction: column; gap: 4px; }
+  .filter-group label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+  .filter-control { padding: 7px 10px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 13px; background: white; color: var(--text); outline: none; min-width: 130px; }
+  .filter-control:focus { border-color: var(--primary); }
+
+  /* TABLE */
+  .table-wrapper { background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: #f8fafc; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); white-space: nowrap; position: sticky; top: 0; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8fafc; }
+  tbody td { padding: 10px 12px; color: var(--text); vertical-align: top; }
+  .td-name { font-weight: 600; min-width: 120px; }
+  .td-phone { color: var(--text-muted); white-space: nowrap; }
+  .td-remarks { max-width: 160px; font-size: 12px; color: var(--text-muted); }
+  .td-date { white-space: nowrap; font-size: 12px; color: var(--text-muted); }
+  .td-actions { white-space: nowrap; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-given { background: var(--success-light); color: var(--success); }
+  .badge-pending { background: var(--warning-light); color: var(--warning); }
+  .badge-shown { background: var(--primary-light); color: var(--primary); }
+  .badge-not-interested { background: var(--danger-light); color: var(--danger); }
+  .badge-closed-yes { background: var(--success-light); color: var(--success); }
+  .badge-closed-no { background: var(--danger-light); color: var(--danger); }
+  .badge-closed-pending { background: var(--warning-light); color: var(--warning); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; overflow-y: auto; padding: 20px; }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal { background: white; border-radius: 16px; width: 100%; max-width: 860px; box-shadow: var(--shadow-lg); margin: auto; }
+  .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .modal-header h3 { font-size: 16px; font-weight: 700; }
+  .modal-close { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 18px; line-height: 1; }
+  .modal-body { padding: 24px; }
+  .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+  .form-section { margin-bottom: 24px; }
+  .form-section-title { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--primary-light); }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .form-full { grid-column: 1 / -1; }
+  .required-star { color: var(--danger); }
+
+  /* MEMBER CARD */
+  .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .member-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .member-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .member-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+  .member-card-name { font-weight: 700; font-size: 14px; }
+  .member-card-id { font-size: 12px; color: var(--text-muted); }
+  .member-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+  .member-stat { font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 20px; color: var(--text-muted); }
+
+  /* ALERT */
+  .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+  .alert-info { background: var(--primary-light); color: var(--primary); }
+  .alert-success { background: var(--success-light); color: var(--success); }
+  .alert-danger { background: var(--danger-light); color: var(--danger); }
+
+  /* EMPTY STATE */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
+  .empty-state p { font-size: 14px; }
+
+  /* PAGINATION */
+  .pagination { display: flex; align-items: center; justify-content: between; padding: 12px 16px; border-top: 1px solid var(--border); gap: 8px; flex-wrap: wrap; }
+  .page-info { font-size: 13px; color: var(--text-muted); flex: 1; }
+
+  /* MOBILE */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+
+  /* LOADING */
+  .loading { display: inline-flex; gap: 4px; align-items: center; }
+  .loading span { width: 6px; height: 6px; background: currentColor; border-radius: 50%; animation: bounce 0.8s ease-in-out infinite; }
+  .loading span:nth-child(2) { animation-delay: 0.15s; }
+  .loading span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+  /* TOAST */
+  #toast { position: fixed; bottom: 24px; right: 24px; background: #1e293b; color: white; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; z-index: 9999; transform: translateY(100px); transition: transform 0.3s; box-shadow: var(--shadow-lg); max-width: 320px; }
+  #toast.show { transform: translateY(0); }
+  #toast.success { background: var(--success); }
+  #toast.error { background: var(--danger); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .main { margin-left: 0; }
+    .hamburger { display: flex; }
+    .form-grid-3 { grid-template-columns: 1fr 1fr; }
+    .content { padding: 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .form-grid-3 { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .filters-bar { flex-direction: column; }
+    .filter-control { min-width: 100%; }
+  }
+
+  .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px; }
+  .tag-today { background: #fef3c7; color: #92400e; font-weight: 600; }
+  select.form-control { cursor: pointer; }
+  .table-info { padding: 10px 16px; background: #f8fafc; font-size: 12px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  .followup-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; align-items: start; margin-bottom: 10px; }
+  .role-select-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <h1>Mission 6A2-8</h1>
+      <p>Private Portal - Authorized Members Only</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="login-form">
+      <div class="form-group">
+        <label>Team ID or Mobile Number</label>
+        <input type="text" id="login-id" class="form-control" placeholder="Your Team ID or Mobile">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-pass" class="form-control" placeholder="Password">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doLogin()">Login to CRM</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="register-form" style="display:none">
+      <div class="form-group">
+        <label>Full Name <span class="required-star">*</span></label>
+        <input type="text" id="reg-name" class="form-control" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label>Distributor ID <span class="required-star">*</span></label>
+        <input type="text" id="reg-teamid" class="form-control" placeholder="e.g. ENA-12345">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number <span class="required-star">*</span></label>
+        <input type="text" id="reg-mobile" class="form-control" placeholder="10-digit mobile">
+      </div>
+      <div class="form-group">
+        <label>Password <span class="required-star">*</span></label>
+        <input type="password" id="reg-pass" class="form-control" placeholder="Choose a strong password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password <span class="required-star">*</span></label>
+        <input type="password" id="reg-pass2" class="form-control" placeholder="Repeat password">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doRegister()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h2>⚡ Enagic CRM</h2>
+      <p>Team Portal</p>
+    </div>
+    <div class="user-info" id="user-info-nav">
+      <div class="user-name" id="nav-user-name">—</div>
+      <div class="user-role" id="nav-user-role"></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section">Main</div>
+      <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-page="guests" onclick="showPage('guests')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        My Guests
+      </button>
+      <button class="nav-item" data-page="followups" onclick="showPage('followups')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Today's Follow-ups
+        <span class="nav-badge" id="followup-badge" style="display:none">0</span>
+      </button>
+      <button class="nav-item" data-page="pending-demo" onclick="showPage('pending-demo')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        Pending Demo
+      </button>
+      <button class="nav-item" data-page="pending-bp" onclick="showPage('pending-bp')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        Pending Business Plan
+      </button>
+      <button class="nav-item" data-page="closed" onclick="showPage('closed')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Closed Guests
+      </button>
+      <div class="nav-section admin-only" style="display:none">Admin</div>
+      <button class="nav-item admin-only" data-page="team" onclick="showPage('team')" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Team Members
+      </button>
+      <button class="nav-item admin-only" data-page="all-guests" onclick="showPage('all-guests')" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        All Guests
+      </button>
+      <button class="nav-item admin-only" data-page="reports" onclick="showPage('reports')" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Reports
+      </button>
+      <div class="nav-section">Account</div>
+      <button class="nav-item" onclick="doLogout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="hamburger" onclick="openSidebar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h2 id="page-title">Dashboard</h2>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary btn-sm" onclick="openGuestModal()">
+          + Add Guest
+        </button>
+        <button class="btn btn-outline btn-sm admin-only" style="display:none" onclick="exportAllCSV()">
+          ↓ Export CSV
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD PAGE -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card stat-blue">
+            <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="stat-value" id="stat-total">—</div>
+            <div class="stat-label">Total Guests</div>
+          </div>
+          <div class="stat-card stat-yellow">
+            <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="stat-value" id="stat-followups">—</div>
+            <div class="stat-label">Today's Follow-ups</div>
+          </div>
+          <div class="stat-card stat-purple">
+            <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+            <div class="stat-value" id="stat-pending-demo">—</div>
+            <div class="stat-label">Pending Demo</div>
+          </div>
+          <div class="stat-card stat-yellow">
+            <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+            <div class="stat-value" id="stat-pending-bp">—</div>
+            <div class="stat-label">Pending Business Plan</div>
+          </div>
+          <div class="stat-card stat-green">
+            <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="stat-value" id="stat-closed">—</div>
+            <div class="stat-label">Closed / Joined</div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <span class="section-title">Recent Guests</span>
+          <button class="btn btn-outline btn-sm" onclick="showPage('guests')">View All →</button>
+        </div>
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Guest Name</th>
+                  <th>Contact</th>
+                  <th>Invitation</th>
+                  <th>Demo</th>
+                  <th>Business Plan</th>
+                  <th>Closing</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recent-guests-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY GUESTS PAGE -->
+      <div class="page" id="page-guests">
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label>Search Name</label>
+            <input type="text" class="filter-control" id="f-name" placeholder="Guest name..." oninput="applyFilters()">
+          </div>
+          <div class="filter-group">
+            <label>Contact</label>
+            <input type="text" class="filter-control" id="f-contact" placeholder="Mobile..." oninput="applyFilters()">
+          </div>
+          <div class="filter-group">
+            <label>Invitation</label>
+            <select class="filter-control" id="f-invitation" onchange="applyFilters()">
+              <option value="">All</option>
+              <option value="Given">Given</option>
+              <option value="To Be Given ASAP">To Be Given ASAP</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Demo Status</label>
+            <select class="filter-control" id="f-demo" onchange="applyFilters()">
+              <option value="">All</option>
+              <option value="Shown">Shown</option>
+              <option value="Pending">Pending</option>
+              <option value="Not Interested">Not Interested</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Business Plan</label>
+            <select class="filter-control" id="f-bp" onchange="applyFilters()">
+              <option value="">All</option>
+              <option value="Shown">Shown</option>
+              <option value="Pending">Pending</option>
+              <option value="Not Interested">Not Interested</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Closing</label>
+            <select class="filter-control" id="f-closing" onchange="applyFilters()">
+              <option value="">All</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="clearFilters()" style="align-self:flex-end">Clear</button>
+          <button class="btn btn-outline btn-sm" onclick="exportMyCSV()" style="align-self:flex-end">↓ Export</button>
+        </div>
+        <div class="table-wrapper">
+          <div class="table-info" id="guests-table-info">Loading...</div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.</th>
+                  <th>Guest Name</th>
+                  <th>Contact</th>
+                  <th>Inv. Date</th>
+                  <th>Invitation</th>
+                  <th>Inv. Remarks</th>
+                  <th>Demo Date</th>
+                  <th>Demo</th>
+                  <th>Demo Remarks</th>
+                  <th>BP Date</th>
+                  <th>BP Status</th>
+                  <th>BP Remarks</th>
+                  <th>FU1</th><th>FU1 Remarks</th>
+                  <th>FU2</th><th>FU2 Remarks</th>
+                  <th>FU3</th><th>FU3 Remarks</th>
+                  <th>FU4</th><th>FU4 Remarks</th>
+                  <th>FU5</th><th>FU5 Remarks</th>
+                  <th>FU6</th><th>FU6 Remarks</th>
+                  <th>FU7</th><th>FU7 Remarks</th>
+                  <th>Closing</th>
+                  <th>Closing Date</th>
+                  <th>Closing Remarks</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="guests-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODAY'S FOLLOW-UPS PAGE -->
+      <div class="page" id="page-followups">
+        <div class="alert alert-info" id="followups-count-msg">Loading...</div>
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Guest Name</th>
+                  <th>Contact</th>
+                  <th>Follow-up #</th>
+                  <th>Follow-up Date</th>
+                  <th>Remarks</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="followups-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENDING DEMO PAGE -->
+      <div class="page" id="page-pending-demo">
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Guest Name</th><th>Contact</th>
+                  <th>Invitation Date</th><th>Demo Status</th><th>Demo Remarks</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="pending-demo-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENDING BP PAGE -->
+      <div class="page" id="page-pending-bp">
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Guest Name</th><th>Contact</th>
+                  <th>Demo Date</th><th>BP Status</th><th>BP Remarks</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="pending-bp-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLOSED GUESTS PAGE -->
+      <div class="page" id="page-closed">
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Guest Name</th><th>Contact</th>
+                  <th>Closing Date</th><th>Closing Remarks</th>
+                  <th class="admin-only" style="display:none">Added By</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="closed-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAM MEMBERS PAGE (Admin) -->
+      <div class="page" id="page-team">
+        <div class="section-header">
+          <span class="section-title">Team Members</span>
+        </div>
+        <div class="member-grid" id="team-grid"></div>
+      </div>
+
+      <!-- ALL GUESTS PAGE (Admin) -->
+      <div class="page" id="page-all-guests">
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label>Search Name</label>
+            <input type="text" class="filter-control" id="af-name" placeholder="Guest name..." oninput="applyAdminFilters()">
+          </div>
+          <div class="filter-group">
+            <label>Team Member</label>
+            <select class="filter-control" id="af-member" onchange="applyAdminFilters()">
+              <option value="">All Members</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Closing</label>
+            <select class="filter-control" id="af-closing" onchange="applyAdminFilters()">
+              <option value="">All</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="applyAdminFilters()" style="align-self:flex-end">Filter</button>
+          <button class="btn btn-success btn-sm" onclick="exportAllCSV()" style="align-self:flex-end">↓ Export All</button>
+        </div>
+        <div class="table-wrapper">
+          <div class="table-info" id="all-guests-info">Loading...</div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.</th>
+                  <th>Guest Name</th><th>Contact</th>
+                  <th>Invitation</th><th>Demo</th><th>BP</th><th>Closing</th>
+                  <th>Added By</th><th>Created</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="all-guests-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORTS PAGE (Admin) -->
+      <div class="page" id="page-reports">
+        <div class="stats-grid" id="admin-stats-grid" style="margin-bottom:24px"></div>
+        <div class="section-title" style="margin-bottom:12px">Per Member Breakdown</div>
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Member</th><th>Team ID</th><th>Total Guests</th>
+                  <th>Invitations</th><th>Demos</th><th>Business Plans</th>
+                  <th>Closed (Yes)</th><th>Role</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reports-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- GUEST MODAL -->
+<div class="modal-overlay" id="guest-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Add New Guest</h3>
+      <button class="modal-close" onclick="closeGuestModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="guest-id">
+
+      <div class="form-section">
+        <div class="form-section-title">Basic Info <span class="required-star">*</span> Required</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Guest Name <span class="required-star">*</span></label>
+            <input type="text" id="g-name" class="form-control" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Contact Number <span class="required-star">*</span></label>
+            <input type="text" id="g-contact" class="form-control" placeholder="Mobile number">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Invitation <span class="required-star">*</span></div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Invitation Status <span class="required-star">*</span></label>
+            <select id="g-inv-status" class="form-control">
+              <option value="">Select...</option>
+              <option value="Given">Given</option>
+              <option value="To Be Given ASAP">To Be Given ASAP</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Invitation Date</label>
+            <input type="date" id="g-inv-date" class="form-control">
+          </div>
+          <div class="form-group form-full">
+            <label>Invitation Remarks</label>
+            <input type="text" id="g-inv-remarks" class="form-control" placeholder="Notes about invitation">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Demo</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Demo Status</label>
+            <select id="g-demo-status" class="form-control">
+              <option value="">Not Set</option>
+              <option value="Shown">Shown</option>
+              <option value="Pending">Pending</option>
+              <option value="Not Interested">Not Interested</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Demo Date</label>
+            <input type="date" id="g-demo-date" class="form-control">
+          </div>
+          <div class="form-group form-full">
+            <label>Demo Remarks</label>
+            <input type="text" id="g-demo-remarks" class="form-control" placeholder="Notes about demo">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Business Plan</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>BP Status</label>
+            <select id="g-bp-status" class="form-control">
+              <option value="">Not Set</option>
+              <option value="Shown">Shown</option>
+              <option value="Pending">Pending</option>
+              <option value="Not Interested">Not Interested</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>BP Date</label>
+            <input type="date" id="g-bp-date" class="form-control">
+          </div>
+          <div class="form-group form-full">
+            <label>BP Remarks</label>
+            <input type="text" id="g-bp-remarks" class="form-control" placeholder="Notes about business plan">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Follow-ups</div>
+        <div id="followups-form"></div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Closing</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Closing Status</label>
+            <select id="g-closing-status" class="form-control">
+              <option value="Pending">Pending</option>
+              <option value="Yes">Yes — Joined!</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Closing Date</label>
+            <input type="date" id="g-closing-date" class="form-control">
+          </div>
+          <div class="form-group form-full">
+            <label>Closing Remarks</label>
+            <input type="text" id="g-closing-remarks" class="form-control" placeholder="Notes about closing">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeGuestModal()">Cancel</button>
+      <button class="btn btn-primary" id="save-guest-btn" onclick="saveGuest()">Save Guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ==================== CONFIGURATION ====================
+// REPLACE THESE WITH YOUR ACTUAL VALUES
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const GOOGLE_SHEET_WEBHOOK = 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL'; // Apps Script web app URL
+const CREATOR_TEAM_ID = 'CREATOR_ID'; // Your own Team ID that gets creator role
+
+// ==================== INIT ====================
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+let allGuests = [];
+let filteredGuests = [];
+let allMembers = [];
+
+// ==================== AUTH ====================
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+  document.getElementById('auth-error').style.display = 'none';
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function doLogin() {
+  const identifier = document.getElementById('login-id').value.trim();
+  const password = document.getElementById('login-pass').value;
+  if (!identifier || !password) { showAuthError('Please fill in all fields.'); return; }
+
+  // Look up email by team ID or mobile
+  const { data: profiles } = await sb.from('profiles')
+    .select('*')
+    .or(`team_id.eq.${identifier},mobile.eq.${identifier}`)
+    .single();
+
+  if (!profiles) { showAuthError('Team ID or Mobile not found.'); return; }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email: profiles.email, password });
+  if (error) { showAuthError('Invalid password.'); return; }
+  await loadApp(data.user);
+}
+
+async function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const teamId = document.getElementById('reg-teamid').value.trim();
+  const mobile = document.getElementById('reg-mobile').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+
+  if (!name || !teamId || !mobile || !pass) { showAuthError('All fields are required.'); return; }
+  if (pass !== pass2) { showAuthError('Passwords do not match.'); return; }
+  if (pass.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+
+  const email = `${teamId.toLowerCase().replace(/[^a-z0-9]/g,'')}@enagic-crm.internal`;
+
+  const { data, error } = await sb.auth.signUp({ email, password: pass });
+  if (error) { showAuthError(error.message); return; }
+
+  const role = teamId === CREATOR_TEAM_ID ? 'creator' : 'member';
+
+  const { error: pe } = await sb.from('profiles').insert({
+    id: data.user.id,
+    full_name: name,
+    team_id: teamId,
+    mobile: mobile,
+    email: email,
+    role: role
+  });
+
+  if (pe) { showAuthError('Registration failed: ' + pe.message); return; }
+  showToast('Account created! Please login.', 'success');
+  switchAuthTab('login');
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  currentUser = null;
+  currentProfile = null;
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('auth-screen').style.display = 'flex';
+}
+
+// ==================== APP LOAD ====================
+async function loadApp(user) {
+  currentUser = user;
+  const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  if (!profile) { showAuthError('Profile not found. Contact admin.'); return; }
+  currentProfile = profile;
+
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  document.getElementById('nav-user-name').textContent = profile.full_name;
+  document.getElementById('nav-user-role').innerHTML = `<span class="role-badge role-${profile.role}">${profile.role}</span>`;
+
+  // Show admin nav
+  if (profile.role === 'creator' || profile.role === 'admin') {
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = '');
+  }
+
+  buildFollowupsForm();
+  await refreshAll();
+  showPage('dashboard');
+}
+
+async function refreshAll() {
+  await loadGuests();
+  await loadDashboardStats();
+}
+
+// ==================== DATA ====================
+async function loadGuests() {
+  let query = sb.from('guests').select('*, profiles(full_name, team_id)').order('created_at', { ascending: false });
+
+  if (currentProfile.role === 'member') {
+    query = query.eq('created_by', currentUser.id);
+  }
+
+  const { data, error } = await query;
+  if (error) { console.error(error); return; }
+  allGuests = data || [];
+  filteredGuests = [...allGuests];
+  renderGuestTable();
+  renderSpecialPages();
+  updateFollowupBadge();
+}
+
+async function loadMembers() {
+  const { data } = await sb.from('profiles').select('*').order('created_at');
+  allMembers = data || [];
+}
+
+// ==================== DASHBOARD ====================
+async function loadDashboardStats() {
+  const today = new Date().toISOString().split('T')[0];
+  const guests = allGuests;
+
+  const total = guests.length;
+  const closed = guests.filter(g => g.closing_status === 'Yes').length;
+  const pendingDemo = guests.filter(g => !g.demo_status || g.demo_status === 'Pending').length;
+  const pendingBP = guests.filter(g => !g.bp_status || g.bp_status === 'Pending').length;
+
+  let followupsToday = 0;
+  for (let g of guests) {
+    for (let i = 1; i <= 7; i++) {
+      if (g[`fu${i}_date`] === today) followupsToday++;
+    }
+  }
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-followups').textContent = followupsToday;
+  document.getElementById('stat-pending-demo').textContent = pendingDemo;
+  document.getElementById('stat-pending-bp').textContent = pendingBP;
+  document.getElementById('stat-closed').textContent = closed;
+
+  // Recent 10
+  renderRecentGuests(guests.slice(0, 10));
+}
+
+function updateFollowupBadge() {
+  const today = new Date().toISOString().split('T')[0];
+  let count = 0;
+  for (let g of allGuests) {
+    for (let i = 1; i <= 7; i++) {
+      if (g[`fu${i}_date`] === today) count++;
+    }
+  }
+  const badge = document.getElementById('followup-badge');
+  if (count > 0) { badge.textContent = count; badge.style.display = 'inline'; }
+  else { badge.style.display = 'none'; }
+}
+
+// ==================== RENDER TABLES ====================
+function statusBadge(val, type) {
+  if (!val) return '<span style="color:#ccc">—</span>';
+  const map = {
+    'Given': 'given', 'To Be Given ASAP': 'pending',
+    'Shown': 'shown', 'Pending': 'pending', 'Not Interested': 'not-interested',
+    'Yes': 'closed-yes', 'No': 'closed-no'
+  };
+  return `<span class="badge badge-${map[val] || 'pending'}">${val}</span>`;
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+
+function renderRecentGuests(guests) {
+  const tbody = document.getElementById('recent-guests-tbody');
+  if (!guests.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><p>No guests yet. Add your first guest!</p></td></tr>'; return; }
+  tbody.innerHTML = guests.map((g, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td class="td-name">${g.guest_name}</td>
+      <td class="td-phone">${g.contact_number}</td>
+      <td>${statusBadge(g.invitation_status)}</td>
+      <td>${statusBadge(g.demo_status)}</td>
+      <td>${statusBadge(g.bp_status)}</td>
+      <td>${statusBadge(g.closing_status)}</td>
+      <td class="td-actions">
+        <button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">Edit</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderGuestTable() {
+  const tbody = document.getElementById('guests-tbody');
+  const info = document.getElementById('guests-table-info');
+  const guests = filteredGuests;
+  info.textContent = `Showing ${guests.length} of ${allGuests.length} guests`;
+
+  if (!guests.length) { tbody.innerHTML = '<tr><td colspan="32" style="text-align:center;padding:40px;color:#94a3b8">No guests found.</td></tr>'; return; }
+
+  tbody.innerHTML = guests.map((g, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td class="td-name">${g.guest_name}</td>
+      <td class="td-phone">${g.contact_number}</td>
+      <td class="td-date">${fmtDate(g.invitation_date)}</td>
+      <td>${statusBadge(g.invitation_status)}</td>
+      <td class="td-remarks">${g.invitation_remarks || '—'}</td>
+      <td class="td-date">${fmtDate(g.demo_date)}</td>
+      <td>${statusBadge(g.demo_status)}</td>
+      <td class="td-remarks">${g.demo_remarks || '—'}</td>
+      <td class="td-date">${fmtDate(g.bp_date)}</td>
+      <td>${statusBadge(g.bp_status)}</td>
+      <td class="td-remarks">${g.bp_remarks || '—'}</td>
+      ${[1,2,3,4,5,6,7].map(n => `<td class="td-date">${fmtDate(g['fu'+n+'_date'])}</td><td class="td-remarks">${g['fu'+n+'_remarks'] || '—'}</td>`).join('')}
+      <td>${statusBadge(g.closing_status)}</td>
+      <td class="td-date">${fmtDate(g.closing_date)}</td>
+      <td class="td-remarks">${g.closing_remarks || '—'}</td>
+      <td class="td-date">${fmtDate(g.created_at?.split('T')[0])}</td>
+      <td class="td-date">${fmtDate(g.updated_at?.split('T')[0])}</td>
+      <td class="td-actions" style="display:flex;gap:4px">
+        <button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">Edit</button>
+        ${g.closing_status !== 'Yes' ? `<button class="btn btn-success btn-sm" onclick="markClosed('${g.id}')">✓ Close</button>` : ''}
+      </td>
+    </tr>`).join('');
+}
+
+function renderSpecialPages() {
+  const today = new Date().toISOString().split('T')[0];
+
+  // Today's follow-ups
+  let fus = [];
+  for (let g of allGuests) {
+    for (let i = 1; i <= 7; i++) {
+      if (g[`fu${i}_date`] === today) {
+        fus.push({ guest: g, num: i, date: g[`fu${i}_date`], remarks: g[`fu${i}_remarks`] });
+      }
+    }
+  }
+  document.getElementById('followups-count-msg').textContent = fus.length
+    ? `${fus.length} follow-up(s) scheduled for today`
+    : 'No follow-ups scheduled for today.';
+  document.getElementById('followups-tbody').innerHTML = fus.length
+    ? fus.map((f, i) => `<tr>
+        <td>${i+1}</td>
+        <td class="td-name">${f.guest.guest_name}</td>
+        <td class="td-phone">${f.guest.contact_number}</td>
+        <td><span class="badge badge-given">Follow-up ${f.num}</span></td>
+        <td class="td-date"><span class="tag tag-today">${fmtDate(f.date)}</span></td>
+        <td class="td-remarks">${f.remarks || '—'}</td>
+        <td><button class="btn btn-outline btn-sm" onclick="editGuest('${f.guest.id}')">Update</button></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No follow-ups today.</td></tr>';
+
+  // Pending demo
+  const pdemo = allGuests.filter(g => !g.demo_status || g.demo_status === 'Pending');
+  document.getElementById('pending-demo-tbody').innerHTML = pdemo.length
+    ? pdemo.map((g, i) => `<tr>
+        <td>${i+1}</td>
+        <td class="td-name">${g.guest_name}</td>
+        <td class="td-phone">${g.contact_number}</td>
+        <td class="td-date">${fmtDate(g.invitation_date)}</td>
+        <td>${statusBadge(g.demo_status || 'Pending')}</td>
+        <td class="td-remarks">${g.demo_remarks || '—'}</td>
+        <td><button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">Update Demo</button></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No pending demos.</td></tr>';
+
+  // Pending BP
+  const pbp = allGuests.filter(g => !g.bp_status || g.bp_status === 'Pending');
+  document.getElementById('pending-bp-tbody').innerHTML = pbp.length
+    ? pbp.map((g, i) => `<tr>
+        <td>${i+1}</td>
+        <td class="td-name">${g.guest_name}</td>
+        <td class="td-phone">${g.contact_number}</td>
+        <td class="td-date">${fmtDate(g.demo_date)}</td>
+        <td>${statusBadge(g.bp_status || 'Pending')}</td>
+        <td class="td-remarks">${g.bp_remarks || '—'}</td>
+        <td><button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">Update BP</button></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No pending business plans.</td></tr>';
+
+  // Closed
+  const closed = allGuests.filter(g => g.closing_status === 'Yes');
+  document.getElementById('closed-tbody').innerHTML = closed.length
+    ? closed.map((g, i) => `<tr>
+        <td>${i+1}</td>
+        <td class="td-name">${g.guest_name}</td>
+        <td class="td-phone">${g.contact_number}</td>
+        <td class="td-date">${fmtDate(g.closing_date)}</td>
+        <td class="td-remarks">${g.closing_remarks || '—'}</td>
+        ${(currentProfile.role !== 'member') ? `<td class="admin-only">${g.profiles?.full_name || '—'}</td>` : ''}
+        <td><button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">View</button></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No closed guests yet.</td></tr>';
+}
+
+// ==================== ADMIN PAGES ====================
+async function loadAdminPages() {
+  await loadMembers();
+
+  // Populate team filter dropdown
+  const sel = document.getElementById('af-member');
+  sel.innerHTML = '<option value="">All Members</option>' +
+    allMembers.map(m => `<option value="${m.id}">${m.full_name}</option>`).join('');
+
+  // Render team members
+  const grid = document.getElementById('team-grid');
+  grid.innerHTML = allMembers.map(m => {
+    const memberGuests = allGuests.filter(g => g.created_by === m.id);
+    const closed = memberGuests.filter(g => g.closing_status === 'Yes').length;
+    return `<div class="member-card">
+      <div class="member-card-header">
+        <div class="member-avatar">${m.full_name[0].toUpperCase()}</div>
+        <div>
+          <div class="member-card-name">${m.full_name}</div>
+          <div class="member-card-id">${m.team_id} · ${m.mobile}</div>
+        </div>
+      </div>
+      <div class="member-stats">
+        <span class="member-stat">👥 ${memberGuests.length} guests</span>
+        <span class="member-stat">✅ ${closed} closed</span>
+        <span class="role-badge role-${m.role}" style="font-size:10px">${m.role}</span>
+      </div>
+      ${currentProfile.role === 'creator' ? `
+      <div class="role-select-row" style="margin-top:8px">
+        <select class="filter-control" id="role-${m.id}" style="min-width:0;flex:1" onchange="changeRole('${m.id}', this.value)">
+          <option value="member" ${m.role==='member'?'selected':''}>Member</option>
+          <option value="admin" ${m.role==='admin'?'selected':''}>Admin</option>
+          <option value="creator" ${m.role==='creator'?'selected':''}>Creator</option>
+        </select>
+        <span style="font-size:11px;color:#64748b">Change Role</span>
+      </div>` : ''}
+    </div>`;
+  }).join('') || '<p style="color:#94a3b8">No members yet.</p>';
+
+  // Reports
+  renderReports();
+  renderAllGuestsTable(allGuests);
+}
+
+function renderReports() {
+  const total = allGuests.length;
+  const closed = allGuests.filter(g => g.closing_status === 'Yes').length;
+  const demos = allGuests.filter(g => g.demo_status === 'Shown').length;
+  const bps = allGuests.filter(g => g.bp_status === 'Shown').length;
+
+  document.getElementById('admin-stats-grid').innerHTML = `
+    <div class="stat-card stat-blue"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="stat-value">${allMembers.length}</div><div class="stat-label">Team Members</div></div>
+    <div class="stat-card stat-blue"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="stat-value">${total}</div><div class="stat-label">Total Guests</div></div>
+    <div class="stat-card stat-purple"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div class="stat-value">${demos}</div><div class="stat-label">Demos Done</div></div>
+    <div class="stat-card stat-yellow"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div><div class="stat-value">${bps}</div><div class="stat-label">Business Plans</div></div>
+    <div class="stat-card stat-green"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div class="stat-value">${closed}</div><div class="stat-label">Total Closed</div></div>
+  `;
+
+  const tbody = document.getElementById('reports-tbody');
+  tbody.innerHTML = allMembers.map(m => {
+    const mg = allGuests.filter(g => g.created_by === m.id);
+    return `<tr>
+      <td class="td-name">${m.full_name}</td>
+      <td>${m.team_id}</td>
+      <td><strong>${mg.length}</strong></td>
+      <td>${mg.filter(g => g.invitation_status === 'Given').length}</td>
+      <td>${mg.filter(g => g.demo_status === 'Shown').length}</td>
+      <td>${mg.filter(g => g.bp_status === 'Shown').length}</td>
+      <td>${mg.filter(g => g.closing_status === 'Yes').length}</td>
+      <td><span class="role-badge role-${m.role}">${m.role}</span></td>
+      <td>
+        ${currentProfile.role === 'creator' ? `<button class="btn btn-danger btn-sm" onclick="deleteMember('${m.id}')">Remove</button>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderAllGuestsTable(guests) {
+  const tbody = document.getElementById('all-guests-tbody');
+  const info = document.getElementById('all-guests-info');
+  info.textContent = `Showing ${guests.length} guests across all members`;
+
+  tbody.innerHTML = guests.map((g, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td class="td-name">${g.guest_name}</td>
+      <td class="td-phone">${g.contact_number}</td>
+      <td>${statusBadge(g.invitation_status)}</td>
+      <td>${statusBadge(g.demo_status)}</td>
+      <td>${statusBadge(g.bp_status)}</td>
+      <td>${statusBadge(g.closing_status)}</td>
+      <td>${g.profiles?.full_name || '—'}</td>
+      <td class="td-date">${fmtDate(g.created_at?.split('T')[0])}</td>
+      <td class="td-actions" style="display:flex;gap:4px">
+        <button class="btn btn-outline btn-sm" onclick="editGuest('${g.id}')">Edit</button>
+        ${currentProfile.role === 'creator' ? `<button class="btn btn-danger btn-sm" onclick="deleteGuest('${g.id}')">Del</button>` : ''}
+      </td>
+    </tr>`).join('') || '<tr><td colspan="10" style="text-align:center;padding:40px;color:#94a3b8">No guests found.</td></tr>';
+}
+
+function applyAdminFilters() {
+  const name = document.getElementById('af-name').value.toLowerCase();
+  const member = document.getElementById('af-member').value;
+  const closing = document.getElementById('af-closing').value;
+
+  let filtered = allGuests;
+  if (name) filtered = filtered.filter(g => g.guest_name.toLowerCase().includes(name));
+  if (member) filtered = filtered.filter(g => g.created_by === member);
+  if (closing) filtered = filtered.filter(g => g.closing_status === closing);
+  renderAllGuestsTable(filtered);
+}
+
+async function changeRole(userId, newRole) {
+  const { error } = await sb.from('profiles').update({ role: newRole }).eq('id', userId);
+  if (error) { showToast('Error updating role', 'error'); return; }
+  showToast('Role updated successfully', 'success');
+  await loadAdminPages();
+}
+
+async function deleteMember(userId) {
+  if (!confirm('Delete this member? Their guest data will remain.')) return;
+  await sb.from('profiles').delete().eq('id', userId);
+  showToast('Member removed', 'success');
+  await loadAdminPages();
+}
+
+async function deleteGuest(guestId) {
+  if (!confirm('Permanently delete this guest record?')) return;
+  await sb.from('guests').delete().eq('id', guestId);
+  showToast('Guest deleted', 'success');
+  await refreshAll();
+}
+
+// ==================== FILTERS ====================
+function applyFilters() {
+  const name = document.getElementById('f-name').value.toLowerCase();
+  const contact = document.getElementById('f-contact').value;
+  const inv = document.getElementById('f-invitation').value;
+  const demo = document.getElementById('f-demo').value;
+  const bp = document.getElementById('f-bp').value;
+  const closing = document.getElementById('f-closing').value;
+
+  filteredGuests = allGuests.filter(g => {
+    if (name && !g.guest_name.toLowerCase().includes(name)) return false;
+    if (contact && !g.contact_number.includes(contact)) return false;
+    if (inv && g.invitation_status !== inv) return false;
+    if (demo && g.demo_status !== demo) return false;
+    if (bp && g.bp_status !== bp) return false;
+    if (closing && g.closing_status !== closing) return false;
+    return true;
+  });
+  renderGuestTable();
+}
+
+function clearFilters() {
+  ['f-name','f-contact'].forEach(id => document.getElementById(id).value = '');
+  ['f-invitation','f-demo','f-bp','f-closing'].forEach(id => document.getElementById(id).value = '');
+  filteredGuests = [...allGuests];
+  renderGuestTable();
+}
+
+// ==================== GUEST MODAL ====================
+function buildFollowupsForm() {
+  const container = document.getElementById('followups-form');
+  container.innerHTML = '';
+  for (let i = 1; i <= 7; i++) {
+    container.innerHTML += `
+      <div style="background:#f8fafc;border-radius:8px;padding:12px;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:700;color:#64748b;margin-bottom:8px">Follow-up ${i}</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="g-fu${i}-date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Remarks</label>
+            <input type="text" id="g-fu${i}-remarks" class="form-control" placeholder="Follow-up ${i} notes">
+          </div>
+        </div>
+      </div>`;
+  }
+}
+
+function openGuestModal(guest = null) {
+  document.getElementById('modal-title').textContent = guest ? 'Edit Guest' : 'Add New Guest';
+  document.getElementById('guest-id').value = guest?.id || '';
+  document.getElementById('g-name').value = guest?.guest_name || '';
+  document.getElementById('g-contact').value = guest?.contact_number || '';
+  document.getElementById('g-inv-status').value = guest?.invitation_status || '';
+  document.getElementById('g-inv-date').value = guest?.invitation_date || '';
+  document.getElementById('g-inv-remarks').value = guest?.invitation_remarks || '';
+  document.getElementById('g-demo-status').value = guest?.demo_status || '';
+  document.getElementById('g-demo-date').value = guest?.demo_date || '';
+  document.getElementById('g-demo-remarks').value = guest?.demo_remarks || '';
+  document.getElementById('g-bp-status').value = guest?.bp_status || '';
+  document.getElementById('g-bp-date').value = guest?.bp_date || '';
+  document.getElementById('g-bp-remarks').value = guest?.bp_remarks || '';
+  document.getElementById('g-closing-status').value = guest?.closing_status || 'Pending';
+  document.getElementById('g-closing-date').value = guest?.closing_date || '';
+  document.getElementById('g-closing-remarks').value = guest?.closing_remarks || '';
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById(`g-fu${i}-date`).value = guest?.[`fu${i}_date`] || '';
+    document.getElementById(`g-fu${i}-remarks`).value = guest?.[`fu${i}_remarks`] || '';
+  }
+  document.getElementById('guest-modal').classList.add('open');
+}
+
+function closeGuestModal() {
+  document.getElementById('guest-modal').classList.remove('open');
+}
+
+function editGuest(id) {
+  const guest = allGuests.find(g => g.id === id);
+  if (guest) openGuestModal(guest);
+}
+
+async function saveGuest() {
+  const name = document.getElementById('g-name').value.trim();
+  const contact = document.getElementById('g-contact').value.trim();
+  const invStatus = document.getElementById('g-inv-status').value;
+
+  if (!name || !contact || !invStatus) {
+    showToast('Guest Name, Contact, and Invitation Status are required.', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('save-guest-btn');
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  const payload = {
+    guest_name: name,
+    contact_number: contact,
+    invitation_status: invStatus,
+    invitation_date: document.getElementById('g-inv-date').value || null,
+    invitation_remarks: document.getElementById('g-inv-remarks').value || null,
+    demo_status: document.getElementById('g-demo-status').value || null,
+    demo_date: document.getElementById('g-demo-date').value || null,
+    demo_remarks: document.getElementById('g-demo-remarks').value || null,
+    bp_status: document.getElementById('g-bp-status').value || null,
+    bp_date: document.getElementById('g-bp-date').value || null,
+    bp_remarks: document.getElementById('g-bp-remarks').value || null,
+    closing_status: document.getElementById('g-closing-status').value || 'Pending',
+    closing_date: document.getElementById('g-closing-date').value || null,
+    closing_remarks: document.getElementById('g-closing-remarks').value || null,
+    updated_at: new Date().toISOString()
+  };
+
+  for (let i = 1; i <= 7; i++) {
+    payload[`fu${i}_date`] = document.getElementById(`g-fu${i}-date`).value || null;
+    payload[`fu${i}_remarks`] = document.getElementById(`g-fu${i}-remarks`).value || null;
+  }
+
+  const guestId = document.getElementById('guest-id').value;
+  let savedId = guestId;
+
+  if (guestId) {
+    const { error } = await sb.from('guests').update(payload).eq('id', guestId);
+    if (error) { showToast('Error saving: ' + error.message, 'error'); btn.textContent = 'Save Guest'; btn.disabled = false; return; }
+  } else {
+    payload.created_by = currentUser.id;
+    payload.created_at = new Date().toISOString();
+    const { data, error } = await sb.from('guests').insert(payload).select().single();
+    if (error) { showToast('Error saving: ' + error.message, 'error'); btn.textContent = 'Save Guest'; btn.disabled = false; return; }
+    savedId = data.id;
+  }
+
+  closeGuestModal();
+  showToast(guestId ? 'Guest updated!' : 'Guest added!', 'success');
+  btn.textContent = 'Save Guest';
+  btn.disabled = false;
+
+  await refreshAll();
+  syncToGoogleSheet({ ...payload, id: savedId, member: currentProfile.full_name, team_id: currentProfile.team_id });
+}
+
+async function markClosed(id) {
+  const date = new Date().toISOString().split('T')[0];
+  const remarks = prompt('Closing remarks (optional):') || '';
+  const { error } = await sb.from('guests').update({
+    closing_status: 'Yes', closing_date: date, closing_remarks: remarks, updated_at: new Date().toISOString()
+  }).eq('id', id);
+  if (error) { showToast('Error: ' + error.message, 'error'); return; }
+  showToast('Guest marked as Closed/Joined!', 'success');
+  await refreshAll();
+  const guest = allGuests.find(g => g.id === id);
+  if (guest) syncToGoogleSheet({ ...guest, closing_status: 'Yes', closing_date: date, closing_remarks: remarks, member: currentProfile.full_name });
+}
+
+// ==================== GOOGLE SHEETS SYNC ====================
+async function syncToGoogleSheet(data) {
+  if (!GOOGLE_SHEET_WEBHOOK || GOOGLE_SHEET_WEBHOOK === 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL') return;
+  try {
+    await fetch(GOOGLE_SHEET_WEBHOOK, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'upsert',
+        timestamp: new Date().toISOString(),
+        ...data
+      })
+    });
+  } catch (e) { console.warn('Sheet sync failed:', e); }
+}
+
+// ==================== EXPORT ====================
+function exportMyCSV() {
+  exportCSV(filteredGuests, 'my-guests');
+}
+
+function exportAllCSV() {
+  exportCSV(allGuests, 'all-guests');
+}
+
+function exportCSV(guests, filename) {
+  if (!guests.length) { showToast('No data to export', 'error'); return; }
+  const headers = ['Sr','Guest Name','Contact','Inv Date','Invitation','Inv Remarks','Demo Date','Demo','Demo Remarks','BP Date','BP','BP Remarks',
+    'FU1 Date','FU1 Remarks','FU2 Date','FU2 Remarks','FU3 Date','FU3 Remarks','FU4 Date','FU4 Remarks',
+    'FU5 Date','FU5 Remarks','FU6 Date','FU6 Remarks','FU7 Date','FU7 Remarks',
+    'Closing','Closing Date','Closing Remarks','Added By','Created','Updated'];
+
+  const rows = guests.map((g, i) => [
+    i+1, g.guest_name, g.contact_number,
+    g.invitation_date||'', g.invitation_status||'', g.invitation_remarks||'',
+    g.demo_date||'', g.demo_status||'', g.demo_remarks||'',
+    g.bp_date||'', g.bp_status||'', g.bp_remarks||'',
+    ...[1,2,3,4,5,6,7].flatMap(n => [g[`fu${n}_date`]||'', g[`fu${n}_remarks`]||'']),
+    g.closing_status||'', g.closing_date||'', g.closing_remarks||'',
+    g.profiles?.full_name||'', g.created_at?.split('T')[0]||'', g.updated_at?.split('T')[0]||''
+  ]);
+
+  const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Guests');
+  XLSX.writeFile(wb, `${filename}-${new Date().toISOString().split('T')[0]}.xlsx`);
+  showToast('Excel file downloaded!', 'success');
+}
+
+// ==================== NAVIGATION ====================
+const pageTitles = {
+  'dashboard': 'Dashboard',
+  'guests': 'My Guests',
+  'followups': "Today's Follow-ups",
+  'pending-demo': 'Pending Demo',
+  'pending-bp': 'Pending Business Plan',
+  'closed': 'Closed Guests',
+  'team': 'Team Members',
+  'all-guests': 'All Guests',
+  'reports': 'Reports & Analytics'
+};
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const page = document.getElementById('page-' + name);
+  if (page) page.classList.add('active');
+
+  const navItem = document.querySelector(`[data-page="${name}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  document.getElementById('page-title').textContent = pageTitles[name] || name;
+  closeSidebar();
+
+  if ((name === 'team' || name === 'all-guests' || name === 'reports') &&
+      (currentProfile.role === 'creator' || currentProfile.role === 'admin')) {
+    loadAdminPages();
+  }
+}
+
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+// ==================== TOAST ====================
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 3000);
+}
+
+// ==================== INIT CHECK ====================
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    await loadApp(session.user);
+  }
+})();
+</script>
+</body>
+</html>
