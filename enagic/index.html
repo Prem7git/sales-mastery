@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enagic Team CRM</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
   :root {
     --bg: #f4f6fa;
@@ -226,8 +224,8 @@
 <div id="auth-screen">
   <div class="auth-card">
     <div class="auth-logo">
-      <h1>Mission 6A2-8</h1>
-      <p>Private Portal - Authorized Members Only</p>
+      <h1>⚡ Enagic Team CRM</h1>
+      <p>Private Portal — Authorized Members Only</p>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
@@ -255,8 +253,8 @@
         <input type="text" id="reg-name" class="form-control" placeholder="Your full name">
       </div>
       <div class="form-group">
-        <label>Distributor ID <span class="required-star">*</span></label>
-        <input type="text" id="reg-teamid" class="form-control" placeholder="e.g. 3600XXXXXXX">
+        <label>Enagic / Team ID <span class="required-star">*</span></label>
+        <input type="text" id="reg-teamid" class="form-control" placeholder="e.g. ENA-12345">
       </div>
       <div class="form-group">
         <label>Mobile Number <span class="required-star">*</span></label>
@@ -781,13 +779,15 @@
 <!-- TOAST -->
 <div id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 // ==================== CONFIGURATION ====================
 // REPLACE THESE WITH YOUR ACTUAL VALUES
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-const GOOGLE_SHEET_WEBHOOK = 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL'; // Apps Script web app URL
-const CREATOR_TEAM_ID = 'CREATOR_ID'; // Your own Team ID that gets creator role
+const SUPABASE_URL = 'https://kjhpsvfktysjshakthjp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqaHBzdmZrdHlzanNoYWt0aGpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NjQyNjAsImV4cCI6MjA5NjA0MDI2MH0.6ff-njttliS52nDzxC8b3_JnVYeAOVB9j32eChH-MqM';
+const GOOGLE_SHEET_WEBHOOK = 'https://script.google.com/macros/s/AKfycbwyIsiTk7tOCfbGgdGZtZqhZozEjfaVFlDoZY_3uKTCIhEwa6d7UUe05Hip7CBLSfV5sw/exec'; // Apps Script web app URL
+const CREATOR_TEAM_ID = '36000249810';
 
 // ==================== INIT ====================
 const { createClient } = supabase;
