@@ -166,14 +166,14 @@ tbody td{padding:8px 10px;vertical-align:middle}
       <p>Private Portal — Authorized Members Only</p>
     </div>
     <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-      <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+      <button class="auth-tab active" id="login-tab-btn">Login</button>
+      <button class="auth-tab" id="register-tab-btn">Register</button>
     </div>
     <div id="auth-error" class="auth-error"></div>
     <div id="login-form">
       <div class="form-group"><label>Team ID or Mobile Number</label><input type="text" id="login-id" class="form-control" placeholder="Team ID or Mobile"></div>
       <div class="form-group"><label>Password</label><input type="password" id="login-pass" class="form-control" placeholder="Password"></div>
-      <button class="btn btn-primary btn-full" onclick="doLogin()">Login to CRM</button>
+      <button class="btn btn-primary btn-full" id="login-btn">Login to CRM</button>
     </div>
     <div id="register-form" style="display:none">
       <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="reg-name" class="form-control" placeholder="Full name"></div>
@@ -181,14 +181,14 @@ tbody td{padding:8px 10px;vertical-align:middle}
       <div class="form-group"><label>Mobile Number <span class="req">*</span></label><input type="text" id="reg-mobile" class="form-control" placeholder="10-digit mobile"></div>
       <div class="form-group"><label>Password <span class="req">*</span></label><input type="password" id="reg-pass" class="form-control" placeholder="Min 6 characters"></div>
       <div class="form-group"><label>Confirm Password <span class="req">*</span></label><input type="password" id="reg-pass2" class="form-control" placeholder="Repeat password"></div>
-      <button class="btn btn-primary btn-full" onclick="doRegister()">Create Account</button>
+      <button class="btn btn-primary btn-full" id="register-btn">Create Account</button>
     </div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-logo"><h2>⚡ Enagic CRM</h2><p>Team Portal</p></div>
     <div class="user-info">
@@ -197,30 +197,30 @@ tbody td{padding:8px 10px;vertical-align:middle}
     </div>
     <div style="padding:10px 0">
       <div class="nav-section">Main</div>
-      <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</button>
-      <button class="nav-item" data-page="guests" onclick="showPage('guests')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>My Guests</button>
-      <button class="nav-item" data-page="followups" onclick="showPage('followups')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Today's Follow-ups<span class="nav-badge" id="followup-badge" style="display:none">0</span></button>
-      <button class="nav-item" data-page="pending-demo" onclick="showPage('pending-demo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>Pending Demo</button>
-      <button class="nav-item" data-page="pending-bp" onclick="showPage('pending-bp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Pending Business Plan</button>
-      <button class="nav-item" data-page="closed" onclick="showPage('closed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Closed Guests</button>
+      <button class="nav-item active" data-page="dashboard">📊 Dashboard</button>
+      <button class="nav-item" data-page="guests">👥 My Guests</button>
+      <button class="nav-item" data-page="followups">⏰ Today's Follow-ups<span class="nav-badge" id="followup-badge" style="display:none">0</span></button>
+      <button class="nav-item" data-page="pending-demo">🎯 Pending Demo</button>
+      <button class="nav-item" data-page="pending-bp">📋 Pending Business Plan</button>
+      <button class="nav-item" data-page="closed">✅ Closed Guests</button>
       <div class="nav-section admin-only" style="display:none">Admin</div>
-      <button class="nav-item admin-only" data-page="team" onclick="showPage('team')" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team Members</button>
-      <button class="nav-item admin-only" data-page="all-guests" onclick="showPage('all-guests')" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>All Guests</button>
-      <button class="nav-item admin-only" data-page="reports" onclick="showPage('reports')" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</button>
+      <button class="nav-item admin-only" data-page="team" style="display:none">👥 Team Members</button>
+      <button class="nav-item admin-only" data-page="all-guests" style="display:none">🌐 All Guests</button>
+      <button class="nav-item admin-only" data-page="reports" style="display:none">📊 Reports</button>
       <div class="nav-section">Account</div>
-      <button class="nav-item" onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Logout</button>
+      <button class="nav-item" id="logout-btn">🚪 Logout</button>
     </div>
   </nav>
 
   <div class="main">
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:10px">
-        <button class="hamburger" onclick="openSidebar()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <button class="hamburger" id="hamburger-btn">☰</button>
         <h2 id="page-title">Dashboard</h2>
       </div>
       <div class="topbar-actions">
-        <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ Add Guest</button>
-        <button class="btn btn-outline btn-sm admin-only" style="display:none" onclick="exportAllXLSX()">↓ Export</button>
+        <button class="btn btn-primary btn-sm" id="add-guest-btn">+ Add Guest</button>
+        <button class="btn btn-outline btn-sm admin-only" id="export-all-btn" style="display:none">↓ Export</button>
       </div>
     </div>
 
@@ -229,13 +229,13 @@ tbody td{padding:8px 10px;vertical-align:middle}
       <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
         <div class="stats-grid">
-          <div class="stat-card stat-blue"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total Guests</div></div>
-          <div class="stat-card stat-yellow"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="stat-value" id="stat-followups">—</div><div class="stat-label">Today's Follow-ups</div></div>
-          <div class="stat-card stat-purple"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="stat-value" id="stat-pending-demo">—</div><div class="stat-label">Pending Demo</div></div>
-          <div class="stat-card stat-yellow"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16h12a2 2 0 0 0 2-2V8z"/></svg></div><div class="stat-value" id="stat-pending-bp">—</div><div class="stat-label">Pending BP</div></div>
-          <div class="stat-card stat-green"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div class="stat-value" id="stat-closed">—</div><div class="stat-label">Closed / Joined</div></div>
+          <div class="stat-card stat-blue"><div class="stat-icon">👥</div><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total Guests</div></div>
+          <div class="stat-card stat-yellow"><div class="stat-icon">⏰</div><div class="stat-value" id="stat-followups">—</div><div class="stat-label">Today's Follow-ups</div></div>
+          <div class="stat-card stat-purple"><div class="stat-icon">🎯</div><div class="stat-value" id="stat-pending-demo">—</div><div class="stat-label">Pending Demo</div></div>
+          <div class="stat-card stat-yellow"><div class="stat-icon">📋</div><div class="stat-value" id="stat-pending-bp">—</div><div class="stat-label">Pending BP</div></div>
+          <div class="stat-card stat-green"><div class="stat-icon">✅</div><div class="stat-value" id="stat-closed">—</div><div class="stat-label">Closed / Joined</div></div>
         </div>
-        <div class="section-header"><span class="section-title">Recent Guests</span><button class="btn btn-outline btn-sm" onclick="showPage('guests')">View All →</button></div>
+        <div class="section-header"><span class="section-title">Recent Guests</span><button class="btn btn-outline btn-sm" id="view-all-guests-btn">View All →</button></div>
         <div class="table-wrapper"><div class="table-scroll"><table>
           <thead><tr><th>#</th><th>Name</th><th>Contact</th><th>City</th><th>Invitation</th><th>Demo</th><th>BP</th><th>Follow-up</th><th>Closing</th></tr></thead>
           <tbody id="recent-tbody"></tbody>
@@ -245,12 +245,12 @@ tbody td{padding:8px 10px;vertical-align:middle}
       <!-- MY GUESTS -->
       <div class="page" id="page-guests">
         <div class="filters-bar">
-          <div class="filter-group"><label>Name</label><input type="text" class="filter-control" id="f-name" placeholder="Search..." oninput="applyFilters()"></div>
-          <div class="filter-group"><label>Contact</label><input type="text" class="filter-control" id="f-contact" placeholder="Mobile..." oninput="applyFilters()"></div>
-          <div class="filter-group"><label>Invitation</label><select class="filter-control" id="f-inv" onchange="applyFilters()"><option value="">All</option><option>Given</option><option>To Be Given ASAP</option></select></div>
-          <div class="filter-group"><label>Closing</label><select class="filter-control" id="f-closing" onchange="applyFilters()"><option value="">All</option><option>Yes</option><option>No</option><option>Pending</option></select></div>
-          <button class="btn btn-outline btn-sm" onclick="clearFilters()" style="align-self:flex-end">Clear</button>
-          <button class="btn btn-outline btn-sm" onclick="exportMyXLSX()" style="align-self:flex-end">↓ Export</button>
+          <div class="filter-group"><label>Name</label><input type="text" class="filter-control" id="f-name" placeholder="Search..."></div>
+          <div class="filter-group"><label>Contact</label><input type="text" class="filter-control" id="f-contact" placeholder="Mobile..."></div>
+          <div class="filter-group"><label>Invitation</label><select class="filter-control" id="f-inv"><option value="">All</option><option>Given</option><option>To Be Given ASAP</option></select></div>
+          <div class="filter-group"><label>Closing</label><select class="filter-control" id="f-closing"><option value="">All</option><option>Yes</option><option>No</option><option>Pending</option></select></div>
+          <button class="btn btn-outline btn-sm" id="clear-filters-btn">Clear</button>
+          <button class="btn btn-outline btn-sm" id="export-my-btn">↓ Export</button>
         </div>
         <div class="table-wrapper">
           <div class="table-info" id="guests-info">Loading...</div>
@@ -311,10 +311,10 @@ tbody td{padding:8px 10px;vertical-align:middle}
       <!-- ALL GUESTS (admin) -->
       <div class="page" id="page-all-guests">
         <div class="filters-bar">
-          <div class="filter-group"><label>Name</label><input type="text" class="filter-control" id="af-name" placeholder="Search..." oninput="applyAdminFilters()"></div>
-          <div class="filter-group"><label>Member</label><select class="filter-control" id="af-member" onchange="applyAdminFilters()"><option value="">All Members</option></select></div>
-          <div class="filter-group"><label>Closing</label><select class="filter-control" id="af-closing" onchange="applyAdminFilters()"><option value="">All</option><option>Yes</option><option>No</option><option>Pending</option></select></div>
-          <button class="btn btn-success btn-sm" onclick="exportAllXLSX()" style="align-self:flex-end">↓ Export All</button>
+          <div class="filter-group"><label>Name</label><input type="text" class="filter-control" id="af-name" placeholder="Search..."></div>
+          <div class="filter-group"><label>Member</label><select class="filter-control" id="af-member"><option value="">All Members</option></select></div>
+          <div class="filter-group"><label>Closing</label><select class="filter-control" id="af-closing"><option value="">All</option><option>Yes</option><option>No</option><option>Pending</option></select></div>
+          <button class="btn btn-success btn-sm" id="export-all-data-btn">↓ Export All</button>
         </div>
         <div class="table-wrapper">
           <div class="table-info" id="all-guests-info">Loading...</div>
@@ -342,7 +342,7 @@ tbody td{padding:8px 10px;vertical-align:middle}
 <!-- ADD GUEST MODAL -->
 <div class="modal-overlay" id="add-modal">
   <div class="modal">
-    <div class="modal-header"><h3>Add New Guest</h3><button class="modal-close" onclick="closeAddModal()">×</button></div>
+    <div class="modal-header"><h3>Add New Guest</h3><button class="modal-close" id="close-modal-btn">×</button></div>
     <div class="modal-body">
       <div style="margin-bottom:16px">
         <div class="form-section-title">Basic Info <span class="req">*</span></div>
@@ -384,8 +384,8 @@ tbody td{padding:8px 10px;vertical-align:middle}
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeAddModal()">Cancel</button>
-      <button class="btn btn-primary" id="add-btn" onclick="addGuest()">Add Guest</button>
+      <button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
+      <button class="btn btn-primary" id="confirm-add-btn">Add Guest</button>
     </div>
   </div>
 </div>
@@ -406,521 +406,14 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentUser = null, currentProfile = null;
 let allGuests = [], filteredGuests = [], allMembers = [];
 
-// ===== AUTH =====
+// ===== AUTH FUNCTIONS =====
 function switchAuthTab(tab) {
   document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
-  document.getElementById('register-form').style.display = tab==='register'?'block':'none';
-  document.getElementById('auth-error').style.display = 'none';
-}
-function showAuthError(msg) {
-  const el = document.getElementById('auth-error');
-  el.textContent = msg; el.style.display = 'block';
-}
-async function doLogin() {
-  const id = document.getElementById('login-id').value.trim();
-  const pass = document.getElementById('login-pass').value;
-  if (!id||!pass) { showAuthError('Fill all fields.'); return; }
-  const { data: prof } = await sb.from('profiles').select('*').or(`team_id.eq.${id},mobile.eq.${id}`).single();
-  if (!prof) { showAuthError('Team ID or Mobile not found.'); return; }
-  const { data, error } = await sb.auth.signInWithPassword({ email: prof.email, password: pass });
-  if (error) { showAuthError('Invalid password.'); return; }
-  await loadApp(data.user);
-}
-async function doRegister() {
-  const name = document.getElementById('reg-name').value.trim();
-  const teamId = document.getElementById('reg-teamid').value.trim();
-  const mobile = document.getElementById('reg-mobile').value.trim();
-  const pass = document.getElementById('reg-pass').value;
-  const pass2 = document.getElementById('reg-pass2').value;
-  if (!name||!teamId||!mobile||!pass) { showAuthError('All fields required.'); return; }
-  if (pass!==pass2) { showAuthError('Passwords do not match.'); return; }
-  if (pass.length<6) { showAuthError('Password min 6 characters.'); return; }
-  const email = `${teamId.toLowerCase().replace(/[^a-z0-9]/g,'')}@enagic-crm.internal`;
-  const { data, error } = await sb.auth.signUp({ email, password: pass });
-  if (error) { showAuthError(error.message); return; }
-  const role = teamId===CREATOR_TEAM_ID ? 'creator' : 'member';
-  const { error: pe } = await sb.from('profiles').insert({ id: data.user.id, full_name: name, team_id: teamId, mobile, email, role });
-  if (pe) { showAuthError('Registration failed: '+pe.message); return; }
-  showToast('Account created! Please login.', 'success');
-  document.querySelectorAll('.auth-tab')[0].click();
-}
-async function doLogout() {
-  await sb.auth.signOut();
-  currentUser = currentProfile = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('auth-screen').style.display = 'flex';
-}
-
-// ===== APP LOAD =====
-async function loadApp(user) {
-  currentUser = user;
-  const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
-  if (!profile) { showAuthError('Profile not found.'); return; }
-  currentProfile = profile;
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('nav-user-name').textContent = profile.full_name;
-  document.getElementById('nav-user-role').innerHTML = `<span class="role-badge role-${profile.role}">${profile.role}</span>`;
-  if (profile.role==='creator'||profile.role==='admin') {
-    document.querySelectorAll('.admin-only').forEach(el => el.style.display = '');
-  }
-  if (profile.role!=='member') {
-    document.getElementById('closed-by-th').style.display = '';
-  }
-  await refreshAll();
-  showPage('dashboard');
-}
-async function refreshAll() {
-  await loadGuests();
-  loadDashboardStats();
-}
-
-// ===== DATA =====
-async function loadGuests() {
-  let q = sb.from('guests').select('*, profiles(full_name,team_id)').order('created_at', { ascending: false });
-  if (currentProfile.role==='member') q = q.eq('created_by', currentUser.id);
-  const { data, error } = await q;
-  if (error) { console.error(error); return; }
-  allGuests = data || [];
-  filteredGuests = [...allGuests];
-  renderGuestTable();
-  renderSpecialPages();
-  updateFUBadge();
-}
-async function loadMembers() {
-  const { data } = await sb.from('profiles').select('*').order('created_at');
-  allMembers = data || [];
-}
-
-// ===== DASHBOARD =====
-function loadDashboardStats() {
-  const today = new Date().toISOString().split('T')[0];
-  const total = allGuests.length;
-  const closed = allGuests.filter(g=>g.closing_date).length;
-  const pendingDemo = allGuests.filter(g=>!g.demo_date).length;
-  const pendingBP = allGuests.filter(g=>!g.bp_date).length;
-  const fuToday = allGuests.filter(g=>g.fu_date===today).length;
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-followups').textContent = fuToday;
-  document.getElementById('stat-pending-demo').textContent = pendingDemo;
-  document.getElementById('stat-pending-bp').textContent = pendingBP;
-  document.getElementById('stat-closed').textContent = closed;
-  renderRecentTable(allGuests.slice(0,8));
-}
-function updateFUBadge() {
-  const today = new Date().toISOString().split('T')[0];
-  const count = allGuests.filter(g=>g.fu_date===today).length;
-  const badge = document.getElementById('followup-badge');
-  badge.style.display = count>0 ? 'inline' : 'none';
-  badge.textContent = count;
-}
-
-// ===== HELPERS =====
-function fmt(d) { if(!d) return '—'; const [y,m,day]=d.split('-'); return `${day}/${m}/${y}`; }
-function stageOf(g) {
-  if (g.closing_date) return `<span class="badge badge-closed">Closed ✓</span>`;
-  if (g.bp_date) return `<span class="badge badge-done">BP Done</span>`;
-  if (g.demo_date) return `<span class="badge badge-done">Demo Done</span>`;
-  if (g.invitation_status==='Given') return `<span class="badge badge-given">Invited</span>`;
-  return `<span class="badge badge-pending">New</span>`;
-}
-
-// ===== INLINE EDIT =====
-function makeEditableDate(guestId, field, currentVal, label='') {
-  const id = `ec-${guestId}-${field}`;
-  return `<div class="editable-cell">
-    <div class="cell-display" id="disp-${id}" onclick="startEdit('${id}')">
-      <span>${currentVal ? fmt(currentVal) : '<span style="color:#cbd5e1;font-size:11px">+ ${label||'Set date'}</span>'}</span>
-      <span class="edit-hint">✏</span>
-    </div>
-    <div class="cell-edit" id="edit-${id}">
-      <input type="date" class="cell-input" id="inp-${id}" value="${currentVal||''}">
-      <div class="cell-actions">
-        <button class="cell-save" onclick="saveCell('${guestId}','${field}','${id}',false)">✓</button>
-        <button class="cell-cancel" onclick="cancelEdit('${id}')">✕</button>
-      </div>
-    </div>
-  </div>`;
-}
-function makeEditableText(guestId, field, currentVal, placeholder='Add remarks') {
-  const id = `ec-${guestId}-${field}`;
-  return `<div class="editable-cell" style="min-width:120px">
-    <div class="cell-display" id="disp-${id}" onclick="startEdit('${id}')">
-      <span style="font-size:12px;color:${currentVal?'var(--text)':'#cbd5e1'}">${currentVal||'+ '+placeholder}</span>
-      <span class="edit-hint">✏</span>
-    </div>
-    <div class="cell-edit" id="edit-${id}">
-      <textarea class="cell-textarea" id="inp-${id}" placeholder="${placeholder}">${currentVal||''}</textarea>
-      <div class="cell-actions">
-        <button class="cell-save" onclick="saveCell('${guestId}','${field}','${id}',true)">✓</button>
-        <button class="cell-cancel" onclick="cancelEdit('${id}')">✕</button>
-      </div>
-    </div>
-  </div>`;
-}
-function makeEditableSelect(guestId, field, currentVal, options) {
-  const id = `ec-${guestId}-${field}`;
-  const label = currentVal || '+ Set';
-  const badgeMap = {'Given':'badge-given','To Be Given ASAP':'badge-pending','Yes':'badge-closed','No':'badge-no','Pending':'badge-pending'};
-  const badgeCls = badgeMap[currentVal] || '';
-  return `<div class="editable-cell">
-    <div class="cell-display" id="disp-${id}" onclick="startEdit('${id}')">
-      ${currentVal ? `<span class="badge ${badgeCls}">${currentVal}</span>` : `<span style="color:#cbd5e1;font-size:11px">+ Set</span>`}
-      <span class="edit-hint">✏</span>
-    </div>
-    <div class="cell-edit" id="edit-${id}">
-      <select class="cell-input" id="inp-${id}">
-        <option value="">—</option>
-        ${options.map(o=>`<option value="${o}" ${currentVal===o?'selected':''}>${o}</option>`).join('')}
-      </select>
-      <div class="cell-actions">
-        <button class="cell-save" onclick="saveCell('${guestId}','${field}','${id}',false)">✓</button>
-        <button class="cell-cancel" onclick="cancelEdit('${id}')">✕</button>
-      </div>
-    </div>
-  </div>`;
-}
-function startEdit(id) {
-  document.getElementById('disp-'+id).classList.add('hidden');
-  document.getElementById('edit-'+id).classList.add('active');
-  const inp = document.getElementById('inp-'+id);
-  if (inp) inp.focus();
-}
-function cancelEdit(id) {
-  document.getElementById('disp-'+id).classList.remove('hidden');
-  document.getElementById('edit-'+id).classList.remove('active');
-}
-async function saveCell(guestId, field, id, isText) {
-  const inp = document.getElementById('inp-'+id);
-  const val = inp.value.trim() || null;
-  const update = { [field]: val, updated_at: new Date().toISOString() };
-  // Auto-set closing logic
-  if (field==='closing_date' && val) update.closing_status = 'Yes';
-  const { error } = await sb.from('guests').update(update).eq('id', guestId);
-  if (error) { showToast('Save failed: '+error.message,'error'); return; }
-  showToast('Saved!','success');
-  await refreshAll();
-  syncSheet(guestId);
-}
-
-// ===== RENDER TABLES =====
-function renderRecentTable(guests) {
-  document.getElementById('recent-tbody').innerHTML = guests.length
-    ? guests.map((g,i) => `<tr>
-        <td>${i+1}</td>
-        <td style="font-weight:600">${g.guest_name}</td>
-        <td style="color:var(--text-muted)">${g.contact_number}</td>
-        <td style="color:var(--text-muted)">${g.city||'—'}</td>
-        <td>${g.invitation_status ? `<span class="badge ${g.invitation_status==='Given'?'badge-given':'badge-pending'}">${g.invitation_status}</span>` : '—'}</td>
-        <td>${g.demo_date ? `<span class="badge badge-done">${fmt(g.demo_date)}</span>` : '<span style="color:#cbd5e1">—</span>'}</td>
-        <td>${g.bp_date ? `<span class="badge badge-done">${fmt(g.bp_date)}</span>` : '<span style="color:#cbd5e1">—</span>'}</td>
-        <td>${g.fu_date ? `<span class="${g.fu_date===new Date().toISOString().split('T')[0]?'tag-today':''}">${fmt(g.fu_date)}</span>` : '—'}</td>
-        <td>${stageOf(g)}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="9" style="text-align:center;padding:40px;color:#94a3b8">No guests yet. Add your first guest!</td></tr>';
-}
-
-function renderGuestTable() {
-  const info = document.getElementById('guests-info');
-  info.textContent = `Showing ${filteredGuests.length} of ${allGuests.length} guests`;
-  const tbody = document.getElementById('guests-tbody');
-  if (!filteredGuests.length) { tbody.innerHTML = '<tr><td colspan="19" style="text-align:center;padding:40px;color:#94a3b8">No guests found.</td></tr>'; return; }
-  tbody.innerHTML = filteredGuests.map((g,i) => `<tr>
-    <td>${i+1}</td>
-    <td style="font-weight:600;white-space:nowrap">${g.guest_name}</td>
-    <td style="color:var(--text-muted);white-space:nowrap">${g.contact_number}</td>
-    <td>${makeEditableText(g.id,'city',g.city,'City')}</td>
-    <td>${makeEditableSelect(g.id,'profession',g.profession,['Business Owner','Service / Job','Doctor','Engineer','Teacher / Professor','Lawyer','Homemaker','Student','Freelancer','Network Marketer','Other'])}</td>
-    <td>${makeEditableSelect(g.id,'income_range',g.income_range,['Below ₹20,000/mo','₹20,000–50,000/mo','₹50,000–1,00,000/mo','₹1,00,000–3,00,000/mo','Above ₹3,00,000/mo'])}</td>
-    <td>${makeEditableDate(g.id,'invitation_date',g.invitation_date,'Inv date')}</td>
-    <td>${makeEditableSelect(g.id,'invitation_status',g.invitation_status,['Given','To Be Given ASAP'])}</td>
-    <td>${makeEditableText(g.id,'invitation_remarks',g.invitation_remarks,'Inv remarks')}</td>
-    <td>${makeEditableDate(g.id,'demo_date',g.demo_date,'Demo date')}</td>
-    <td>${makeEditableText(g.id,'demo_remarks',g.demo_remarks,'Demo remarks')}</td>
-    <td>${makeEditableDate(g.id,'bp_date',g.bp_date,'BP date')}</td>
-    <td>${makeEditableText(g.id,'bp_remarks',g.bp_remarks,'BP remarks')}</td>
-    <td>${makeEditableDate(g.id,'fu_date',g.fu_date,'Follow-up date')}</td>
-    <td>${makeEditableText(g.id,'fu_remarks',g.fu_remarks,'FU remarks')}</td>
-    <td>${makeEditableDate(g.id,'closing_date',g.closing_date,'Closing date')}</td>
-    <td>${makeEditableSelect(g.id,'closing_status',g.closing_status,['Pending','Yes','No'])}</td>
-    <td>${makeEditableText(g.id,'closing_remarks',g.closing_remarks,'Closing remarks')}</td>
-    <td style="color:var(--text-muted);font-size:11px;white-space:nowrap">${fmt(g.created_at?.split('T')[0])}</td>
-  </tr>`).join('');
-}
-
-function renderSpecialPages() {
-  const today = new Date().toISOString().split('T')[0];
-  // Follow-ups today
-  const fus = allGuests.filter(g=>g.fu_date===today);
-  document.getElementById('fu-msg').textContent = fus.length ? `${fus.length} follow-up(s) today` : 'No follow-ups scheduled for today.';
-  document.getElementById('fu-tbody').innerHTML = fus.length
-    ? fus.map((g,i)=>`<tr>
-        <td>${i+1}</td><td style="font-weight:600">${g.guest_name}</td>
-        <td style="color:var(--text-muted)">${g.contact_number}</td>
-        <td>${g.city||'—'}</td>
-        <td><span class="tag-today">${fmt(g.fu_date)}</span></td>
-        <td style="font-size:12px;color:var(--text-muted)">${g.fu_remarks||'—'}</td>
-        <td>${stageOf(g)}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No follow-ups today.</td></tr>';
-
-  // Pending demo = no demo_date yet
-  const pd = allGuests.filter(g=>!g.demo_date);
-  document.getElementById('pdemo-tbody').innerHTML = pd.length
-    ? pd.map((g,i)=>`<tr>
-        <td>${i+1}</td><td style="font-weight:600">${g.guest_name}</td>
-        <td style="color:var(--text-muted)">${g.contact_number}</td>
-        <td>${g.city||'—'}</td>
-        <td style="font-size:12px">${fmt(g.invitation_date)}</td>
-        <td style="font-size:12px;color:var(--text-muted)">${g.invitation_remarks||'—'}</td>
-        <td>${makeEditableDate(g.id,'demo_date',g.demo_date,'Set demo date')}</td>
-        <td>${makeEditableText(g.id,'demo_remarks',g.demo_remarks,'Demo remarks')}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="8" style="text-align:center;padding:40px;color:#94a3b8">No pending demos 🎉</td></tr>';
-
-  // Pending BP = demo done but no bp_date
-  const pb = allGuests.filter(g=>g.demo_date&&!g.bp_date);
-  document.getElementById('pbp-tbody').innerHTML = pb.length
-    ? pb.map((g,i)=>`<tr>
-        <td>${i+1}</td><td style="font-weight:600">${g.guest_name}</td>
-        <td style="color:var(--text-muted)">${g.contact_number}</td>
-        <td>${g.city||'—'}</td>
-        <td style="font-size:12px">${fmt(g.demo_date)}</td>
-        <td>${makeEditableDate(g.id,'bp_date',g.bp_date,'Set BP date')}</td>
-        <td>${makeEditableText(g.id,'bp_remarks',g.bp_remarks,'BP remarks')}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No pending business plans 🎉</td></tr>';
-
-  // Closed
-  const cl = allGuests.filter(g=>g.closing_date||g.closing_status==='Yes');
-  document.getElementById('closed-tbody').innerHTML = cl.length
-    ? cl.map((g,i)=>`<tr>
-        <td>${i+1}</td><td style="font-weight:600">${g.guest_name}</td>
-        <td style="color:var(--text-muted)">${g.contact_number}</td>
-        <td>${g.city||'—'}</td>
-        <td style="font-size:12px">${fmt(g.closing_date)}</td>
-        <td style="font-size:12px;color:var(--text-muted)">${g.closing_remarks||'—'}</td>
-        ${currentProfile.role!=='member'?`<td style="font-size:12px">${g.profiles?.full_name||'—'}</td>`:''}
-      </tr>`).join('')
-    : '<tr><td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">No closed guests yet.</td></tr>';
-}
-
-// ===== ADMIN =====
-async function loadAdminPages() {
-  await loadMembers();
-  const sel = document.getElementById('af-member');
-  sel.innerHTML = '<option value="">All Members</option>' + allMembers.map(m=>`<option value="${m.id}">${m.full_name}</option>`).join('');
-  renderTeamGrid();
-  renderReports();
-  renderAllGuestsTable(allGuests);
-}
-function renderTeamGrid() {
-  document.getElementById('team-grid').innerHTML = allMembers.map(m => {
-    const mg = allGuests.filter(g=>g.created_by===m.id);
-    return `<div class="member-card">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <div class="member-avatar">${m.full_name[0].toUpperCase()}</div>
-        <div><div style="font-weight:700">${m.full_name}</div><div style="font-size:11px;color:var(--text-muted)">${m.team_id} · ${m.mobile}</div></div>
-      </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-        <span style="font-size:11px;background:var(--bg);padding:2px 8px;border-radius:20px">👥 ${mg.length} guests</span>
-        <span style="font-size:11px;background:var(--bg);padding:2px 8px;border-radius:20px">✅ ${mg.filter(g=>g.closing_date).length} closed</span>
-        <span class="role-badge role-${m.role}">${m.role}</span>
-      </div>
-      ${currentProfile.role==='creator'?`<div style="display:flex;gap:6px;align-items:center;margin-top:6px">
-        <select class="filter-control" style="min-width:0;flex:1;font-size:12px" onchange="changeRole('${m.id}',this.value)">
-          <option value="member" ${m.role==='member'?'selected':''}>Member</option>
-          <option value="admin" ${m.role==='admin'?'selected':''}>Admin</option>
-          <option value="creator" ${m.role==='creator'?'selected':''}>Creator</option>
-        </select>
-        <span style="font-size:11px;color:var(--text-muted)">Role</span>
-        <button class="btn btn-danger btn-sm" onclick="deleteMember('${m.id}')">Remove</button>
-      </div>`:''}
-    </div>`;
-  }).join('') || '<p style="color:#94a3b8">No members yet.</p>';
-}
-function renderReports() {
-  const total=allGuests.length, closed=allGuests.filter(g=>g.closing_date).length;
-  const demos=allGuests.filter(g=>g.demo_date).length, bps=allGuests.filter(g=>g.bp_date).length;
-  document.getElementById('admin-stats').innerHTML = `
-    <div class="stat-card stat-blue"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><div class="stat-value">${allMembers.length}</div><div class="stat-label">Team Members</div></div>
-    <div class="stat-card stat-blue"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="stat-value">${total}</div><div class="stat-label">Total Guests</div></div>
-    <div class="stat-card stat-purple"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div class="stat-value">${demos}</div><div class="stat-label">Demos Done</div></div>
-    <div class="stat-card stat-yellow"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16h12a2 2 0 0 0 2-2V8z"/></svg></div><div class="stat-value">${bps}</div><div class="stat-label">BPs Done</div></div>
-    <div class="stat-card stat-green"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div class="stat-value">${closed}</div><div class="stat-label">Total Closed</div></div>`;
-  document.getElementById('reports-tbody').innerHTML = allMembers.map(m=>{
-    const mg=allGuests.filter(g=>g.created_by===m.id);
-    return `<tr>
-      <td style="font-weight:600">${m.full_name}</td><td style="color:var(--text-muted)">${m.team_id}</td>
-      <td><strong>${mg.length}</strong></td><td>${mg.filter(g=>g.demo_date).length}</td>
-      <td>${mg.filter(g=>g.bp_date).length}</td><td>${mg.filter(g=>g.closing_date).length}</td>
-      <td><span class="role-badge role-${m.role}">${m.role}</span></td>
-      <td>${currentProfile.role==='creator'?`<button class="btn btn-danger btn-sm" onclick="deleteMember('${m.id}')">Remove</button>`:''}</td>
-    </tr>`;
-  }).join('');
-}
-function renderAllGuestsTable(guests) {
-  document.getElementById('all-guests-info').textContent = `Showing ${guests.length} guests`;
-  document.getElementById('all-guests-tbody').innerHTML = guests.map((g,i)=>`<tr>
-    <td>${i+1}</td>
-    <td style="font-weight:600">${g.guest_name}</td>
-    <td style="color:var(--text-muted)">${g.contact_number}</td>
-    <td>${g.city||'—'}</td><td>${g.profession||'—'}</td>
-    <td>${g.invitation_status?`<span class="badge ${g.invitation_status==='Given'?'badge-given':'badge-pending'}">${g.invitation_status}</span>`:'—'}</td>
-    <td>${g.demo_date?fmt(g.demo_date):'—'}</td>
-    <td>${g.bp_date?fmt(g.bp_date):'—'}</td>
-    <td>${g.fu_date?`<span class="${g.fu_date===new Date().toISOString().split('T')[0]?'tag-today':''}">${fmt(g.fu_date)}</span>`:'—'}</td>
-    <td>${stageOf(g)}</td>
-    <td style="font-size:12px">${g.profiles?.full_name||'—'}</td>
-    <td style="font-size:11px;color:var(--text-muted)">${fmt(g.created_at?.split('T')[0])}</td>
-    <td>${currentProfile.role==='creator'?`<button class="btn btn-danger btn-sm" onclick="deleteGuest('${g.id}')">Del</button>`:''}</td>
-  </tr>`).join('') || '<tr><td colspan="13" style="text-align:center;padding:40px;color:#94a3b8">No guests.</td></tr>';
-}
-function applyAdminFilters() {
-  const name=document.getElementById('af-name').value.toLowerCase();
-  const member=document.getElementById('af-member').value;
-  const closing=document.getElementById('af-closing').value;
-  let f=allGuests;
-  if(name) f=f.filter(g=>g.guest_name.toLowerCase().includes(name));
-  if(member) f=f.filter(g=>g.created_by===member);
-  if(closing) f=f.filter(g=>g.closing_status===closing);
-  renderAllGuestsTable(f);
-}
-async function changeRole(uid,role) {
-  await sb.from('profiles').update({role}).eq('id',uid);
-  showToast('Role updated','success'); await loadAdminPages();
-}
-async function deleteMember(uid) {
-  if(!confirm('Remove this member?')) return;
-  await sb.from('profiles').delete().eq('id',uid);
-  showToast('Member removed','success'); await loadAdminPages();
-}
-async function deleteGuest(id) {
-  if(!confirm('Delete this guest permanently?')) return;
-  await sb.from('guests').delete().eq('id',id);
-  showToast('Guest deleted','success'); await refreshAll();
-}
-
-// ===== FILTERS =====
-function applyFilters() {
-  const name=document.getElementById('f-name').value.toLowerCase();
-  const contact=document.getElementById('f-contact').value;
-  const inv=document.getElementById('f-inv').value;
-  const closing=document.getElementById('f-closing').value;
-  filteredGuests=allGuests.filter(g=>{
-    if(name&&!g.guest_name.toLowerCase().includes(name)) return false;
-    if(contact&&!g.contact_number.includes(contact)) return false;
-    if(inv&&g.invitation_status!==inv) return false;
-    if(closing&&g.closing_status!==closing) return false;
-    return true;
-  });
-  renderGuestTable();
-}
-function clearFilters() {
-  ['f-name','f-contact'].forEach(id=>document.getElementById(id).value='');
-  ['f-inv','f-closing'].forEach(id=>document.getElementById(id).value='');
-  filteredGuests=[...allGuests]; renderGuestTable();
-}
-
-// ===== ADD GUEST =====
-function openAddModal() { document.getElementById('add-modal').classList.add('open'); }
-function closeAddModal() { document.getElementById('add-modal').classList.remove('open'); }
-async function addGuest() {
-  const name=document.getElementById('g-name').value.trim();
-  const contact=document.getElementById('g-contact').value.trim();
-  const invStatus=document.getElementById('g-inv-status').value;
-  if(!name||!contact||!invStatus) { showToast('Name, Contact & Invitation Status required','error'); return; }
-  const btn=document.getElementById('add-btn');
-  btn.textContent='Saving...'; btn.disabled=true;
-  const payload={
-    guest_name:name, contact_number:contact,
-    city:document.getElementById('g-city').value||null,
-    profession:document.getElementById('g-profession').value||null,
-    income_range:document.getElementById('g-income').value||null,
-    invitation_status:invStatus,
-    invitation_date:document.getElementById('g-inv-date').value||null,
-    invitation_remarks:document.getElementById('g-inv-remarks').value||null,
-    created_by:currentUser.id,
-    created_at:new Date().toISOString(),
-    updated_at:new Date().toISOString()
-  };
-  const { data, error } = await sb.from('guests').insert(payload).select().single();
-  btn.textContent='Add Guest'; btn.disabled=false;
-  if(error) { showToast('Error: '+error.message,'error'); return; }
-  closeAddModal();
-  // Reset form
-  ['g-name','g-contact','g-city','g-inv-remarks'].forEach(id=>document.getElementById(id).value='');
-  ['g-profession','g-income','g-inv-status'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('g-inv-date').value='';
-  showToast('Guest added!','success');
-  await refreshAll();
-  syncSheet({...payload, id:data.id, member:currentProfile.full_name, team_id:currentProfile.team_id});
-}
-
-// ===== GOOGLE SHEETS =====
-async function syncSheet(guestId) {
-  if(!GOOGLE_SHEET_WEBHOOK) return;
-  let data = typeof guestId==='string' ? allGuests.find(g=>g.id===guestId) : guestId;
-  if(!data) return;
-  try {
-    await fetch(GOOGLE_SHEET_WEBHOOK,{
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ action:'upsert', timestamp:new Date().toISOString(), ...data, member:data.profiles?.full_name||currentProfile?.full_name })
-    });
-  } catch(e) { console.warn('Sheet sync:',e); }
-}
-
-// ===== EXPORT =====
-function exportMyXLSX() { exportXLSX(filteredGuests,'my-guests'); }
-function exportAllXLSX() { exportXLSX(allGuests,'all-guests'); }
-function exportXLSX(guests, fname) {
-  if(!guests.length) { showToast('No data','error'); return; }
-  const headers=['Sr','Name','Contact','City','Profession','Income','Inv Date','Invitation','Inv Remarks','Demo Date','Demo Remarks','BP Date','BP Remarks','FU Date','FU Remarks','Closing Date','Closing','Closing Remarks','Added By','Created'];
-  const rows=guests.map((g,i)=>[
-    i+1,g.guest_name,g.contact_number,g.city||'',g.profession||'',g.income_range||'',
-    g.invitation_date||'',g.invitation_status||'',g.invitation_remarks||'',
-    g.demo_date||'',g.demo_remarks||'',g.bp_date||'',g.bp_remarks||'',
-    g.fu_date||'',g.fu_remarks||'',g.closing_date||'',g.closing_status||'',g.closing_remarks||'',
-    g.profiles?.full_name||'',g.created_at?.split('T')[0]||''
-  ]);
-  const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);
-  const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,'Guests');
-  XLSX.writeFile(wb,`${fname}-${new Date().toISOString().split('T')[0]}.xlsx`);
-  showToast('Downloaded!','success');
-}
-
-// ===== NAV =====
-const pageTitles={dashboard:'Dashboard',guests:'My Guests',followups:"Today's Follow-ups",'pending-demo':'Pending Demo','pending-bp':'Pending Business Plan',closed:'Closed Guests',team:'Team Members','all-guests':'All Guests',reports:'Reports'};
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const pg=document.getElementById('page-'+name);
-  if(pg) pg.classList.add('active');
-  const ni=document.querySelector(`[data-page="${name}"]`);
-  if(ni) ni.classList.add('active');
-  document.getElementById('page-title').textContent=pageTitles[name]||name;
-  closeSidebar();
-  if(['team','all-guests','reports'].includes(name)&&(currentProfile.role==='creator'||currentProfile.role==='admin')) loadAdminPages();
-}
-function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('open'); }
-function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('open'); }
-
-// ===== TOAST =====
-function showToast(msg,type='') {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.className='show '+type;
-  setTimeout(()=>t.className='',3000);
-}
-
-// ===== INIT =====
-(async()=>{
-  const { data:{ session } } = await sb.auth.getSession();
-  if(session) await loadApp(session.user);
-})();
-</script>
-</body>
-</html>
+  if (tab === 'login') {
+    document.getElementById('login-tab-btn').classList.add('active');
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('register-form').style.display = 'none';
+  } else {
+    document.getElementById('register-tab-btn').classList.add('active');
+    document.getElementById('login-form').style.display = 'none';
+    document
