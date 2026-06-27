@@ -1048,25 +1048,47 @@ function validate(ids){
 
 async function submitInlineForm(btn) {
   if (!validate(['f-name','f-phone','f-email','f-prof'])) return;
-  btn.textContent = "Registering...";
-  btn.style.background = 'linear-gradient(135deg,#3ecf6e,#28a855)';
-  btn.style.color = '#fff';
+  btn.textContent = "Processing...";
   btn.disabled = true;
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const profession = document.getElementById('f-prof').value;
   try {
-    const res = await fetch('https://www.coachshrutitiwari.com/api/register', {
+    const res = await fetch('/api/swb-create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: document.getElementById('f-name').value.trim(),
-        phone: document.getElementById('f-phone').value.trim(),
-        email: document.getElementById('f-email').value.trim(),
-        profession: document.getElementById('f-prof').value,
-      city: document.getElementById('f-city').value.trim()
-      })
+      body: JSON.stringify({ name, phone, email, profession })
     });
     const data = await res.json();
-    if (data.success) window.location.href = '/swb/success.html';
-    else { btn.textContent = 'Try Again'; btn.disabled = false; }
+    if (!data.orderId) throw new Error('Order failed');
+    const options = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: data.currency,
+      name: 'Coach Shruti Tiwari',
+      description: 'Sales Warrior Blueprint — ₹199',
+      order_id: data.orderId,
+      prefill: { name, email, contact: phone },
+      theme: { color: '#f5a000' },
+      handler: async function(response) {
+        const verifyRes = await fetch('/api/swb-verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            name, email, phone, profession
+          })
+        });
+        const verifyData = await verifyRes.json();
+        if (verifyData.success) window.location.href = '/swb/success.html';
+        else { btn.textContent = 'Try Again'; btn.disabled = false; }
+      },
+      modal: { ondismiss: function() { btn.textContent = 'JOIN NOW FOR ₹199'; btn.disabled = false; } }
+    };
+    new window.Razorpay(options).open();
   } catch(e) {
     btn.textContent = 'Try Again'; btn.disabled = false;
   }
@@ -1075,23 +1097,47 @@ async function submitInlineForm(btn) {
 async function submitModal() {
   if (!validate(['m-name','m-phone','m-email','m-prof'])) return;
   const btn = document.querySelector('.mbtn');
-  btn.textContent = 'Registering...';
+  btn.textContent = 'Processing...';
   btn.disabled = true;
+  const name = document.getElementById('m-name').value.trim();
+  const phone = document.getElementById('m-phone').value.trim();
+  const email = document.getElementById('m-email').value.trim();
+  const profession = document.getElementById('m-prof').value;
   try {
-    const res = await fetch('https://www.coachshrutitiwari.com/api/register', {
+    const res = await fetch('/api/swb-create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: document.getElementById('m-name').value.trim(),
-        phone: document.getElementById('m-phone').value.trim(),
-        email: document.getElementById('m-email').value.trim(),
-        profession: document.getElementById('m-prof').value,
-        city: document.getElementById('m-city').value.trim()
-      })
+      body: JSON.stringify({ name, phone, email, profession })
     });
     const data = await res.json();
-    if (data.success) window.location.href = '/swb/success.html';
-    else { btn.textContent = 'Try Again'; btn.disabled = false; }
+    if (!data.orderId) throw new Error('Order failed');
+    const options = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: data.currency,
+      name: 'Coach Shruti Tiwari',
+      description: 'Sales Warrior Blueprint — ₹199',
+      order_id: data.orderId,
+      prefill: { name, email, contact: phone },
+      theme: { color: '#f5a000' },
+      handler: async function(response) {
+        const verifyRes = await fetch('/api/swb-verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            name, email, phone, profession
+          })
+        });
+        const verifyData = await verifyRes.json();
+        if (verifyData.success) window.location.href = '/swb/success.html';
+        else { btn.textContent = 'Try Again'; btn.disabled = false; }
+      },
+      modal: { ondismiss: function() { btn.textContent = 'JOIN NOW FOR ₹199'; btn.disabled = false; } }
+    };
+    new window.Razorpay(options).open();
   } catch(e) {
     btn.textContent = 'Try Again'; btn.disabled = false;
   }
@@ -1160,5 +1206,6 @@ wrapper.addEventListener('touchend', (e) => {
 createDots();
 goToSlide(0);
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </body>
 </html>
