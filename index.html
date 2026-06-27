@@ -933,7 +933,7 @@ footer{
     <li><a href="#testimonials">Stories</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
-  <a class="nav-session" href="/swb">
+  <a class="nav-session" href="#" onclick="openPayModal();return false;">
     <span class="nav-session-dot"></span>
     Sales Warrior Blueprint
   </a>
@@ -1002,7 +1002,7 @@ footer{
         <div class="hb-l">Years of<br>Influence</div>
       </div>
       <!-- Floating session card -->
-      <a class="session-float" href="/swb">
+      <a class="session-float" href="#" onclick="openPayModal();return false;">
         <div class="sf-live"><span class="sf-dot"></span>Next Session</div>
         <div class="sf-title">Sales Warrior Blueprint</div>
         <div class="sf-meta">Sunday · 7–8:30 PM<br>Live on Zoom · ₹199 Only</div>
@@ -1112,7 +1112,7 @@ footer{
     <h2 class="section-title">Next <em>Live Session</em></h2>
     <p class="section-sub">Join thousands who have already transformed their sales game.</p>
   </div>
-  <a class="event-card-mega reveal" href="/swb">
+  <a class="event-card-mega reveal" href="#" onclick="openPayModal();return false;">
     <div class="ecm-bg-img"></div>
     <div class="ecm-body">
       <div>
@@ -1376,7 +1376,7 @@ footer{
     <div class="footer-links-col">
       <h4>Sessions</h4>
       <ul>
-        <li><a href="/swb">Sales Warrior Blueprint</a></li>
+        <li><a href="#" onclick="openPayModal();return false;">Sales Warrior Blueprint</a></li>
         <li><a href="https://instagram.com/coachshrutitiwari" target="_blank">Instagram</a></li>
         <li><a href="https://www.youtube.com/@coachshrutitiwari" target="_blank">YouTube</a></li>
         <li><a href="https://t.me/coachshrutitiwari" target="_blank">Telegram Community</a></li>
@@ -1392,7 +1392,7 @@ footer{
 <!-- ══ STICKY BAR ══ -->
 <div class="sticky-bottom" id="stickyBar">
   <span class="sb-msg">🔥 Next Session: <span>Sales Warrior Blueprint</span> - Only ₹199</span>
-  <a class="sb-cta" href="/swb">Register Now</a>
+  <a class="sb-cta" href="#" onclick="openPayModal();return false;">Register Now</a>
 </div>
 
 <script>
@@ -1528,6 +1528,122 @@ async function submitLead() {
   } catch(err) {
     msg.style.display='block';
     msg.textContent='⚠️ Something went wrong. Try again.';
+  }
+}
+</script>
+<!-- PAYMENT REGISTRATION MODAL -->
+<div id="payModal" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(160deg,#1e1030,#13101e);border:1px solid rgba(200,146,58,.35);border-radius:16px;padding:36px 32px;max-width:420px;width:100%;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closePayModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;">×</button>
+    <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#edb84e;font-weight:600;margin-bottom:8px;">Sales Warrior Blueprint</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;margin-bottom:6px;">Reserve Your Seat<br><em style="color:#edb84e;font-style:italic;">Only ₹199</em></h3>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:22px;">Fill your details — payment opens right after.</p>
+
+    <div id="payModalError" style="display:none;background:rgba(224,62,30,.1);border:1px solid rgba(224,62,30,.3);border-radius:6px;padding:10px 13px;color:#ff8060;font-size:.82rem;margin-bottom:14px;"></div>
+
+    <div style="display:flex;flex-direction:column;gap:13px;margin-bottom:18px;">
+      <input id="pm-name" type="text" placeholder="Full Name" style="padding:13px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(200,146,58,.25);border-radius:6px;color:#fff;font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;">
+      <input id="pm-phone" type="tel" placeholder="10-digit WhatsApp Number" style="padding:13px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(200,146,58,.25);border-radius:6px;color:#fff;font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;">
+      <input id="pm-email" type="email" placeholder="Email Address" style="padding:13px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(200,146,58,.25);border-radius:6px;color:#fff;font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;">
+      <select id="pm-profession" style="padding:13px 15px;background:#1e1030;border:1px solid rgba(200,146,58,.25);border-radius:6px;color:#fff;font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;">
+        <option value="">Select your profession...</option>
+        <option>Direct Selling Professional</option>
+        <option>Insurance Advisor / Agent</option>
+        <option>Network Marketer</option>
+        <option>Coach / Consultant</option>
+        <option>Business Owner</option>
+        <option>Sales Professional</option>
+        <option>Housewife</option>
+        <option>Student</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <button id="payModalBtn" onclick="initiatePayFromHome()" style="width:100%;padding:15px;background:linear-gradient(135deg,#c8923a,#edb84e);color:#06050a;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;">
+      🎯 Pay ₹199 & Confirm Seat
+    </button>
+    <p style="text-align:center;margin-top:10px;font-size:.72rem;color:rgba(255,255,255,.3);">🔒 Secure payment via Razorpay</p>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+function openPayModal(){
+  document.getElementById('payModal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closePayModal(){
+  document.getElementById('payModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+async function initiatePayFromHome(){
+  const name = document.getElementById('pm-name').value.trim();
+  const phone = document.getElementById('pm-phone').value.trim();
+  const email = document.getElementById('pm-email').value.trim();
+  const profession = document.getElementById('pm-profession').value;
+  const errEl = document.getElementById('payModalError');
+  const btn = document.getElementById('payModalBtn');
+
+  if(!name||!phone||!email||!profession){errEl.style.display='block';errEl.textContent='⚠️ Please fill all fields!';return;}
+  if(!/^[0-9]{10}$/.test(phone)){errEl.style.display='block';errEl.textContent='⚠️ Enter valid 10-digit number!';return;}
+  if(!/\S+@\S+\.\S+/.test(email)){errEl.style.display='block';errEl.textContent='⚠️ Enter valid email!';return;}
+  errEl.style.display='none';
+
+  btn.textContent='Processing...';
+  btn.disabled=true;
+
+  try{
+    const res = await fetch('/api/swb-create-order',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,phone,email,profession})
+    });
+    const data = await res.json();
+    if(!data.orderId) throw new Error('Order create nahi hua');
+
+    const options = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: data.currency,
+      name: 'Coach Shruti Tiwari',
+      description: 'Sales Warrior Blueprint — ₹199',
+      order_id: data.orderId,
+      prefill: { name, email, contact: phone },
+      theme: { color: '#edb84e' },
+      handler: async function(response){
+        const verifyRes = await fetch('/api/swb-verify',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            name, email, phone, profession
+          })
+        });
+        const verifyData = await verifyRes.json();
+        if(verifyData.success){
+          window.location.href = '/swb/success.html';
+        } else {
+          errEl.style.display='block';
+          errEl.textContent='⚠️ Payment verify nahi hua. Support se contact karo.';
+        }
+      },
+      modal:{
+        ondismiss:function(){
+          btn.textContent='🎯 Pay ₹199 & Confirm Seat';
+          btn.disabled=false;
+        }
+      }
+    };
+    new window.Razorpay(options).open();
+
+  } catch(err){
+    errEl.style.display='block';
+    errEl.textContent='⚠️ Something went wrong. Try again!';
+    btn.textContent='🎯 Pay ₹199 & Confirm Seat';
+    btn.disabled=false;
   }
 }
 </script>
