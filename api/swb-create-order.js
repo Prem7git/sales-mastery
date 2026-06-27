@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     });
 
     const order = await razorpay.orders.create({
-      amount:   19900,       // ₹199 in paise
+      amount:   100,       // ₹199 in paise
       currency: "INR",
       receipt:  `swb_${Date.now()}`,
       notes:    { name, phone, email, profession },
