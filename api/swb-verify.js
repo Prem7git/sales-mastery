@@ -60,10 +60,10 @@ module.exports = async function handler(req, res) {
         </div>
         <div style="background:#fff;padding:28px;border-radius:0 0 12px 12px;border:1px solid #eee;">
           <h2 style="color:#1e1030;">Hi ${name}! 🎉</h2>
-          <p style="color:#555;">Tumhari seat confirm ho gayi!</p>
+          <p style="color:#555;">Your seat is confirmed!</p>
           <div style="background:#fdf0d4;border-left:4px solid #c8923a;padding:16px;border-radius:4px;margin:20px 0;">
-            📅 <b>Date:</b> This Sunday<br>
-            🕙 <b>Time:</b> 7:00 – 8:30 PM IST<br>
+            📅 <b>Date:</b> July 2nd 2026<br>
+            🕙 <b>Time:</b> 07:30 PM IST<br>
             📍 <b>Venue:</b> Live on Zoom<br>
             🌐 <b>Language:</b> Hinglish
           </div>
@@ -72,7 +72,7 @@ module.exports = async function handler(req, res) {
             👉 Join WhatsApp Group
           </a>
           <p style="color:#888;font-size:13px;margin-top:20px;"><b>Payment ID:</b> ${razorpay_payment_id}</p>
-          <p style="color:#888;font-size:13px;">— Coach Shruti Tiwari 🔥</p>
+          <p style="color:#888;font-size:13px;"> - Team Shruti Tiwari</p>
         </div>
       </div>`,
     });
