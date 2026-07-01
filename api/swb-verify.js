@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, profession,
-          payment_id: razorpay_payment_id, order_id: razorpay_order_id,
+          payment_id: razorpay_payment_id, order_id: razorpay_order_id,zoomLink: zoomJoinUrl,
           amount: "₹4999", timestamp, source: "Sales Warrior Bootcamp" }),
       });
     } catch (e) { console.error("Sheet error:", e); }
