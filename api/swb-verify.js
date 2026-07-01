@@ -71,7 +71,7 @@ module.exports = async function handler(req, res) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, profession,
           payment_id: razorpay_payment_id, order_id: razorpay_order_id,
-          amount: "₹199", timestamp, source: "Sales Warrior Blueprint" }),
+          amount: "₹4999", timestamp, source: "Sales Warrior Bootcamp" }),
       });
     } catch (e) { console.error("Sheet error:", e); }
 
@@ -86,16 +86,16 @@ module.exports = async function handler(req, res) {
     await transporter.sendMail({
       from: `"Coach Shruti Website" <${process.env.EMAIL_USER}>`,
       to: process.env.ADMIN_EMAIL,
-      subject: `💰 New Registration: ${name} — ₹199`,
+      subject: `💰 New Registration: ${name} - ₹4999`,
       html: `<p><b>Name:</b> ${name}</p><p><b>Phone:</b> ${phone}</p><p><b>Email:</b> ${email}</p><p><b>Profession:</b> ${profession}</p><p><b>Payment ID:</b> ${razorpay_payment_id}</p><p><b>Time:</b> ${timestamp}</p>`,
     });
     await transporter.sendMail({
       from: `"Coach Shruti Tiwari" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "✅ Seat Confirmed! — Sales Warrior Blueprint",
+      subject: "✅ Seat Confirmed! - Sales Warrior Bootcamp",
       html: `<div style="font-family:Arial,sans-serif;max-width:540px;margin:auto;">
         <div style="background:#1e1030;padding:24px;text-align:center;border-radius:12px 12px 0 0;">
-          <h1 style="color:#edb84e;">Sales Warrior Blueprint</h1>
+          <h1 style="color:#edb84e;">Sales Warrior Bootcamp</h1>
         </div>
         <div style="background:#fff;padding:28px;border-radius:0 0 12px 12px;border:1px solid #eee;">
           <h2 style="color:#1e1030;">Hi ${name}! 🎉</h2>
@@ -113,7 +113,8 @@ module.exports = async function handler(req, res) {
             👉 Join WhatsApp Group
           </a>
           <p style="color:#888;font-size:13px;margin-top:20px;"><b>Payment ID:</b> ${razorpay_payment_id}</p>
-          <p style="color:#888;font-size:13px;"> - Team Shruti Tiwari</p>
+          <p style="color:#888;font-size:13px;"> Congratulations </p>
+          <p style="color:#888;font-size:13px;"> - Team Shruti Tiwari Ma'am </p>
         </div>
       </div>`,
     });
