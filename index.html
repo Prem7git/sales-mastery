@@ -26,7 +26,9 @@ window.SITE = {
 <meta property="og:title" content="Shruti Tiwari | Life Coach, Corporate Trainer &amp; Inspirational Speaker">
 <meta property="og:description" content="Helping people sell, lead and transform. 1000+ workshops, 140+ organisations trained.">
 <meta property="og:image" content="https://www.coachshrutitiwari.com/img/hero.jpg">
-<meta name="theme-color" content="#4A1729">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,6 +91,13 @@ h3{font-family:var(--serif);font-weight:400;line-height:1.15}
 .coverfoot{text-align:center;font-family:var(--cond);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:clamp(13px,1.9vw,19px);margin-top:20px}
 .coverfoot i{font-style:normal;margin:0 .7em}
 
+     @media (min-width:901px){
+  .cover .wrap{max-width:1215px;display:grid;grid-template-columns:5fr 6fr;grid-template-rows:1fr auto}
+  .cover .hero{grid-row:1/3}
+  .cover .namebar{grid-column:2;border-top:0;border-left:2px solid var(--gold);text-align:left;display:flex;flex-direction:column;justify-content:flex-end;padding:48px 48px 24px}
+  .cover .coverfoot{grid-column:2;margin:0;background:var(--navy);color:var(--gold);text-align:left;padding:0 48px 48px;border-left:2px solid var(--gold)}
+  .cover .namebar h1{font-size:clamp(44px,5.2vw,76px)}
+}
 /* PROFILE */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;background:var(--maroon);color:var(--cream);padding:34px 30px;margin-bottom:38px}
 .stats b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(38px,5.4vw,66px);line-height:1.05}
@@ -307,7 +316,8 @@ body.no-bar .wa{bottom:18px}
   .contact::after{background:linear-gradient(180deg,rgba(39,16,27,.9),rgba(39,16,27,.84))}
 }
 @media (max-width:700px){
-  .collage{grid-template-columns:1fr 1fr}
+  .collage{grid-template-columns:1fr 1fr;grid-auto-flow:dense}
+  .collage .col.b .t:last-child{grid-column:1/-1;aspect-ratio:3/2 !important}
   .collage .col{display:contents}
   .collage .col .t{aspect-ratio:4/3 !important;flex:none !important}
   .collage .wide{aspect-ratio:16/9}
